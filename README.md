@@ -1,2 +1,7 @@
-# static
-a simple react site [js plaything] for hosting my static assets
+# (anti)static
+
+tools that are great:
+ - react.js
+ - @storybook/react
+ - redux
+ - **the web**
