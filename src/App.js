@@ -1,11 +1,14 @@
-import React, { Component}  from "react";
-import "./App.css";
+import React, { Component }  from "react";
+import { Button } from '@mindshaft/cute-components';
+import '@mindshaft/cute-components/build/main.css'
+import './App.css';
 
 class App extends Component{
-  render(){
+  render() {
     return(
       <div className="App">
-        <h1> Of all the websites in all the world, she found mine </h1>
+        <h1>Relax</h1>
+        <Button>make it so</Button>
       </div>
     );
   }
