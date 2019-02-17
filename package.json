@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "@mindshaft/cute-components": "file:../cute-components",
+    "lodash": "^4.17.11",
+    "node-uuid": "^1.4.8",
     "react": "^16.8.2",
     "react-dom": "^16.8.2"
   }

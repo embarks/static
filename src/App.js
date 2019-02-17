@@ -1,21 +1,14 @@
-import React, { Component }  from 'react';
-import { Button } from '@mindshaft/cute-components';
+import React from 'react';
 import '@mindshaft/cute-components/build/main.css';
 import './App.css';
+import Notes from './Notes';
 
-
-
-class App extends Component{
-  render() {
-    return(
-      <div className="App">
-        <>
-          <h1>Relax</h1>
-          <Button></Button>
-        </>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Notes />
+    </div>
+  );
+};
 
 export default App;
