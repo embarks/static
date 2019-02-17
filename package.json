@@ -40,7 +40,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@mindshaft/cute-components": "file:../cute-components",
+    "@mindshaft/cute-components": "0.3.0",
     "lodash": "^4.17.11",
     "node-uuid": "^1.4.8",
     "react": "^16.8.2",
