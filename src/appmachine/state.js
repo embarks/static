@@ -93,7 +93,7 @@ export function machine(reducers, persisted) {
 
     try {
       isDispatching = true;
-      currentState = reducer({ ...defaultState, ...currentState }, action);
+      currentState = reducer(currentState || defaultState, action);
     }
     catch(error) {
       console.error('Failed to get the new state', error);

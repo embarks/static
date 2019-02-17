@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { Button, Input } from '@mindshaft/cute-components';
 import { wrap } from '../appmachine/connect';
 import { add, clear } from '../appmachine/notes';
+import { Link } from 'react-router-dom';
 
 export const NoteTaker = (props) => {
   const { notes, add, clear } = props;
   const [note, setNote] = useState('');
   return (
-    <>
+    <div className="NotesApp">
       <Input onChange={setNote} value={note}></Input>
       <h1>Relax</h1>
       <Button onClick={
@@ -27,7 +28,8 @@ export const NoteTaker = (props) => {
           );
         })
       }
-    </>
+      <Link to="/">Home</Link>
+    </div>
   );
 };
 

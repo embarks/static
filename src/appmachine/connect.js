@@ -4,8 +4,17 @@ import PropTypes from 'prop-types';
 
 export const Context = React.createContext(null);
 
-export function wrap(stateToProps = () => [], dispatchToProps = {}) {
-  const dispatchPropKeys = Object.keys(dispatchToProps);
+export function wrap(mapStateToProps = () => [], dispatchToProps = {}) {
+  if (typeof mapStateToProps !== 'function') {
+    throw new Error('function wrap(mapStateToProps, mapDispatchToProps) map expects a function for mapStateToProps');
+
+  }
+  let dispatchPropKeys = [];
+  try {
+    dispatchPropKeys = Object.keys(dispatchToProps);
+  } catch(error) {
+    throw new Error('function wrap(mapStateToProps, mapDispatchToProps) expects an object for mapDispatchToProps');
+  }
   const mapDispatch = (dispatch) => {
     return dispatchPropKeys.reduce((props, key) =>
       ({
@@ -19,7 +28,7 @@ export function wrap(stateToProps = () => [], dispatchToProps = {}) {
       <Context.Consumer>
         {
           ({ dispatch, state }) => {
-            return <WrappedComponent {...props} {...mapDispatch(dispatch)} {...stateToProps(state)} />;
+            return <WrappedComponent {...props} {...mapDispatch(dispatch)} {...mapStateToProps(state)} />;
           }}
       </Context.Consumer>
     );

@@ -40,10 +40,12 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@mindshaft/cute-components": "0.3.0",
+    "@mindshaft/cute-components": "file:../cute-components",
     "lodash": "^4.17.11",
     "node-uuid": "^1.4.8",
     "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+    "react-dom": "^16.8.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
   }
 }
