@@ -1,8 +1,6 @@
 const path = require('path');
-const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
 module.exports = {
   entry: './src/index.js',
   module: {
@@ -28,7 +26,14 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ['*', '.js', '.jsx'] },
+  resolve: { 
+    alias: {
+      'react': path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),      
+    },
+  
+    extensions: ['*', '.js', '.jsx'] 
+  },
   output: {
     path: path.resolve(__dirname, './dist/'),
     filename: '[name].bundle.js'

@@ -3,6 +3,11 @@ import notes from './notes';
 import storage from '../storage';
 import throttle from 'lodash/throttle';
 
+const defaultState = {
+  notes: [],
+  name: '',
+};
+
 const persistedState = storage.loadState();
 
 const machine = createMachine({ notes }, persistedState);
@@ -19,19 +24,21 @@ const persistNotes = () => {
 
 machine.listen(throttle(persistNotes, 1000));
 
-const root = (state, action) => {
+const root = (state = {}, action) => {
+  let newState = state;
   try { 
     machine.dispatch(state, action);
+    newState = machine.getState();
+
   } catch(error) {
     console.error(`Failed to dispatch ${action.type}`, error);
   }
-  return machine.getState();
+  return newState;
 };
-
 export default { 
   root,
   initialState: { 
-    notes: [],
+    ...defaultState,
     ...machine.getState()
   }
 };

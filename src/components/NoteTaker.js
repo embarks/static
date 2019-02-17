@@ -3,46 +3,31 @@ import PropTypes from 'prop-types';
 import { Button, Input } from '@mindshaft/cute-components';
 import { wrap } from '../appmachine/connect';
 import { add, clear } from '../appmachine/notes';
-import { Link } from 'react-router-dom';
 
 export const NoteTaker = (props) => {
-  const { notes, add, clear } = props;
+  const { add, clear } = props;
   const [note, setNote] = useState('');
+  const addNote = () => {
+    setNote('');
+    add(note);
+  };
   return (
-    <div className="NotesApp">
+    <div className='note-taker'>
+      {props.header}
       <Input onChange={setNote} value={note}></Input>
-      <h1>Relax</h1>
-      <Button onClick={
-        () => { 
-          setNote('');
-          add(note);
-        }
-      }>
+      <Button onClick={addNote}>
       </Button>
-
       <Button onClick={clear}>Clear</Button>
-      {
-        notes && notes.map(({ note }, index) => { 
-          return (
-            <Button key={`note-${index}`}>{note}</Button>
-          );
-        })
-      }
-      <Link to="/">Home</Link>
+      {props.children}
     </div>
   );
 };
 
-NoteTaker.defaultProps = {
-  notes: []
-};
 NoteTaker.propTypes = {
-  notes: PropTypes.array,
-  add: PropTypes.func,
-  clear: PropTypes.func
+  add: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([ PropTypes.arrayOf(PropTypes.element), PropTypes.element ]),
+  header: PropTypes.element
 };
 
-export default wrap(
-  ({ notes }) => ({ notes }),
-  { add, clear }
-)(NoteTaker);
+export default wrap(null, { add, clear })(NoteTaker);
