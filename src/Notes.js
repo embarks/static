@@ -5,11 +5,12 @@ import { Button } from '@mindshaft/cute-components';
 import { wrap } from './appmachine/connect';
 import { remove } from './appmachine/notes';
 import NoteTaker from './components/NoteTaker';
+import styles from './scss/notes.module.scss';
 
 const NotesApp = ({ notes, remove }) => {
   const removeNote = (note) => () => remove(note);
   return (
-    <div className="NotesApp">
+    <div className={styles.notes}>
       <Link to="/">Home</Link>
       <NoteTaker
         header={<h1>Relax</h1>}

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Home } from '@mindshaft/cute-components';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import machine from './appmachine';
 import { wrap } from './appmachine/connect';
 import Root from './appmachine/connect';
-import '@mindshaft/cute-components/build/main.css';
-import './App.css';
+
 import Notes from './Notes';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const mapNameToProps = ({ name }) => ({ name });
 const ConnectedHome = wrap(mapNameToProps)(
@@ -15,12 +15,14 @@ const ConnectedHome = wrap(mapNameToProps)(
 
 const App = () => {
   return (
-    <Router>
-      <Root machine={machine}>
-        <Route exact path="/" component={ConnectedHome} />
-        <Route path="/notes" component={Notes} />
-      </Root>
-    </Router>
+    <div>
+      <Router>
+        <Root machine={machine}>
+          <Route exact path="/" component={ConnectedHome} />
+          <Route path="/notes" component={Notes} />
+        </Root>
+      </Router>
+    </div>
   );
 };
 
