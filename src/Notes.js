@@ -21,10 +21,10 @@ const NotesApp = ({ notes, header, changeHeader, remove }) => {
           />
         }
       >
-        {notes && notes.map((note) => { 
-          const { NoteID, note: message } = note;
+        {notes && notes.map((note) => {
+          const { NoteID, note: message, variant } = note;
           return (
-            <Button onClick={removeNote(note)} key={`note-${NoteID}`}>{message}</Button>
+            <Button variant={variant} onClick={removeNote(note)} key={`note-${NoteID}`}>{message}</Button>
           );
         })}
       </NoteTaker>

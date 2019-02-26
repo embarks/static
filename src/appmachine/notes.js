@@ -1,9 +1,10 @@
 import v4 from 'uuid/v4';
 
-export function add(note) {
+export function add({ note, variant }) {
   return {
     type: 'add note',
-    note
+    note,
+    variant
   };
 }
 
@@ -31,7 +32,7 @@ export function changeTitle(newTitle) {
 function notesReducer(state, action) {
   switch (action.type) {
   case 'add note':
-    return Object.assign({}, state, { todos: state.todos.concat({ NoteID: v4(), note: action.note }) });
+    return Object.assign({}, state, { todos: state.todos.concat({ NoteID: v4(), note: action.note, variant: action.variant }) });
   case 'remove note':
     return Object.assign({}, state, { todos: state.todos.filter(({ NoteID }) => NoteID !== action.NoteID) });
   case 'clear notes': 

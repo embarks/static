@@ -6,12 +6,21 @@ import { add, clear } from '../appmachine/notes';
 import styles from '../scss/note-taker.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+const variants = [
+  'primary',
+  'secondary',
+  'info',
+  'bright',
+  'success',
+  'danger'
+];
 export const NoteTaker = (props) => {
   const { add, clear } = props;
   const [note, setNote] = useState('');
   const addNote = () => {
+    const variant = variants[Math.floor(Math.random() * variants.length)];
     setNote('');
-    add(note);
+    add({ note, variant });
   };
   return (
     <div className={styles['note-taker']}>
