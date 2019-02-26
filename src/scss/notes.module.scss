@@ -1,4 +1,5 @@
 .notes {
-  margin: 1rem;
-  font-family: 'Ubuntu Mono', 'Roboto Mono', 'Menlo', 'Courier New', Courier, monospace;
+  input, textarea {
+    margin-bottom: .5rem;
+  }
 }

@@ -46,7 +46,10 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@mindshaft/cute-components": "^0.3.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "@mindshaft/cute-components": "^0.3.6",
     "lodash": "^4.17.11",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",

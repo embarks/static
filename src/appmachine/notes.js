@@ -20,16 +20,26 @@ export function clear() {
   };
 }
 
+export function changeTitle(newTitle) {
+  return {
+    type: 'change title',
+    newTitle
+  };
+}
+
+
 function notesReducer(state, action) {
   switch (action.type) {
   case 'add note':
-    return { notes: state.notes.concat({ NoteID: v4(), note: action.note }) };
+    return Object.assign({}, state, { todos: state.todos.concat({ NoteID: v4(), note: action.note }) });
   case 'remove note':
-    return { notes: state.notes.filter(({ NoteID }) => NoteID !== action.NoteID) };
+    return Object.assign({}, state, { todos: state.todos.filter(({ NoteID }) => NoteID !== action.NoteID) });
   case 'clear notes': 
-    return { notes: [] };
+    return Object.assign({}, state, { todos: [] });
+  case 'change title':
+    return Object.assign({}, state, { title: action.newTitle });
   default:
-    throw new Error('No action type provided to notesReducer');
+    return state;
   }
 }
 

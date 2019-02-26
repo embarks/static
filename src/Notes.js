@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Button } from '@mindshaft/cute-components';
+import { Button, Input } from '@mindshaft/cute-components';
 import { wrap } from './appmachine/connect';
-import { remove } from './appmachine/notes';
+import { remove, changeTitle } from './appmachine/notes';
 import NoteTaker from './components/NoteTaker';
 import styles from './scss/notes.module.scss';
 
-const NotesApp = ({ notes, remove }) => {
+const NotesApp = ({ notes, header, changeHeader, remove }) => {
   const removeNote = (note) => () => remove(note);
   return (
     <div className={styles.notes}>
-      <Link to="/">Home</Link>
       <NoteTaker
-        header={<h1>Relax</h1>}
+        header={
+          <Input as='input' type='text'
+            subtle
+            contentEditable
+            tabIndex={1}
+            onChange={changeHeader}
+            value={`${typeof header === 'undefined' ? '// TODO' : header}`}
+          />
+        }
       >
         {notes && notes.map((note) => { 
           const { NoteID, note: message } = note;
@@ -28,9 +34,11 @@ const NotesApp = ({ notes, remove }) => {
 
 NotesApp.propTypes = {
   notes: PropTypes.array,
-  remove: PropTypes.func.isRequired
+  header: PropTypes.string,
+  remove: PropTypes.func.isRequired,
+  changeHeader: PropTypes.func.isRequired
 };
 
-export default wrap(({ notes }) => ({ notes }), { remove })(
+export default wrap(({ notes }) => ({ notes: notes.todos, header: notes.title }), { remove, changeHeader: changeTitle  })(
   NotesApp
 );

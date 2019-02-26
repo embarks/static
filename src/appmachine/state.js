@@ -9,7 +9,7 @@ const combination = (reducers) => {
       const key = keys[i];
       const reducer = reducers[key];
       const previousStateForKey = state[key];
-      nextState = reducer({ [key]: previousStateForKey }, action);
+      nextState[key] = reducer(previousStateForKey, action);
       hasChanged = hasChanged || nextState !== previousStateForKey;
     }
     return hasChanged ? nextState : state;
@@ -79,7 +79,6 @@ export function machine(reducers, persisted) {
   }
 
   function dispatch(defaultState, action) {
-
     if (typeof action.type === 'undefined') {
       throw new Error(
         'Actions may not have an undefined "type" property. ' +
@@ -93,7 +92,7 @@ export function machine(reducers, persisted) {
 
     try {
       isDispatching = true;
-      currentState = reducer(currentState || defaultState, action);
+      currentState = reducer(Object.assign({}, defaultState, currentState), action);
     }
     catch(error) {
       console.error('Failed to get the new state', error);

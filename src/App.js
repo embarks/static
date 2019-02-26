@@ -1,28 +1,31 @@
 import React from 'react';
 import { Home } from '@mindshaft/cute-components';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import machine from './appmachine';
 import { wrap } from './appmachine/connect';
 import Root from './appmachine/connect';
-
+import { setName } from './appmachine/home';
 import Notes from './Notes';
+import Nav from './components/Nav';
+import styles from './scss/app.module.scss';
+import './lib/falib';
 
-const mapNameToProps = ({ name }) => ({ name });
-const ConnectedHome = wrap(mapNameToProps)(
-  (props) => (<Home {...props}><Link to="/notes">Notes</Link></Home>)
-);
+const mapNameToProps = ({ home }) => ({ name: home.name });
+const ConnectedHome = wrap(mapNameToProps, { changeName: setName })((props) => {
+  return (<Home name={props.name} changeName={(v) => { props.changeName(v); }}></Home>);
+});
 
 const App = () => {
   return (
-    <div>
-      <Router>
-        <Root machine={machine}>
+    <Router>
+      <Root machine={machine}>
+        <Nav></Nav>
+        <div className={styles.app}>
           <Route exact path="/" component={ConnectedHome} />
           <Route path="/notes" component={Notes} />
-        </Root>
-      </Router>
-    </div>
+        </div>
+      </Root>
+    </Router>
   );
 };
 

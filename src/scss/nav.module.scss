@@ -1,0 +1,16 @@
+@import './variables';
+
+.nav {
+  padding: 0 0 .25rem 0;
+  a:not(:first-child) {
+    margin-right: .5rem;
+  }
+  a {
+    color: $bold;
+    i {
+      display: inline-block;
+      width: 1em;
+      height: 0;
+    }
+  }
+}

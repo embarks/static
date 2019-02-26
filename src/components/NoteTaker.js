@@ -4,6 +4,7 @@ import { Button, Input } from '@mindshaft/cute-components';
 import { wrap } from '../appmachine/connect';
 import { add, clear } from '../appmachine/notes';
 import styles from '../scss/note-taker.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const NoteTaker = (props) => {
   const { add, clear } = props;
@@ -15,10 +16,13 @@ export const NoteTaker = (props) => {
   return (
     <div className={styles['note-taker']}>
       {props.header}
-      <Input onChange={setNote} value={note}></Input>
-      <Button onClick={addNote}>
-      </Button>
-      <Button onClick={clear}>Clear</Button>
+      <Input as='textarea' tabIndex={0} onChange={setNote} value={note}></Input>
+      <div className={styles['notes-main-control']}>
+        <>
+          <Button variant="primary" onClick={addNote}/>
+          <Button variant="danger" onClick={clear}><FontAwesomeIcon icon={'snowplow'} /></Button>
+        </>
+      </div>
       <div className={styles['notes-body']}>
         {props.children}
       </div>
