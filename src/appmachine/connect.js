@@ -27,13 +27,13 @@ export function wrap(mapStateToProps = () => [], dispatchToProps = {}) {
         })
       , {});
     };
-    return (WrappedComponent) => function Wrapped(props) {
+    return (WrappedComponent) => function Wrapped(wrappedProps) {
       return( 
         <Context.Consumer>
           {
             ({ dispatch, state }) => {
               const stateToProps = mapStateToProps !== null ? mapStateToProps(state) : {};
-              return <WrappedComponent {...props} {...mapDispatch(dispatch)} {...stateToProps} />;
+              return <WrappedComponent {...wrappedProps} {...mapDispatch(dispatch)} {...stateToProps} />;
             }}
         </Context.Consumer>
       );
@@ -41,8 +41,8 @@ export function wrap(mapStateToProps = () => [], dispatchToProps = {}) {
   }
   catch(error) {
     console.error('function wrap(mapStateToProps, mapDispatchToProps) expects an object with function values for mapDispatchToProps', error);
-    return (WrappedComponent) => function DefaultConnectComponent(props) {
-      return <WrappedComponent {...props} />;
+    return (WrappedComponent) => function DefaultConnectComponent(defaultProps) {
+      return <WrappedComponent {...defaultProps} />;
     };
   }
 }

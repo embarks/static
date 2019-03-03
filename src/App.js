@@ -10,10 +10,17 @@ import Nav from './components/Nav';
 import styles from './scss/app.module.scss';
 import './lib/falib';
 
-const mapNameToProps = ({ home }) => ({ name: home.name });
-const ConnectedHome = wrap(mapNameToProps, { changeName: setName })((props) => {
-  return (<Home name={props.name} changeName={(v) => { props.changeName(v); }}></Home>);
-});
+const mapNameToProps = (state) => {
+  return { name: state.home.name };
+};
+const ConnectedHome = wrap(
+  mapNameToProps, 
+  { changeName: setName }
+)(
+  function HomeyHome(props) {
+    return (<Home name={props.name} changeName={props.changeName}></Home>);
+  }
+);
 
 const App = () => {
   return (

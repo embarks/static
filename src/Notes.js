@@ -39,6 +39,8 @@ NotesApp.propTypes = {
   changeHeader: PropTypes.func.isRequired
 };
 
-export default wrap(({ notes }) => ({ notes: notes.todos, header: notes.title }), { remove, changeHeader: changeTitle  })(
+export default wrap(
+  ({ notes }) => ({ notes: notes.todos, header: notes.title }), 
+  { remove, changeHeader: changeTitle  })(
   NotesApp
 );
