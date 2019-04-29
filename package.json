@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/busy-dying/static.git"
+    "url": "git+https://github.com/embarks/static.git"
   },
   "keywords": [
     "reactjs",
@@ -18,9 +18,9 @@
   "author": "emily",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/busy-dying/static/issues"
+    "url": "https://github.com/embarks/static/issues"
   },
-  "homepage": "https://github.com/busy-dying/static#readme",
+  "homepage": "https://github.com/embarks/static#readme",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
