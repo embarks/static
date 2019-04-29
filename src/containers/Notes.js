@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Input } from '@mindshaft/cute-components';
-import { wrap } from './appmachine/connect';
-import { remove, changeTitle } from './appmachine/notes';
-import NoteTaker from './components/NoteTaker';
-import styles from './scss/notes.module.scss';
+import { wrap } from '../appmachine/connect';
+import { remove, changeTitle } from '../appmachine/notes';
+import NoteTaker from '../components/NoteTaker';
+import styles from '../scss/notes.module.scss';
 
 const NotesApp = ({ notes, header, changeHeader, remove }) => {
   const removeNote = (note) => () => remove(note);

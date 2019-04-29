@@ -5,7 +5,8 @@ import machine from './appmachine';
 import { wrap } from './appmachine/connect';
 import Root from './appmachine/connect';
 import { setName } from './appmachine/home';
-import Notes from './Notes';
+import Notes from './containers/Notes';
+import Cave from './containers/Cave';
 import Nav from './components/Nav';
 import styles from './scss/app.module.scss';
 import './lib/falib';
@@ -26,10 +27,11 @@ const App = () => {
   return (
     <Router>
       <Root machine={machine}>
-        <Nav></Nav>
+        <Nav />
         <div className={styles.app}>
           <Route exact path="/" component={ConnectedHome} />
           <Route path="/notes" component={Notes} />
+          <Route path="/cave" component={Cave} />
         </div>
       </Root>
     </Router>
