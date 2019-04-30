@@ -1,16 +1,108 @@
 @import './variables';
 
-.nav {
-  padding: 0 0 .25rem 0;
-  a:not(:first-child) {
-    margin-right: .5rem;
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  -moz-transform: $property;
+  transform: $property;
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+}
+
+
+%snake-link {
+  display: inline-block;
+  fill: $main;
+  transition: fill .8s;
+  position: absolute;
+  &:hover {
+    fill: $bright;
+    cursor: pointer;
+
   }
-  a {
-    color: $bold;
-    i {
-      display: inline-block;
-      width: 1em;
-      height: 0;
+}
+
+.nav {
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  margin: 1rem auto 0 auto;
+  min-height: 26rem;
+  width: 53rem;
+  color: $bright;
+  u {
+    transition: color .2s;
+    cursor: pointer;
+    display:block;
+    padding: 0 1rem;
+    background-color: $bright;
+    text-decoration: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    display: block;
+    font-size: 2rem;
+    font-style: italic;
+    &:hover {
+      color: $black;
     }
   }
+  a:hover {
+    svg {
+      fill: $bright;
+    }
+
+  }
+
+  svg:nth-child(1) { // tail-end
+    @extend %snake-link;
+    @include transform(scale(0.31));
+    top: 2rem;
+  }
+  svg:nth-child(2) { // body part 4
+    @extend %snake-link;
+    @include transform(scale(0.2));
+    left: 0rem;
+    top: 17rem;
+  }
+  svg:nth-child(3) { // body part 3
+    @extend %snake-link;
+    @include transform(scale(0.25));
+    left: 8.7rem;
+    top: 16rem;
+  }
+  svg:nth-child(4) { // body part 2
+    @extend %snake-link;
+    @include transform(scale(0.3));
+    top: 6.5rem;
+    left: 10.5rem;
+    z-index: 2;
+  }
+  svg:nth-child(5) { // body part 1
+    @extend %snake-link;
+    @include transform(scale(0.28));
+    left: 10.5rem;
+    z-index: 1;
+  }
+  svg:nth-child(6) { // body part 0
+    @extend %snake-link;
+    @include transform(scale(0.22));
+    left: 21rem;
+    top: 11.5rem;
+  }
+  svg:nth-child(7) { // neck
+    @extend %snake-link;
+    @include transform(scale(0.3));
+    left: 29rem;
+    top: 6rem;
+  }
+  svg:nth-child(8) { // head
+    @extend %snake-link;
+    @include transform(scale(0.35));
+    left: 32rem;
+    top: 3rem;
+  }
+
 }

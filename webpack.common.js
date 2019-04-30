@@ -72,9 +72,17 @@ module.exports = {
           postCSSLoader,
           'sass-loader',
         ]
+      }, 
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: '@svgr/webpack',
+          },
+        ],
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|)$/,
         use: [
           {
             loader: 'file-loader',
