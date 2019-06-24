@@ -1,6 +1,10 @@
-@import '~@mindshaft/cute-components/lib/scss/_theme.scss';
+@import '~@mindshaft/cute-components/lib/scss/_theme_spacedust.scss';
 
 :export {
   link: $blue;
+}
 
+@font-face {
+  font-family: 'CantataOne';
+  src: url('../assets/fonts/CantataOne-Regular.ttf');
 }

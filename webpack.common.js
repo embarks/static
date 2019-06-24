@@ -1,12 +1,12 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const autoprefixer = require('autoprefixer');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const autoprefixer = require('autoprefixer')
 
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV !== 'production'
 
-const StyleLoader = devMode ? 'style-loader' : MiniCssExtractPlugin.loader;
+const StyleLoader = devMode ? 'style-loader' : MiniCssExtractPlugin.loader
 
 const postCSSLoader = {
   loader: 'postcss-loader',
@@ -19,7 +19,7 @@ const postCSSLoader = {
       })
     ]
   }
-};
+}
 
 const CSSModuleLoader = {
   loader: 'css-loader',
@@ -29,7 +29,7 @@ const CSSModuleLoader = {
     localIdentName: devMode ? '[local]__[hash:base64:5]' : '[hash:base64:5]',
     minimize: true
   }
-};
+}
 
 const CSSLoader = {
   loader: 'css-loader',
@@ -38,8 +38,7 @@ const CSSLoader = {
     sourceMap: true,
     minimize: true
   }
-};
-
+}
 
 module.exports = {
   entry: './src/index.js',
@@ -57,7 +56,7 @@ module.exports = {
           StyleLoader,
           CSSLoader,
           postCSSLoader
-        ],
+        ]
       },
       {
         test: /\.scss$/,
@@ -70,19 +69,19 @@ module.exports = {
           StyleLoader,
           CSSModuleLoader,
           postCSSLoader,
-          'sass-loader',
+          'sass-loader'
         ]
-      }, 
+      },
       {
         test: /\.svg$/,
         use: [
           {
-            loader: '@svgr/webpack',
-          },
-        ],
+            loader: '@svgr/webpack'
+          }
+        ]
       },
       {
-        test: /\.(png|jpg|gif|)$/,
+        test: /\.(png|jpg|gif|ttf)$/,
         use: [
           {
             loader: 'file-loader',
@@ -92,27 +91,27 @@ module.exports = {
       }
     ]
   },
-  resolve: { 
+  resolve: {
     alias: {
       'react': path.resolve(__dirname, 'node_modules', 'react'),
-      'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
+      'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom')
     },
-    extensions: ['*', '.js', '.jsx'] 
+    extensions: ['*', '.js', '.jsx']
   },
   output: {
     path: path.resolve(__dirname, './dist/'),
     filename: '[name].bundle.js'
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']), 
-    new HtmlWebpackPlugin({ 
-      template: path.resolve(__dirname, './public/index.html'),
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './public/index.html')
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
     })
   ]
-};
+}

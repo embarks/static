@@ -1,0 +1,102 @@
+
+@import './variables';
+@import './mixins';
+
+@mixin transitionLong($property...) {
+  -webkit-transition: all 1.8s ease;
+  -moz-transition: all 1.8s ease;
+  -o-transition: all 1.8s ease;
+  transition: all 1.8s ease;
+  transition-property: $property;
+}
+
+
+@mixin transitionShort($property...) {
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+  transition-property: $property;
+}
+
+.header {
+  position: relative;
+  color: $bright;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  span.glass {
+    transition: height 0.5s, width 0.5s, margin 0.5s;
+    background: $bright;
+    position: absolute;
+    height: 0;
+    width: 0;
+    z-index: 4;
+    border-radius: 200px;
+    border: 20px rgba(227, 205, 123, 0.5);
+  }
+  span.shownGlass {
+    height: 120px;
+    width: 120px;
+    margin-left: -50px;
+    margin-top: -50px;
+  }
+  &.mobile-header {
+    overflow: hidden;
+  }
+  u {
+    color: $black;
+    transition: color .2s;
+    cursor:none;
+    display:block;
+    padding: 0 1rem;
+    text-decoration: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    display: block;
+    font-size: 2rem;
+    font-style: italic;
+    z-index: 5;
+  }
+}
+
+.nav {
+  width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  &:not(.hidden) {
+    @include transitionLong(all);
+    top: -66%;
+    opacity: 1;
+  }
+  a {
+    color: $blue;
+    height: 12rem;
+    font-size: 2rem;
+    line-height: 12rem;
+    text-align: right;
+    margin-right: 5rem;
+    &:hover {
+      text-decoration: none;
+      color: $bright-blue;
+    }
+  }
+}
+
+.hidden {
+  @include transitionShort(all);
+  top: 100%;
+  margin-bottom: 0;
+  opacity: 0;
+}
+
+
+.scroll-detect {
+  position:absolute;
+  top: 0;
+}

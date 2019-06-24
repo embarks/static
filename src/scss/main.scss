@@ -5,6 +5,12 @@ html, body {
   width: 100%;
   font-family: 'Ubuntu Mono', 'Roboto Mono', 'Menlo', 'Courier New', Courier, monospace;
   background-color: $black;
+  &.preload * {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+  }
 }
 #root {
   width: 100%;

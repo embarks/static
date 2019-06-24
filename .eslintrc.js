@@ -6,8 +6,14 @@ module.exports = {
     },
     'extends': [ 
         'eslint:recommended',
-        'plugin:react/recommended'
+        'plugin:react/recommended',
+        'standard'
     ],
+    'settings': {
+        'react': {
+            'version': 'detect'
+        }
+    },
     'globals': {
         'Atomics': 'readonly',
         'SharedArrayBuffer': 'readonly'
@@ -36,9 +42,5 @@ module.exports = {
             'error',
             'single'
         ],
-        'semi': [
-            'error',
-            'always'
-        ]
     }
 };
