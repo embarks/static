@@ -1,29 +1,45 @@
 @import './variables';
+@import './mixins';
 
-header.links {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
-  a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $bright-blue;
-    font-size: 2rem;
-    line-height: 2rem;
-    white-space: nowrap;
-    z-index: 8;
+@mixin transitionShort($property...) {
+  -webkit-transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+  transition-property: $property;
+}
+
+
+@include keyframes(wobble) {
+
+}
+.link.highlighted {
+  @include transitionShort(all);
+  color: $bright-red;
+  margin-right: 1.5rem;
+  font-family: 'Sans';
+}
+
+.link:not(.highlighted) {
+  @include transitionShort(all);
+  font-family: 'Sans-Italic';
+}
+
+.link {
+  font-family: 'Sans-Italic';
+  text-transform: lowercase;
+  color: $info;
+  height: 20%;
+  font-size: 3rem;
+  line-height: 20%;
+  text-align: right;
+  margin-right: 1rem;
+  &:hover.highlighted {
+    text-decoration: none;
+    color: $bright-red;
   }
-  .block-top {
-    height: 3500px;
-  }
-  .block-github {
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    background: red;
-    top: 100%;
+  &:hover:not(.highlighted) {
+    text-decoration: none;
+    color: $info;
   }
 }

@@ -30,3 +30,18 @@
       @content;
   }
 }
+
+@mixin transformOrigin($origin) {
+    transform-origin: $origin;
+    -webkit-transform-origin: $origin;
+    -ms-transform-origin: $origin;
+    -moz-transform-origin: $origin;
+}
+  
+@mixin transform($property, $origin) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    -moz-transform: $property;
+    transform: $property;
+    @include transformOrigin($origin);
+  }

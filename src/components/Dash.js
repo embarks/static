@@ -18,7 +18,7 @@ const Dash = ({ mobile }) => {
     const { currentPosition } = waypoint
     if (currentPosition === 'inside') {
       setScrolled(false)
-    } else {
+    } else if (currentPosition === 'above') {
       setScrolled(true)
     }
   }
@@ -30,11 +30,12 @@ const Dash = ({ mobile }) => {
         ? <>
         <Waypoint onPositionChange={_handlePositionChange}><div className={styles['scroll-detect']} /></Waypoint>
         <nav className={cx(styles.nav, { [styles.hidden]: !scrolled })}>
-          <RevealLinks />
+          <RevealLinks scrolled={scrolled} />
         </nav>
         </>
         : <Mouse render={mouse => (
           <header className={styles.header}>
+
             <span className={cx(styles.glass, {
               [styles.shownGlass]: showGlass
             })} style={{ top: mouse.y, left: mouse.x }} />
