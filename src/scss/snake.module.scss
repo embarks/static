@@ -277,16 +277,15 @@ svg.head {
     margin: 0 auto;
     position: relative;
     display: block;
-
+    @include transitionLong(margin, transform, opacity, position);
+    
     &.hidden {
-      @include transitionLong(margin, transform, opacity, position);
       @include transform(translateY(-20rem), 60% 30%);
       opacity: 0;
       position: absolute;
     }
     
     &.shown {
-      @include transitionLong(margin, transform, opacity, position);
       @include transform(translateY(0), 60% 30%);
       opacity: 1;
     }

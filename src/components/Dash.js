@@ -47,7 +47,6 @@ const Dash = ({ mobile }) => {
         )} />
       }
     </>
-
   )
 }
 
@@ -56,5 +55,3 @@ Dash.propTypes = {
 }
 
 export default Dash
-
-// export default withRouter(Dash);

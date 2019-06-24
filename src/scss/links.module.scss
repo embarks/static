@@ -10,36 +10,50 @@
 }
 
 
-@include keyframes(wobble) {
-
+.link.highlighted, 
+.link.highlighted button,
+.link.highlighted a
+{
+  color: $bright;
+  padding-right: 1.5rem;
+  & label { font-family: 'Sans'; }
+  div.tag { height: 50%; }
 }
-.link.highlighted {
+
+.link, .link button, .link a {
   @include transitionShort(all);
-  color: $bright-red;
-  margin-right: 1.5rem;
-  font-family: 'Sans';
-}
-
-.link:not(.highlighted) {
-  @include transitionShort(all);
-  font-family: 'Sans-Italic';
-}
-
-.link {
-  font-family: 'Sans-Italic';
+  & label { 
+    font-family: 'Sans-Italic'; 
+    position: relative;
+  }
   text-transform: lowercase;
   color: $info;
-  height: 20%;
+  height: 100%;
   font-size: 3rem;
-  line-height: 20%;
-  text-align: right;
-  margin-right: 1rem;
-  &:hover.highlighted {
-    text-decoration: none;
-    color: $bright-red;
+  line-height: 100%;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  div.tag {
+    @include transitionShort(all);
+    height: 0;
+    width: 100%;
+    z-index: -1;
+    background: $dark;
+    position: absolute;
+    bottom: 7px;
   }
-  &:hover:not(.highlighted) {
-    text-decoration: none;
-    color: $info;
-  }
+}
+
+
+
+.temporary-link {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
 }

@@ -45,33 +45,21 @@
 }
 
 @-webkit-keyframes flame {
-  0% { transform: scale(1) }
-  12% { transform: scale(0.8) }
-  25% { transform: scale(0.9) }
-  37% { transform: scale(0.8) }
-  42% { transform: scale(0.9) }
-  50% { transform: scale(0.9) }
-  100% { transform: scale(1) }
+  0%, 100% { transform: scale(1) }
+  12%, 37% { transform: scale(0.8) }
+  25%, 42%, 50% { transform: scale(0.9) }
 }
 
 @-webkit-keyframes whispX {
-  0% { transform: skewX(1deg) }
-  12% { transform: skewX(8deg) }
-  25% { transform: skewX(9deg) }
-  37% { transform: skewX(8deg) }
-  42% { transform: skewX(9deg) }
-  50% { transform: skewX(9deg) }
-  100% { transform: skewX(1deg) }
+  0%, 100% { transform: skewX(1deg) }
+  12%, 37% { transform: skewX(8deg) }
+  25%, 42%, 50% { transform: skewX(9deg) }
 }
 
 @-webkit-keyframes whispY {
-  0% { transform: skewY(1deg) }
-  12% { transform: skewY(8deg) }
-  25% { transform: skewY(9deg) }
-  37% { transform: skewY(8deg) }
-  42% { transform: skewY(9deg) }
-  50% { transform: skewY(9deg) }
-  100% { transform: skewY(1deg) }
+  0%, 100% { transform: skewY(1deg) }
+  12%, 37% { transform: skewY(8deg) }
+  25%, 42%, 50% { transform: skewY(9deg) }
 }
 
 @-webkit-keyframes fly-up-burnout-1 {
@@ -151,33 +139,21 @@
 }
 
 @keyframes flame {
-  0% { transform: scale(1) }
-  12% { transform: scale(0.8) }
-  25% { transform: scale(0.9) }
-  37% { transform: scale(0.8) }
-  42% { transform: scale(0.9) }
-  50% { transform: scale(0.9) }
-  100% { transform: scale(1) }
+  0%, 100% { transform: scale(1) }
+  12%, 37% { transform: scale(0.8) }
+  25%, 42%, 50% { transform: scale(0.9) }
 }
 
 @keyframes whispX {
-  0% { transform: skewX(1deg) }
-  12% { transform: skewX(8deg) }
-  25% { transform: skewX(9deg) }
-  37% { transform: skewX(8deg) }
-  42% { transform: skewX(9deg) }
-  50% { transform: skewX(9deg) }
-  100% { transform: skewX(1deg) }
+  0%, 100% { transform: skewX(1deg) }
+  12%, 37% { transform: skewX(8deg) }
+  25%, 42%, 50% { transform: skewX(9deg) }
 }
 
 @keyframes whispY {
-  0% { transform: skewY(1deg) }
-  12% { transform: skewY(8deg) }
-  25% { transform: skewY(9deg) }
-  37% { transform: skewY(8deg) }
-  42% { transform: skewY(9deg) }
-  50% { transform: skewY(9deg) }
-  100% { transform: skewY(1deg) }
+  0%, 100% { transform: skewY(1deg) }
+  12%, 37% { transform: skewY(8deg) }
+  25%, 42%, 50% { transform: skewY(9deg) }
 }
 
 @keyframes fly-up-burnout-1 {

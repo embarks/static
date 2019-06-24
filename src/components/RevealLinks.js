@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styles from '../scss/links.module.scss'
 import { Waypoint } from 'react-waypoint'
 import cx from 'classnames'
+import PreventEffect from './PreventEffect'
 
 const links = [
-  { href: 'https://github.com/embarks', title: 'Github', id: 'github' },
-  { href: 'https://trello.com/b/pPZZjjfC/dev', title: 'Trello', id: 'trello' },
-  { href: 'https://www.linkedin.com/in/thebartman/', title: 'LinkedIn', id: 'linkedin' },
-  { link: '/log', title: 'Posts', id: 'posts' },
-  { link: '/data', title: 'Infographics', id: 'info' },
-  { link: '/sounds', title: 'Soundboard', id: 'sounds' }
+  { link: '/about', title: 'about', id: 'about', complete: true },
+  { link: '/log', title: 'posts', id: 'posts', complete: false },
+  { href: 'https://github.com/embarks', title: 'source', id: 'github' },
+  { href: 'https://trello.com/b/pPZZjjfC/dev', title: 'projects', id: 'trello' },
+  { href: 'https://www.linkedin.com/in/thebartman/', title: 'Résumé', id: 'linkedin' }
 ]
 
 const RevealLinks = (props) => {
-  const [highlighted, setHighlighted] = useState(['github'])
-
-  useEffect(() => {
-    function _listener (scroll) {
-      var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop
-      var scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight
-      var scrolledToBottom = (scrollTop + window.innerHeight) >= scrollHeight
-      if (scrolledToBottom) {
-        console.log('you\'re at the bottom of the page')
-      }
-    }
-    window.addEventListener('scroll', _listener)
-  })
+  const [highlighted, setHighlighted] = useState([links[0]['id']])
 
   function _handleWaypoint (link) {
     return (waypoint) => {
@@ -42,14 +30,41 @@ const RevealLinks = (props) => {
   return (
     links.map((link, index) => (
       <React.Fragment key={`link-${index}`}>
-        <Waypoint bottomOffset="10%" topOffset="75%" onPositionChange={_handleWaypoint({ id: link.id, index })}>
+        <Waypoint bottomOffset="25%" topOffset="35%" onPositionChange={_handleWaypoint({ id: link.id, index })}>
           {
             link.hasOwnProperty('href')
-              ? <a href={link.href} className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}>
-                {link.title}
+              ? <a target="_blank" href={link.href}
+                rel="noopener noreferrer"
+                className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}
+              >
+                <label>
+                  {link.title}
+                  <div className={styles.tag} />
+                </label>
               </a>
-              : <Link to={link.link} className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}>{link.title}
-              </Link>
+              : <span className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}>
+                {
+                  !link.complete
+                    ? <PreventEffect render={(onClick) => {
+                      return (
+                        <button className={styles['temporary-link']}
+                          onTouchStart={onClick('touch')}
+                        >
+                          <label>
+                            {link.title}
+                            <div className={styles.tag} />
+                          </label>
+                        </button>
+                      )
+                    }}></PreventEffect>
+                    : <Link to={link.link}>
+                      <label>
+                        {link.title}
+                        <div className={styles.tag} />
+                      </label>
+                    </Link>
+                }
+              </span>
           }
         </Waypoint>
       </React.Fragment>
