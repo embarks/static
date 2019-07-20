@@ -31,14 +31,14 @@
     position: absolute;
     height: 0;
     width: 0;
-    z-index: 4;
+    z-index: 2;
     border-radius: 200px;
     border: 20px rgba(227, 205, 123, 0.5);
   }
   span.shownGlass {
     height: 120px;
     width: 120px;
-    margin-left: -50px;
+    margin-left: -60px;
     margin-top: -50px;
   }
   &.mobile-header {
@@ -52,7 +52,7 @@
     padding: 0 1rem;
     text-decoration: none;
     position: absolute;
-    bottom: 0;
+    bottom: 6rem;
     right: 0;
     text-align: center;
     display: block;
@@ -71,7 +71,6 @@
   &:not(.hidden) {
     @include transitionLong(all);
     top: -30%;
-    margin-bottom: 60%;
     opacity: 1;
   }
 }

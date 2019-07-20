@@ -14,20 +14,22 @@
 .link.highlighted button,
 .link.highlighted a
 {
-  color: $bright;
   padding-right: 1.5rem;
-  & label { font-family: 'Sans'; }
-  div.tag { height: 50%; }
+  font-family: 'Sans'; 
+  color: $bold;
+  &:hover  {
+    text-decoration: none;
+    color: $bold;
+    &, &:hover > div > button {
+      color: $bold;
+    }
+  }
 }
 
 .link, .link button, .link a {
   @include transitionShort(all);
-  & label { 
-    font-family: 'Sans-Italic'; 
-    position: relative;
-  }
+  font-family: 'Sans-Italic'; 
   text-transform: lowercase;
-  color: $info;
   height: 100%;
   font-size: 3rem;
   line-height: 100%;
@@ -36,17 +38,15 @@
   justify-content: flex-end;
   align-items: center;
   position: relative;
-  div.tag {
-    @include transitionShort(all);
-    height: 0;
-    width: 100%;
-    z-index: -1;
-    background: $dark;
-    position: absolute;
-    bottom: 7px;
+  color: $bright;
+  &:hover  {
+    text-decoration: none;
+    color: $bright;
+    &, &:hover > div > button {
+      color: $bright;
+    }
   }
 }
-
 
 
 .temporary-link {

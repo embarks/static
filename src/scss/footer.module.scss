@@ -1,0 +1,183 @@
+@import './mixins';
+@import './variables';
+
+@mixin transitionShort($property...) {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  transition-property: $property;
+}
+
+@mixin transitionLong($property...) {
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+  transition-property: $property;
+}
+
+@mixin delayTransition($s) {
+  -webkit-transition-delay: $s; 
+  -moz-transition-delay: $s; 
+  -o-transition-delay: $s; 
+  transition-delay: $s; 
+}
+
+@include keyframes(wavywave) {
+  0%, 100% { 
+    @include transform(skewX(0deg) skewY(0deg), 50% 50%);
+     }
+  25% {
+    @include transform(skewX(1.5deg) skewY(0.5deg), -5% -5%);
+
+  }
+  50% { 
+    @include transform(skewX(-1.5deg) skewY(-1deg), 10% 10%);
+    
+  } 
+  75% { 
+    @include transform(skewX(1.5deg) skewY(0.5deg), -25% -25%);
+    
+   }
+}
+
+footer {
+  &.mobile {
+    height: 30rem;
+    padding-top: 8rem;  
+  }
+  &:not(.mobile) {
+    @include transitionShort(padding, opacity);
+    height: 17rem;
+    margin-top: -6rem;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2rem;
+  }
+  &.show:not(.mobile) {
+    @include transitionShort(padding, opacity);
+  }
+  position: relative;
+  width: 100%;
+  padding: 0 5%;
+  color: $info;
+  cursor: default;
+  font-family: 'Sans';
+  * { 
+    font-family: 'Sans';
+  }
+  font-smooth: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  u {
+    @include transitionLong(width, transform);
+    width: 0;
+    margin-top: -0.1rem;
+    height: 1.5rem;
+    overflow: hidden;
+    opacity: 0;
+  }
+  &.show u {
+    opacity: 1;
+    display: inline-block;
+    position: absolute;
+    background: lighten($black, 5%);
+    width: 8.2rem;
+    margin-left: -0.4rem;
+    z-index: -1;
+    @include animation('wavywave 10s ease-in-out infinite');
+    animation-delay: 1s;
+  }
+  .name {
+    width: 0;
+    overflow:hidden;
+    @include transitionLong(color, margin);
+  }
+  &.show .name {
+    margin-right: 1rem;
+    color: $bright;
+  }
+  &:not(.mobile) .fire-container {
+    position: absolute;
+    right: 10%;
+    bottom: 0;
+  }
+  &.mobile .fire-container {
+    background: transparent;
+    position: absolute;
+    width: 1px;
+    right: 1px;
+    left: 0;
+    margin: auto;
+    z-index: -1;
+    overflow: hidden;
+    width: 100%;
+    height: 15rem;
+    bottom: 0;
+  }
+  .info-container {
+    @include transitionLong(margin, opacity);
+    font-size: 0.9rem;
+    font-family: 'Sans';
+  }
+  a {
+    color: $info2;
+    font-family: 'Sans-Italic';
+    &:hover {
+      color: $blue;
+    }
+  }
+  .url {
+    white-space: nowrap;
+  }
+  .demph {
+    color: $dark;
+    margin-right: 1rem;
+    &::after {
+      content: ":";
+      color: $bold;
+    }
+  }
+  em {
+    font-family: 'Sans';
+    color: $main;
+  }
+  .mailto a {
+    color: $bold;
+    font-family: 'Sans';
+  }
+
+  label {
+    margin-bottom: 0;
+  }
+  .bg, .bglt, .bgltr {
+    @include transitionLong(bottom);
+    width: 200%;
+    border-radius: 0 0 0 0;
+    left: -50%;
+    bottom: -100%;
+    position: absolute;
+    &.show-bg, &.show-bglt, &.show-bgltr {
+      bottom: 0;
+    }
+  }
+  .bg {
+    @include delayTransition(0.2s);
+    background-color: darken($black, 5%);
+    height: 80%;
+    z-index: -3;
+  }
+  .bglt {
+    @include delayTransition(0.1s);
+    background-color: darken($black, 2%);
+    height: 90%;
+    z-index: -4;
+  }
+  .bgltr {
+    background-color: darken($black, 1%);
+    height: 100%;
+    z-index: -5;
+  }
+}

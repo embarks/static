@@ -7,8 +7,9 @@ import cx from 'classnames'
 import PreventEffect from './PreventEffect'
 
 const links = [
-  { link: '/about', title: 'about', id: 'about', complete: true },
+  { link: '/about', title: 'about', id: 'about', complete: false },
   { link: '/log', title: 'posts', id: 'posts', complete: false },
+  { href: 'https://codepen.io/', title: 'pens', id: 'codepen' },
   { href: 'https://github.com/embarks', title: 'source', id: 'github' },
   { href: 'https://trello.com/b/pPZZjjfC/dev', title: 'projects', id: 'trello' },
   { href: 'https://www.linkedin.com/in/thebartman/', title: 'Résumé', id: 'linkedin' }
@@ -30,41 +31,30 @@ const RevealLinks = (props) => {
   return (
     links.map((link, index) => (
       <React.Fragment key={`link-${index}`}>
-        <Waypoint bottomOffset="25%" topOffset="35%" onPositionChange={_handleWaypoint({ id: link.id, index })}>
+        <Waypoint bottomOffset="35%" topOffset="55%" onPositionChange={_handleWaypoint({ id: link.id, index })}>
           {
             link.hasOwnProperty('href')
               ? <a target="_blank" href={link.href}
                 rel="noopener noreferrer"
                 className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}
               >
-                <label>
-                  {link.title}
-                  <div className={styles.tag} />
-                </label>
+                {link.title}
               </a>
-              : <span className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}>
-                {
-                  !link.complete
-                    ? <PreventEffect render={(onClick) => {
-                      return (
-                        <button className={styles['temporary-link']}
-                          onTouchStart={onClick('touch')}
-                        >
-                          <label>
-                            {link.title}
-                            <div className={styles.tag} />
-                          </label>
-                        </button>
-                      )
-                    }}></PreventEffect>
-                    : <Link to={link.link}>
-                      <label>
+              : !link.complete
+                ? <div className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}
+                ><PreventEffect render={(onClick) => {
+                    return (
+                      <button className={styles['temporary-link']}
+                        onTouchStart={onClick('touch')}
+                      >
                         {link.title}
-                        <div className={styles.tag} />
-                      </label>
-                    </Link>
-                }
-              </span>
+                      </button>
+                    )
+                  }}></PreventEffect>
+                </div>
+                : <Link to={link.link} className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}>
+                  {link.title}
+                </Link>
           }
         </Waypoint>
       </React.Fragment>

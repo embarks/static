@@ -63,21 +63,21 @@ p.burst {
       content: "★"
     }
     &:nth-child(1) {
-      @include animation("xAxis 0.5s ease-in-out, fade 0.5s ease-in-out forwards");
+      @include animation("xAxis 0.5s, fade 0.5s forwards");
       &::after {
-        @include animation("yAxis 0.5s ease-in-out")
+        @include animation("yAxis 0.5s")
       }
     }
     &:nth-child(2) {
-      @include animation("xAxis-2 0.5s ease-in-out, fade 0.5s ease-in-out forwards");
+      @include animation("xAxis-2 0.5s, fade 0.5s forwards");
       &::after {
-        @include animation("yAxis-2 0.5s ease-in-out")
+        @include animation("yAxis-2 0.5s")
       }
     }
     &:nth-child(3) {
-      @include animation("xAxis-3 0.5s ease-in-out, fade 0.5s ease-in-out forwards");
+      @include animation("xAxis-3 0.5s, fade 0.5s forwards");
       &::after {
-        @include animation("yAxis-3 0.5s ease-in-out")
+        @include animation("yAxis-3 0.5s")
       }
     }
   }

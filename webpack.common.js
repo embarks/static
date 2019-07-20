@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const Dotenv = require('dotenv-webpack')
 const autoprefixer = require('autoprefixer')
 
 const devMode = process.env.NODE_ENV !== 'production'
@@ -103,6 +104,7 @@ module.exports = {
     filename: '[name].bundle.js'
   },
   plugins: [
+    new Dotenv(),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './public/index.html')

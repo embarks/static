@@ -24,7 +24,7 @@ const PreventEffect = props => {
         y = event.clientY - rect.top
       }
       elementRef.current.appendChild(burst)
-      burst.style.top = `${y - 15}px`
+      burst.style.top = `${y - 20}px`
       burst.style.left = `${x - 10}px`
       setTimeout(() => {
         burst.remove(burst)

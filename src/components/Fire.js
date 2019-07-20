@@ -4,7 +4,7 @@ import styles from '../scss/fire.module.scss'
 
 const Fire = props => {
   return (
-    <section className={styles.light} >
+    <div className={styles.light} >
       <ul className={styles['fire-container']}>
         <li className={styles.fire} />
         <li className={styles.fire} />
@@ -23,7 +23,7 @@ const Fire = props => {
       <span className={styles.spark} />
       <span className={styles.spark} />
       <span className={styles.spark} />
-    </section>
+    </div>
   )
 }
 

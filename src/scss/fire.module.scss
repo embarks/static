@@ -192,15 +192,19 @@
   }
 }
 
-section.light {
+.light {
   position: absolute;
-  bottom: 4rem;
+  margin:auto;
   z-index: 3;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 1px;
+  bottom: 5rem;
   ul.fire-container {
     position: relative;
     transform: rotate(-45deg);
     margin: 0;
-    margin-bottom: 1rem;
     z-index: 2;
     li {
       list-style: none;
@@ -236,7 +240,7 @@ section.light {
       width: 11rem;
       height: 11rem;
       top: -1rem; 
-      right: 1rem;
+      left: -10rem;
       border-radius: 50% 0% 50% 50%;
       background: $bright;
       animation: flame 1s, whispX 1.8s, whispY 1.8s;

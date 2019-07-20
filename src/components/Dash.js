@@ -7,7 +7,9 @@ import { Waypoint } from 'react-waypoint'
 import RevealLinks from './RevealLinks'
 import cx from 'classnames'
 
-const Dash = ({ mobile }) => {
+const DOMAIN = process.env.DOMAIN
+
+const Dash = ({ mobile, children }) => {
   const [showGlass, setShowGlass] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -40,18 +42,23 @@ const Dash = ({ mobile }) => {
               [styles.shownGlass]: showGlass
             })} style={{ top: mouse.y, left: mouse.x }} />
             <u onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-              embarks.solweb.org
+              {DOMAIN}
             </u>
 
           </header>
         )} />
       }
+      {children}
     </>
   )
 }
 
 Dash.propTypes = {
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node)
+  ])
 }
 
 export default Dash
