@@ -280,12 +280,10 @@ svg.head {
     @include transitionLong(margin, transform, opacity, position);
     
     &.hidden {
-      @include transform(translateY(-20rem), 60% 30%);
       opacity: 0;
     }
     
     &.shown {
-      @include transform(translateY(0), 60% 30%);
       opacity: 1;
     }
   }
