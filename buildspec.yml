@@ -1,0 +1,20 @@
+version: 0.1
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - echo Entered the install phase...
+      - sudo apt-get update -y && sudo apt-get install -y make apt-transport-https
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+      - sudo apt-get update -y && sudo apt-get install -y yarn
+  pre_build:
+    commands:
+      - echo Entered pre_build phase...
+      - yarn install
+  build:
+    commands:
+      - yarn run test
+      - yarn run build
+      - echo Build completed on `date`

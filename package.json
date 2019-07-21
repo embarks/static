@@ -4,7 +4,7 @@
   "description": "practice for emily",
   "scripts": {
     "test": "echo \"testing\"",
-    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "start": "HTTPS=true webpack-dev-server --open --config webpack.dev.js",
     "build": "NODE_ENV='production' webpack --config webpack.prod.js "
   },
   "repository": {
@@ -55,7 +55,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@mindshaft/cute-components": "file:../cute-components",
+    "@mindshaft/cute-components": "^0.5.0",
     "classnames": "^2.2.6",
     "dotenv-webpack": "^1.7.0",
     "lodash": "^4.17.11",
