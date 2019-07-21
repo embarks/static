@@ -281,6 +281,7 @@ svg.head {
     
     &.hidden {
       opacity: 0;
+      @include transform(translateY(-20rem), 50% 50%);
     }
     
     &.shown {
