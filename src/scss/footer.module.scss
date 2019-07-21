@@ -55,6 +55,7 @@ footer {
     display: flex;
     align-items: flex-end;
     padding-bottom: 2rem;
+    padding-top: 6rem;
   }
   &.show:not(.mobile) {
     @include transitionShort(padding, opacity);
@@ -117,6 +118,9 @@ footer {
     height: 15rem;
     bottom: 0;
   }
+  &:not(.mobile) .info-container {
+    height: 100%;
+  }
   .info-container {
     @include transitionLong(margin, opacity);
     font-size: 0.9rem;
@@ -132,14 +136,6 @@ footer {
   .url {
     white-space: nowrap;
   }
-  .demph {
-    color: $dark;
-    margin-right: 1rem;
-    &::after {
-      content: ":";
-      color: $bold;
-    }
-  }
   em {
     font-family: 'Sans';
     color: $main;
@@ -151,6 +147,12 @@ footer {
 
   label {
     margin-bottom: 0;
+    color: $dark;
+    margin-right: 1rem;
+    &::after {
+      content: ":";
+      color: $bold;
+    }
   }
   .bg, .bglt, .bgltr {
     @include transitionLong(bottom);
@@ -159,6 +161,7 @@ footer {
     left: -50%;
     bottom: -100%;
     position: absolute;
+    overflow: hidden;
     &.show-bg, &.show-bglt, &.show-bgltr {
       bottom: 0;
     }

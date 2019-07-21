@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import styles from '../scss/links.module.scss'
+import styles from '../scss/mobile-links.module.scss'
 import { Waypoint } from 'react-waypoint'
 import cx from 'classnames'
 import PreventEffect from './PreventEffect'
@@ -9,7 +9,7 @@ import PreventEffect from './PreventEffect'
 const links = [
   { link: '/about', title: 'about', id: 'about', complete: false },
   { link: '/log', title: 'posts', id: 'posts', complete: false },
-  { href: 'https://codepen.io/', title: 'pens', id: 'codepen' },
+  { href: 'https://codepen.io/embarks/#', title: 'pens', id: 'codepen' },
   { href: 'https://github.com/embarks', title: 'source', id: 'github' },
   { href: 'https://trello.com/b/pPZZjjfC/dev', title: 'projects', id: 'trello' },
   { href: 'https://www.linkedin.com/in/thebartman/', title: 'Résumé', id: 'linkedin' }
@@ -42,10 +42,11 @@ const RevealLinks = (props) => {
               </a>
               : !link.complete
                 ? <div className={cx(styles.link, { [styles.highlighted]: highlighted.includes(link.id) })}
-                ><PreventEffect render={(onClick) => {
+                ><PreventEffect render={({ onTouch, onClick }) => {
                     return (
                       <button className={styles['temporary-link']}
-                        onTouchStart={onClick('touch')}
+                        onTouchEnd={onTouch}
+                        onClick={onClick}
                       >
                         {link.title}
                       </button>

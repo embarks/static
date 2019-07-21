@@ -4,7 +4,8 @@ import IsomorphicSnake from './Snake'
 import Mouse from './Mouse'
 import styles from '../scss/header.module.scss'
 import { Waypoint } from 'react-waypoint'
-import RevealLinks from './RevealLinks'
+import MobileNav from './MobileLinks'
+import DesktopNav from './Nav'
 import cx from 'classnames'
 
 const DOMAIN = process.env.DOMAIN
@@ -32,19 +33,17 @@ const Dash = ({ mobile, children }) => {
         ? <>
         <Waypoint onPositionChange={_handlePositionChange}><div className={styles['scroll-detect']} /></Waypoint>
         <nav className={cx(styles.nav, { [styles.hidden]: !scrolled })}>
-          <RevealLinks scrolled={scrolled} />
+          <MobileNav scrolled={scrolled} />
         </nav>
         </>
         : <Mouse render={mouse => (
           <header className={styles.header}>
-
             <span className={cx(styles.glass, {
               [styles.shownGlass]: showGlass
             })} style={{ top: mouse.y, left: mouse.x }} />
             <u onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
               {DOMAIN}
             </u>
-
           </header>
         )} />
       }

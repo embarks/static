@@ -34,7 +34,7 @@ const PreventEffect = props => {
 
   return (
     <div className={styles.container} ref={elementRef}>
-      {props.render(_onClick)}
+      {props.render(({ onClick: _onClick('click'), onTouchStart: _onClick('touch') }))}
     </div>
   )
 }
