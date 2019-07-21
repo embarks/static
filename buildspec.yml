@@ -15,6 +15,7 @@ phases:
     commands:
       - echo Entered pre_build phase...
       - yarn install
+      - aws s3 cp $ENV_BUCKET/.env ./.env
   build:
     commands:
       - yarn run test
@@ -22,6 +23,6 @@ phases:
       - echo Build completed...
   post_build:
     commands:
-      - aws s3 sync ./dist $S3_BUCKET
+      - aws s3 sync ./dist $STORAGE_BUCKET
       - echo Successfully uploaded build to S3
   
