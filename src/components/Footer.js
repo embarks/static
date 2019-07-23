@@ -51,7 +51,7 @@ const Footer = ({ mobile, children }) => {
         </address>
         {mobile ? null : <>
         <Button onClick={openMobileWindow} variant="primary">
-          🚧 v.mobile
+          🚧 mobile
         </Button></>
         }
       </section>

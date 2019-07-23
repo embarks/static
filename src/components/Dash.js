@@ -5,7 +5,7 @@ import Mouse from './Mouse'
 import styles from '../scss/header.module.scss'
 import { Waypoint } from 'react-waypoint'
 import MobileNav from './MobileLinks'
-import DesktopNav from './Nav'
+// import DesktopNav from './Nav'
 import cx from 'classnames'
 
 const DOMAIN = process.env.DOMAIN
@@ -36,7 +36,11 @@ const Dash = ({ mobile, children }) => {
           <MobileNav scrolled={scrolled} />
         </nav>
         </>
-        : <Mouse render={mouse => (
+        : <>
+        {/* <nav>
+          <DesktopNav />
+        </nav> */}
+        <Mouse render={mouse => (
           <header className={styles.header}>
             <span className={cx(styles.glass, {
               [styles.shownGlass]: showGlass
@@ -46,6 +50,7 @@ const Dash = ({ mobile, children }) => {
             </u>
           </header>
         )} />
+        </>
       }
       {children}
     </>

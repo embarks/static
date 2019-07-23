@@ -52,26 +52,32 @@ const Snake = ({ children, isMobile, scrolled }) => {
 
   const _Snake = (
     <section className={cx(styles.decoration, { [styles['mobile-head']]: isMobile })}>
-      {snake.map(({ Piece, baseStyles, id }, index) =>
-        <React.Fragment key={`key-${index}`}>
-          <Piece
-            id={id}
-            key={`gadsden-${index}`}
-            onMouseEnter={isMobile ? undefined : changeTheme(index)}
-            onMouseLeave={isMobile ? undefined : changeTheme(index)}
-            className={
-              cx(baseStyles,
-                {
-                  [styles.animated]: isMobile,
-                  [styles['mobile']]: isMobile,
-                  [(themed.find(({ key }) => index === key) || {}).theme]: themed.some(({ key }) => index === key)
-                }
-              )
-            }
-          />
+      {snake.map(({ Piece, baseStyles, id }, index) => {
+        const themeKeys = themed.map(({ key }) => key)
+        const styleIndex = themeKeys.indexOf(index)
+        const theme = (themed[styleIndex] || {}).theme
+        return (
+          <React.Fragment key={`key-${index}`}>
+            <Piece
+              id={id}
+              key={`gadsden-${index}`}
+              onMouseEnter={isMobile ? undefined : changeTheme(index)}
+              onMouseLeave={isMobile ? undefined : changeTheme(index)}
+              className={
+                cx(baseStyles,
+                  {
+                    [styles.animated]: isMobile,
+                    [styles['mobile']]: isMobile,
+                    [theme]: styleIndex !== -1
+                  }
+                )
+              }
+            />
 
-          <Piece key={`gadsden-shadow-${index}`} className={cx(baseStyles, styles.shadow)} />
-        </React.Fragment>
+            <Piece key={`gadsden-shadow-${index}`} className={cx(baseStyles, styles.shadow)} />
+          </React.Fragment>
+        )
+      }
       )}
       {children}
     </section>
