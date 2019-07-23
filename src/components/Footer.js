@@ -5,6 +5,7 @@ import { Button } from '@mindshaft/cute-components'
 import cx from 'classnames'
 import Fire from './Fire'
 import styles from '../scss/footer.module.scss'
+import { version } from '../../package.json'
 
 const DOMAIN = process.env.DOMAIN
 const EMAIL = process.env.MAIL_SUPPORT
@@ -49,11 +50,12 @@ const Footer = ({ mobile, children }) => {
             </small>
           </span>
         </address>
+        <label>[version]</label><span className={styles.version}>{`v${version}`}</span><br />
         {mobile ? null : <>
         <Button onClick={openMobileWindow} variant="primary">
           🚧 mobile
-        </Button></>
-        }
+        </Button>
+        </>}
       </section>
       {children}
     </footer>

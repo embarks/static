@@ -183,4 +183,10 @@ footer {
     height: 100%;
     z-index: -5;
   }
+  .version {
+    color: $notice;
+  }
+  button {
+    margin-top: 1rem;
+  }
 }

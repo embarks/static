@@ -1,6 +1,6 @@
 {
   "name": "humblelab",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "practice for emily",
   "scripts": {
     "test": "echo \"testing\"",
