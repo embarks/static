@@ -24,32 +24,20 @@
   transition-delay: $s; 
 }
 
-@include keyframes(wavywave) {
-  0%, 100% { 
-    @include transform(skewX(0deg) skewY(0deg), 50% 50%);
-     }
-  25% {
-    @include transform(skewX(1.5deg) skewY(0.5deg), -5% -5%);
-
-  }
-  50% { 
-    @include transform(skewX(-1.5deg) skewY(-1deg), 10% 10%);
-    
-  } 
-  75% { 
-    @include transform(skewX(1.5deg) skewY(0.5deg), -25% -25%);
-    
-   }
+.fireplace {
+  position: absolute;
+  right: 10%;
+  bottom: 3rem;
+  z-index: 1;
 }
 
 footer {
+  height: 19rem;
   &.mobile {
-    height: 30rem;
     padding-top: 8rem;  
   }
   &:not(.mobile) {
     @include transitionShort(padding, opacity);
-    height: 17rem;
     margin-top: -6rem;
     z-index: 2;
     display: flex;
@@ -88,7 +76,6 @@ footer {
     width: 8.2rem;
     margin-left: -0.4rem;
     z-index: -1;
-    @include animation('wavywave 10s ease-in-out infinite');
     animation-delay: 1s;
   }
   .name {
@@ -100,12 +87,7 @@ footer {
     margin-right: 1rem;
     color: $bright;
   }
-  &:not(.mobile) .fire-container {
-    position: absolute;
-    right: 10%;
-    bottom: 0;
-  }
-  &.mobile .fire-container {
+  &.mobile .fireplace {
     background: transparent;
     position: absolute;
     width: 1px;
@@ -155,15 +137,15 @@ footer {
     }
   }
   .bg, .bglt, .bgltr {
-    @include transitionLong(bottom);
-    width: 200%;
-    border-radius: 0 0 0 0;
-    left: -50%;
-    bottom: -100%;
+    @include transitionLong(transform);
+    right: 0;
+    left: 0;
+    bottom: 0;
+    @include transform(translateY(100%), 50% 50%);
     position: absolute;
     overflow: hidden;
     &.show-bg, &.show-bglt, &.show-bgltr {
-      bottom: 0;
+    @include transform(translateY(0), 50% 50%);
     }
   }
   .bg {

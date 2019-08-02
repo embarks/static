@@ -38,43 +38,40 @@ const themes = [
 ]
 
 const Snake = ({ children, isMobile, scrolled }) => {
-  const [themed, setThemed] = useState([])
+  const [themed, setThemed] = useState({})
 
-  function changeTheme (sectionIndex) {
-    return () => setThemed([
-      ...themed.filter(({ key }) => key !== sectionIndex),
-      {
-        key: sectionIndex,
-        theme: themes[Math.floor((Math.random() * themes.length))]
-      }
-    ])
+  function _setThemed (section) {
+    return () => {
+      setThemed({
+        ...themed,
+        [section]: themes[Math.floor((Math.random() * themes.length))]
+      })
+    }
   }
 
+  function onMouseEvent (id) {
+    return isMobile ? undefined : _setThemed(id)
+  }
+
+  const mobileStyles = { [styles.animated]: isMobile, [styles.mobile]: isMobile }
   const _Snake = (
     <section className={cx(styles.decoration, { [styles['mobile-head']]: isMobile })}>
-      {snake.map(({ Piece, baseStyles, id }, index) => {
-        const themeKeys = themed.map(({ key }) => key)
-        const styleIndex = themeKeys.indexOf(index)
-        const theme = (themed[styleIndex] || {}).theme
+      {snake.map(({ Piece, baseStyles, id }) => {
+        const theme = themed[id]
+
         return (
-          <React.Fragment key={`key-${index}`}>
+          <React.Fragment key={`key-${id}`}>
             <Piece
               id={id}
-              key={`gadsden-${index}`}
-              onMouseEnter={isMobile ? undefined : changeTheme(index)}
-              onMouseLeave={isMobile ? undefined : changeTheme(index)}
+              key={`gadsden-${id}`}
+              onMouseEnter={onMouseEvent(id)}
+              onMouseLeave={onMouseEvent(id)}
               className={
-                cx(baseStyles,
-                  {
-                    [styles.animated]: isMobile,
-                    [styles['mobile']]: isMobile,
-                    [theme]: styleIndex !== -1
-                  }
-                )
+                cx(baseStyles, theme, mobileStyles)
               }
             />
 
-            <Piece key={`gadsden-shadow-${index}`} className={cx(baseStyles, styles.shadow)} />
+            <Piece key={`gadsden-shadow-${id}`} className={cx(baseStyles, styles.shadow)} />
           </React.Fragment>
         )
       }

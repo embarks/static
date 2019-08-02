@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Waypoint } from 'react-waypoint'
 import { Button } from '@mindshaft/cute-components'
 import cx from 'classnames'
-import Fire from './Fire'
 import styles from '../scss/footer.module.scss'
 import { version } from '../../package.json'
+import Fire from './Fire'
 
 const DOMAIN = process.env.DOMAIN
 const EMAIL = process.env.MAIL_SUPPORT
@@ -21,14 +21,19 @@ const Footer = ({ mobile, children }) => {
 
   function _setShowFooter (show) { return () => setShowFooter(show) }
 
+  const Fireplace = (
+    <section className={styles.fireplace}>
+      <Fire />
+    </section>
+  )
+
   return (
+    <>
+    {mobile ? null : Fireplace}
     <footer className={cx({ [styles.mobile]: mobile, [styles.show]: showFooter })}>
       <div className={cx(styles.bg, { [styles['show-bg']]: showFooter })} />
       <div className={cx(styles.bglt, { [styles['show-bglt']]: showFooter })} />
       <div className={cx(styles.bgltr, { [styles['show-bgltr']]: showFooter })} />
-      <section className={styles['fire-container']}>
-        <Fire />
-      </section>
       <section className={styles['info-container']}>
         <address>
           <p>
@@ -59,6 +64,7 @@ const Footer = ({ mobile, children }) => {
       </section>
       {children}
     </footer>
+    </>
   )
 }
 
