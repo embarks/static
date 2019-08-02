@@ -8,8 +8,7 @@ import MobileNav from './MobileLinks'
 // import DesktopNav from './Nav'
 import cx from 'classnames'
 
-const DOMAIN = process.env.DOMAIN
-
+const QUOTE = 'concerned about the future?'
 const Dash = ({ mobile, children }) => {
   const [showGlass, setShowGlass] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -46,7 +45,7 @@ const Dash = ({ mobile, children }) => {
               [styles.shownGlass]: showGlass
             })} style={{ top: mouse.y, left: mouse.x }} />
             <u onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-              {DOMAIN}
+              {QUOTE}
             </u>
           </header>
         )} />

@@ -2,32 +2,34 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import Dash from './components/Dash'
-import detectMobile from './lib/detectMobile'
+import detectMobile, { MIN_WIDTH } from './lib/detectMobile'
 import styles from './scss/app.module.scss'
 import './lib/falib'
 import Footer from './components/Footer'
 import { parse } from 'query-string'
 import throttle from 'lodash/throttle'
 
+const MOBILE_DETECTED = detectMobile()
 const Home = props => {
   const [mobile, showMobile] = useState(parse(props.location.search).screen === 'mobile')
   const windowresize = throttle(event => {
     const w = window.innerWidth ||
       document.documentElement.clientWidth ||
       document.body.clientWidth
-    if (w < 848) {
+    if (w < MIN_WIDTH) {
       showMobile(true)
-    } else if (w >= 848) {
+    } else if (w >= MIN_WIDTH) {
       showMobile(false)
     }
   }, 300)
   useEffect(() => {
+    windowresize()
     window.addEventListener('resize', windowresize)
     return () => {
       window.removeEventListener('resize', windowresize)
     }
   }, [])
-  const isMobile = detectMobile() || mobile
+  const isMobile = MOBILE_DETECTED || mobile
   return (
     <>
     <main className={styles.app}>
