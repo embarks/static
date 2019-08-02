@@ -11,7 +11,7 @@ import throttle from 'lodash/throttle'
 
 const MOBILE_DETECTED = detectMobile()
 const Home = props => {
-  const [mobile, showMobile] = useState(parse(props.location.search).screen === 'mobile')
+  const [isMobile, showMobile] = useState(MOBILE_DETECTED)
   const windowresize = throttle(event => {
     const w = window.innerWidth ||
       document.documentElement.clientWidth ||
@@ -29,7 +29,9 @@ const Home = props => {
       window.removeEventListener('resize', windowresize)
     }
   }, [])
-  const isMobile = MOBILE_DETECTED || mobile
+  useEffect(() => {
+    showMobile(parse(props.location.search).screen === 'mobile')
+  }, [])
   return (
     <>
     <main className={styles.app}>

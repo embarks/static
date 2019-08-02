@@ -47,15 +47,15 @@
   u {
     color: $black;
     transition: color .2s;
-    cursor:none;
+    cursor: none;
     display:block;
     padding: 0 1rem;
     text-decoration: none;
     position: absolute;
     bottom: 6rem;
     max-width: 150px;
-    right: 0;
-    text-align: left;
+    right: calc(10% - 75px);
+    text-align: center;
     display: block;
     font-size: 1.5rem;
     font-style: italic;
