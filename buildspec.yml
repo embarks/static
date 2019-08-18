@@ -23,6 +23,6 @@ phases:
       - echo Build completed...
   post_build:
     commands:
-      - aws s3 sync ./dist $STORAGE_BUCKET
+      - aws s3 sync ./dist $STORAGE_BUCKET --delete
       - echo Successfully uploaded build to S3
   
