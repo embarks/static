@@ -755,10 +755,10 @@
     humps "^2.0.1"
     prop-types "^15.5.10"
 
-"@mindshaft/cute-components@^0.7.0":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@mindshaft/cute-components/-/cute-components-0.7.1.tgz#781114d9676819179afbf82a599fe7117598b80c"
-  integrity sha512-i/sa/QRZmFVcuHvcBHYHXepTLFFW6F64VbTpgK6m/vFpxFLZaqw3UxHQIdB9UG6Or1wdlrY+/EWCZpevusRMuw==
+"@mindshaft/jits@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mindshaft/jits/-/jits-0.1.0.tgz#bba60b842038dd9a267e66c0022457ce55ce1215"
+  integrity sha512-3ggYrVGF4mUqEmuHZBdWXYddfYyZe22Cz53mELtf0bawcVWMpfh2OmrMHMPUT9sgA0PyweXfwRjmZpLvS0sX9Q==
   dependencies:
     "@svgr/webpack" "^4.3.2"
     bootstrap "^4.3.1"

@@ -13,7 +13,7 @@ module.exports = merge(common, {
     splitChunks: {
       cacheGroups: {
         'component-lib': {
-          test: /[\\/]node_modules[\\/](@mindshaft\/cute-components)[\\/]/,
+          test: /[\\/]node_modules[\\/](@mindshaft\/jits)[\\/]/,
           name: 'component-lib',
           chunks: 'all'
         },

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, withRouter, Link } from 'react-router-dom'
-import { Dash, Footer } from '@mindshaft/cute-components'
+import { Dash, Footer } from '@mindshaft/jits'
 import detectMobile, { MIN_WIDTH } from './lib/detectMobile'
 import styles from './scss/app.module.scss'
 import './lib/falib'

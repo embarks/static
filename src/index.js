@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import '@mindshaft/cute-components/build/main.css'
+import '@mindshaft/jits/build/main.css'
 import './scss/main.scss'
 import App from './App.js'
 
