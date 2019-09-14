@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
-import Dash from './components/Dash'
+import { BrowserRouter as Router, Route, withRouter, Link } from 'react-router-dom'
+import { Dash, Footer } from '@mindshaft/cute-components'
 import detectMobile, { MIN_WIDTH } from './lib/detectMobile'
 import styles from './scss/app.module.scss'
 import './lib/falib'
-import Footer from './components/Footer'
+import { version } from '../package.json'
 import { parse } from 'query-string'
 import throttle from 'lodash/throttle'
 
 const MOBILE_DETECTED = detectMobile()
+const DOMAIN = process.env.DOMAIN
+const EMAIL = process.env.MAIL_SUPPORT
+const TME = process.env.CHAT_SUPPORT
+
+const links = [
+  { link: '/about', title: 'about', id: 'about', complete: false },
+  { link: '/log', title: 'posts', id: 'posts', complete: false },
+  { href: 'https://codepen.io/embarks/#', title: 'pens', id: 'codepen' },
+  { href: 'https://github.com/embarks', title: 'source', id: 'github' },
+  { href: 'https://trello.com/b/pPZZjjfC/dev', title: 'projects', id: 'trello' },
+  { href: 'https://www.linkedin.com/in/thebartman/', title: 'Résumé', id: 'linkedin' }
+]
+
 const Home = props => {
   const [isMobile, showMobile] = useState(MOBILE_DETECTED)
   const windowresize = throttle(event => {
@@ -35,8 +48,13 @@ const Home = props => {
   return (
     <>
     <main className={styles.app}>
-      <Dash mobile={isMobile}>
-        <Footer mobile={isMobile}>
+      <Dash mobile={isMobile} Link={Link} links={links}>
+        <Footer mobile={isMobile}
+          version={version}
+          domain={DOMAIN}
+          email={EMAIL}
+          tme={TME}
+        >
         </Footer>
       </Dash>
     </main>
