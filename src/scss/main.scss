@@ -4,7 +4,7 @@ html, body {
   height: 100%;
   width: 100%;
   font-size: 16px;
-  font-family: 'Ubuntu Mono', 'Roboto Mono', 'Menlo', 'Courier New', Courier, monospace;
+  font-family: 'Sans', 'Ubuntu Mono', 'Roboto Mono', 'Menlo', 'Courier New', Courier, monospace;
   background-color: $black;
   &.preload * {
     -webkit-transition: none !important;

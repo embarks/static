@@ -1,6 +1,6 @@
 {
   "name": "humblelab",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "em's web presence",
   "scripts": {
     "test": "echo \"testing\"",
@@ -54,7 +54,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@mindshaft/jits": "^0.1.0",
+    "@mindshaft/jits": "^0.2.1",
     "classnames": "^2.2.6",
     "dotenv-webpack": "^1.7.0",
     "lodash": "^4.17.11",

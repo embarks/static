@@ -755,10 +755,10 @@
     humps "^2.0.1"
     prop-types "^15.5.10"
 
-"@mindshaft/jits@^0.1.0":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@mindshaft/jits/-/jits-0.1.1.tgz#93376258ff387e1425d0099be34eb9092c0b537e"
-  integrity sha512-z4ux+cyuQOfgxW2V1IxdAu5sRpEoOAyCbljMzTGtl3ki7OetGQVo5iex3o7+vZTBQHIlM3XPrf95EvJ5vAvLgw==
+"@mindshaft/jits@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@mindshaft/jits/-/jits-0.2.1.tgz#c3ed8a172d661e73a5e61448a1710ed04c5bde0b"
+  integrity sha512-RtlWBrCtDzFlCkWsVb5f4PIpCSU/XWKkRMl2cC/t4PNr9NK48LPlv6RIr5HHrFn5YTwuayX6WllA8pdbXtBNVA==
   dependencies:
     "@svgr/webpack" "^4.3.2"
     bootstrap "^4.3.1"
