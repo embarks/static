@@ -1,46 +1,43 @@
 module.exports = {
-    'env': {
-        'node': true,
-        'browser': true,
-        'es6': true
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
     },
-    'extends': [ 
-        'eslint:recommended',
-        'plugin:react/recommended',
-        'standard'
+    "extends": "eslint:recommended",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+      "svelte3"
     ],
-    'settings': {
-        'react': {
-            'version': 'detect'
-        }
-    },
-    'globals': {
-        'Atomics': 'readonly',
-        'SharedArrayBuffer': 'readonly'
-    },
-    'parserOptions': {
-        'ecmaFeatures': {
-            'jsx': true
-        },
-        'ecmaVersion': 2018,
-        'sourceType': 'module'
-    },
-    'plugins': [
-        'react'
+    "overrides": [
+      {
+        "files": ["**/*.svelte"],
+        "processor": "svelte3/svelte3"
+      },
     ],
-    'rules': {
-        'no-console': 'off',
-        'indent': [
-            'error',
-            2
+    "rules": {
+        "indent": [
+            "error",
+            4
         ],
-        'linebreak-style': [
-            'error',
-            'unix'
+        "linebreak-style": [
+            "error",
+            "unix"
         ],
-        'quotes': [
-            'error',
-            'single'
+        "quotes": [
+            "error",
+            "double"
         ],
+        "semi": [
+            "error",
+            "never"
+        ]
     }
-};
+}
