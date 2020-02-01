@@ -54,6 +54,7 @@
 <style>
   :global(body) {
     background-color: #333333;
+    padding: 0;
   }
   .outer {  
     height: 100%;

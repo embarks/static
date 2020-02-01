@@ -1,8 +1,7 @@
 <script>
-  import {tweened} from 'svelte/motion'
-  import { backOut } from 'svelte/easing';
+  import { tweened } from 'svelte/motion'
+  import { backOut } from 'svelte/easing'
 
-  let touching = false
   let eyes = {
     left: null,
     right: null
@@ -25,6 +24,7 @@
     sy = `${$y > 100 ? 100 : $y < 0 ? 0 : $y}%`
     mobile = rect && rect.width && rect.width < 800
   }
+  
 
   function resize () { 
     rect = div.getBoundingClientRect() 
@@ -37,11 +37,7 @@
     })
   }
 
-  
   function handleMousemove (event) {
-    Object.values(eyes).forEach((eye) => {
-      // if (eye && eye.classList.contains('closed')) eye.classList.remove('closed')
-    })
     x.set((event.clientX - rect.left) / rect.width * 100)
     y.set((event.clientY - rect.top) / rect.height * 100)
   }
@@ -132,13 +128,11 @@
     border: 10px solid #996600;
     border-radius: 50%;
     content: " ";
-
   }
   div.container {
     overflow: hidden;
     width: 100%; 
     height: 100%;
-
     user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
