@@ -40,7 +40,7 @@
     allmystars = [...allmystars, { x: event.clientX, y: event.clientY, key }]
     setTimeout(function () {
       allmystars = allmystars.filter(({ key: o }) => key !== o)
-    }, 200) 
+    }, 200)
   }
 
   function handleTouch(e) {
@@ -74,7 +74,7 @@
   on:touchend={handleTouch}
   on:mouseup={handleClick}
 >
-  <Eyes  />
+  <Eyes />
 </div>
 {#each allmystars as { key, x, y } (key)}
   <div 
