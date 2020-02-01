@@ -30,10 +30,6 @@
     rect = div.getBoundingClientRect() 
   }
 
-  function handleClick (event) {
-    handleMousemove(event)
-  }
-
   function handleTouch (event) {
     handleMousemove({
       clientX: event.changedTouches[0].clientX,
@@ -43,6 +39,9 @@
 
   
   function handleMousemove (event) {
+    Object.values(eyes).forEach((eye) => {
+      // if (eye && eye.classList.contains('closed')) eye.classList.remove('closed')
+    })
     x.set((event.clientX - rect.left) / rect.width * 100)
     y.set((event.clientY - rect.top) / rect.height * 100)
   }
@@ -64,7 +63,7 @@
     return (event) => {
       doMouseEnter()
       setTimeout(() => {
-        mouseLeaveEye(eye)
+        mouseLeaveEye(eye)()
       }, 1000)
     }
   }
@@ -151,7 +150,6 @@
 <svelte:window on:resize={resize} />
 <div class="container"
   on:mousemove={handleMousemove}
-  on:click={handleClick}
   on:touchmove={handleTouch}
   on:touchstart={handleTouch}
 >
@@ -160,13 +158,12 @@
       <div class="eye {mobile ? 'mobile' : ''}"
         on:mouseenter={mouseEnterEye(eyes.left)}
         on:mouseleave={mouseLeaveEye(eyes.left)}
-        on:touchstart={touchEye(eyes.left)}
+        on:touchmove={touchEye(eyes.left)}
       ></div>
       {#if !mobile}
         <div class="eye"
           on:mouseenter={mouseEnterEye(eyes.right)}
           on:mouseleave={mouseLeaveEye(eyes.right)}
-          on:touchstart={touchEye(eyes.right)}
         ></div>
       {/if}
     </div>
