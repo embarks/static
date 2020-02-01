@@ -2,6 +2,7 @@
   import {tweened} from 'svelte/motion'
   import { backOut } from 'svelte/easing';
 
+  let touching = false
   let eyes = {
     left: null,
     right: null
@@ -34,7 +35,6 @@
   }
 
   function handleTouch (event) {
-    console.log("touch", event)
     handleMousemove({
       clientX: event.changedTouches[0].clientX,
       clientY: event.changedTouches[0].clientY
@@ -62,9 +62,10 @@
   function touchEye (eye) {
     const doMouseEnter = mouseEnterEye(eye)
     return (event) => {
-      // event.preventDefault()
-      setTimeout(mouseLeaveEye(eye), 1000)
       doMouseEnter()
+      setTimeout(() => {
+        mouseLeaveEye(eye)
+      }, 1000)
     }
   }
 
@@ -117,7 +118,7 @@
     margin-right: 0px
   }
   :global(.closed) {
-    height: 0px!important;
+    height: 0px !important;
     margin: 50px 0;
     transform: translateY(25px);
   }
