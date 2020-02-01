@@ -17,6 +17,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "test": "echo \"TEST\"",
     "start": "webpack-dev-server --content-base public"
   }
 }
