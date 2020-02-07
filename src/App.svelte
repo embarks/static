@@ -5,6 +5,7 @@
 
   let m = { x: 0, y: 0 }
   let allmystars = []
+  const NO_ACTION_TYPE = "INPUT"
   
   function starIn (node, { duration }) {
     return {
@@ -36,17 +37,21 @@
   
   
   function handleClick(event) {
-    const key = `${event.clientX} ${event.clientY}`
-    allmystars = [...allmystars, { x: event.clientX, y: event.clientY, key }]
-    setTimeout(function () {
-      allmystars = allmystars.filter(({ key: o }) => key !== o)
-    }, 200)
+    if (event.target.nodeName !== NO_ACTION_TYPE) {
+      const y = event.clientY - window.scrollY;
+      const key = `${event.clientX} ${y}`
+      allmystars = [...allmystars, { x: event.clientX, y, key }]
+      setTimeout(function () {
+        allmystars = allmystars.filter(({ key: o }) => key !== o)
+      }, 200)
+    }
   }
 
   function handleTouch(e) {
     handleClick({
       clientY: e.changedTouches[0].clientY,
-      clientX: e.changedTouches[0].clientX
+      clientX: e.changedTouches[0].clientX,
+      target: e.target
     })
   }
 </script>
@@ -63,6 +68,7 @@
   
   .star {
     position: absolute;
+    font-size: 2rem;
   }
   .star::after {
     content: "★";
@@ -78,10 +84,13 @@
   <Eyes />
 </div>
 {#each allmystars as { key, x, y } (key)}
-  <div 
+  <div
     in:starIn="{{ duration: 400 }}"
     out:starOut="{{ duration: 5000 }}"
     class="star" 
-    style="top:{y-14}px;left:{x-10}px;"
+    style="
+      top:{y-14*2}px;
+      left:{x-10*2}px;
+    "
   ></div>
 {/each}

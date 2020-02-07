@@ -1,8 +1,10 @@
 <script>
+  import { onMount } from 'svelte'
   import { tweened } from 'svelte/motion'
   import { backOut } from 'svelte/easing'
+  import { version } from '../package.json'
 
-  let eyes = {
+  export let eyes = {
     left: null,
     right: null
   }
@@ -18,22 +20,58 @@
   let sx = `${$x}%`
   let sy = `${$y}%`
 
+  let eyeRight, eyeLeft, eyeTop, eyeBottom
+
   $: {
     if (div) rect = div.getBoundingClientRect()
     sx = `${$x > 100 ? 100 : $x < 0 ? 0 : $x}%`
     sy = `${$y > 100 ? 100 : $y < 0 ? 0 : $y}%`
     mobile = rect && rect.width && rect.width < 800
   }
-  
 
   function resize () { 
     rect = div.getBoundingClientRect() 
   }
 
+  function blink ({ touchX, touchY }) {
+    if (eyes.left) {
+      const {
+        top,
+        right,
+        bottom, 
+        left
+       } = eyes.left.getBoundingClientRect()
+       
+      if (typeof(eyeTop) === 'undefined'  || top < eyeTop) 
+        eyeTop = top
+      if (typeof(eyeRight) === 'undefined' || right < eyeRight) 
+        eyeRight = right
+      if (typeof(eyeLeft) === 'undefined' || left > eyeLeft) 
+        eyeLeft = left
+      if (typeof(eyeBottom) === 'undefined' || bottom > eyeBottom)
+        eyeBottom = bottom
+
+      const close = mouseEnterEye(eyes.left)
+      const open = mouseLeaveEye(eyes.left)
+       if (
+         touchX > eyeLeft && 
+         touchX < eyeRight && 
+         touchY < eyeBottom && 
+         touchY > eyeTop
+        ) { close(event) }
+        else { open(event) }
+    }
+  }
+
   function handleTouch (event) {
+    const touchX = event.changedTouches[0].clientX;
+    const touchY = event.changedTouches[0].clientY;
+    blink({ touchX, touchY })
+
     handleMousemove({
-      clientX: event.changedTouches[0].clientX,
-      clientY: event.changedTouches[0].clientY
+      ...event,
+      clientX: touchX,
+      clientY: touchY
     })
   }
 
@@ -57,10 +95,7 @@
   function touchEye (eye) {
     const doMouseEnter = mouseEnterEye(eye)
     return (event) => {
-      doMouseEnter()
-      setTimeout(() => {
-        mouseLeaveEye(eye)()
-      }, 1000)
+      doMouseEnter(event)
     }
   }
 
@@ -83,6 +118,7 @@
   .detec .eye {
     background: none;
     top: 0;
+    z-index: 1000;
   }
   .eyes {
     position: relative;
@@ -145,7 +181,7 @@
 <div class="container"
   on:mousemove={handleMousemove}
   on:touchmove={handleTouch}
-  on:touchstart={handleTouch}
+  on:touchend={handleTouch}
 >
   <div class="eyes" bind:this={div}>
     <div class="detec">
@@ -174,17 +210,19 @@
       </div>
     </div>
     {#if !mobile}
-
     <div class="eye" bind:this={eyes.right}>
       <div
         class="pupil"
         style="
           top: {sy};
           left: {sx};
-          transform: translate(-{sx}, -{sy})"
+          transform: translate(-{sx}, -{sy})
+        "
       >
     </div>
   </div>
   {/if}
   </div>
+  <slot>
+  </slot>
 </div>
