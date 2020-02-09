@@ -8,6 +8,8 @@
     left: null,
     right: null
   }
+  let eyePos = {}
+
   let div, rect, mobile
   let x = tweened(50, {
     duration: 400,
@@ -20,53 +22,60 @@
   let sx = `${$x}%`
   let sy = `${$y}%`
 
-  let eyeRight, eyeLeft, eyeTop, eyeBottom
+  onMount(() => {
+    if (div) rect = div.getBoundingClientRect()
+    for (const side in eyes) {
+      const eye = eyes[side]
+      if (eye) {
+        const eyeRect = eye.getBoundingClientRect()
+        eyePos[side] = eyeRect
+      }
+    }
+    mobile = rect && rect.width && rect.width < 800
+  })
 
   $: {
-    if (div) rect = div.getBoundingClientRect()
     sx = `${$x > 100 ? 100 : $x < 0 ? 0 : $x}%`
     sy = `${$y > 100 ? 100 : $y < 0 ? 0 : $y}%`
-    mobile = rect && rect.width && rect.width < 800
   }
 
   function resize () { 
-    rect = div.getBoundingClientRect() 
+    rect = div.getBoundingClientRect()
+    mobile = rect.width && rect.width < 800
   }
 
-  function blink ({ touchX, touchY }) {
-    if (eyes.left) {
-      const {
-        top,
-        right,
-        bottom, 
-        left
-       } = eyes.left.getBoundingClientRect()
-       
-      if (typeof(eyeTop) === 'undefined'  || top < eyeTop) 
-        eyeTop = top
-      if (typeof(eyeRight) === 'undefined' || right < eyeRight) 
-        eyeRight = right
-      if (typeof(eyeLeft) === 'undefined' || left > eyeLeft) 
-        eyeLeft = left
-      if (typeof(eyeBottom) === 'undefined' || bottom > eyeBottom)
-        eyeBottom = bottom
+  function isTouchingEye(side, { touchX, touchY }) {
+    const {
+      top,
+      right,
+      bottom, 
+      left
+    } = eyePos[side]
+    
+    return (
+      touchX > left && 
+      touchX < right && 
+      touchY < bottom && 
+      touchY > top
+    );
+  }
 
-      const close = mouseEnterEye(eyes.left)
-      const open = mouseLeaveEye(eyes.left)
-       if (
-         touchX > eyeLeft && 
-         touchX < eyeRight && 
-         touchY < eyeBottom && 
-         touchY > eyeTop
-        ) { close(event) }
-        else { open(event) }
+  function blinkOnTouch ({ touchX, touchY }) {
+    for (const side in eyes) {
+      const eye = eyes[side]
+      if (eye) {
+        const close = mouseEnterEye(eye)
+        const open = mouseLeaveEye(eye)
+        if (isTouchingEye(side, { touchX, touchY })) close(event)
+        else open(event)
+      }
     }
   }
 
   function handleTouch (event) {
     const touchX = event.changedTouches[0].clientX;
     const touchY = event.changedTouches[0].clientY;
-    blink({ touchX, touchY })
+    blinkOnTouch({ touchX, touchY })
 
     handleMousemove({
       ...event,
@@ -76,8 +85,8 @@
   }
 
   function handleMousemove (event) {
-    x.set((event.clientX - rect.left) / rect.width * 100)
-    y.set((event.clientY - rect.top) / rect.height * 100)
+    $x = (event.clientX - rect.left) / rect.width * 100
+    $y = (event.clientY - rect.top) / rect.height * 100
   }
 
   function mouseEnterEye (eye) {
@@ -166,6 +175,7 @@
     content: " ";
   }
   div.container {
+    position: absolute;
     overflow: hidden;
     width: 100%; 
     height: 100%;
@@ -185,7 +195,7 @@
 >
   <div class="eyes" bind:this={div}>
     <div class="detec">
-      <div class="eye {mobile ? 'mobile' : ''}"
+      <div class="eye{mobile ? ' mobile' : ''}"
         on:mouseenter={mouseEnterEye(eyes.left)}
         on:mouseleave={mouseLeaveEye(eyes.left)}
         on:touchmove={touchEye(eyes.left)}
@@ -194,10 +204,11 @@
         <div class="eye"
           on:mouseenter={mouseEnterEye(eyes.right)}
           on:mouseleave={mouseLeaveEye(eyes.right)}
+          on:touchmove={touchEye(eyes.right)}
         ></div>
       {/if}
     </div>
-    <div class="eye {mobile ? 'mobile' : ''}"
+    <div class="eye{mobile ? ' mobile' : ''}"
       bind:this={eyes.left}>
       <div
         class="pupil"
