@@ -36,9 +36,10 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     /**
-					 * MiniCssExtractPlugin doesn't support HMR.
-					 * For developing, use 'style-loader' instead.
-					 * */
+                     * MiniCssExtractPlugin doesn't support HMR.
+                     * For developing, use 'style-loader' instead.
+                     * 
+                     **/
                     prod ? MiniCssExtractPlugin.loader : "style-loader",
                     "css-loader"
                 ]
@@ -51,5 +52,8 @@ module.exports = {
             filename: "[name].css"
         })
     ],
-    devtool: prod ? false: "source-map"
+    devtool: prod ? false: "source-map",
+    devServer: {
+        https: true
+    }
 }
