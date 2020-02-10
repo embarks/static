@@ -1,12 +1,17 @@
 <script>
   import Eyes from './Eyes.svelte'
-  import {elasticOut, elasticInOut} from 'svelte/easing'
-  import {onMount} from 'svelte'
+  import Button from './Button.svelte'
+  import { elasticOut, elasticInOut } from 'svelte/easing'
+  import { onMount, afterUpdate } from 'svelte'
 
   let m = { x: 0, y: 0 }
+  let scrolly = 0
   let allmystars = []
-  const NO_ACTION_TYPE = "INPUT"
-  
+  let agree = false
+  let express = false
+
+  function onScroll () { scrolly = window.pageYOffset }
+
   function starIn (node, { duration }) {
     return {
       duration,
@@ -35,16 +40,30 @@
     }
   }
   
+  function handleButton (eventType) {
+    if (eventType === 'mouseenter')
+      return (event) => {
+        express = true
+      }
+    if (eventType === 'mouseleave') 
+      return (event) => {
+          express = false
+        }
+    if (eventType === 'touchend') {
+      return (event) => {
+        express = false
+      }
+    }
+    return () => { agree = !agree }
+  }
   
   function handleClick(event) {
-    if (event.target.nodeName !== NO_ACTION_TYPE) {
-      const y = event.clientY - window.scrollY;
-      const key = `${event.clientX} ${y}`
-      allmystars = [...allmystars, { x: event.clientX, y, key }]
-      setTimeout(function () {
-        allmystars = allmystars.filter(({ key: o }) => key !== o)
-      }, 200)
-    }
+    const y = event.clientY + scrolly;
+    const key = `${event.clientX} ${y}`
+    allmystars = [...allmystars, { x: event.clientX, y, key }]
+    setTimeout(function () {
+      allmystars = allmystars.filter(({ key: o }) => key !== o)
+    }, 200)
   }
 
   function handleTouch(e) {
@@ -54,12 +73,14 @@
       target: e.target
     })
   }
+
 </script>
 
 <style>
   :global(body) {
     background-color: #333333;
     padding: 0;
+    font-size: 10px;
   }
   .outer {  
     height: 100%;
@@ -75,13 +96,35 @@
     color: #ffcc66;
     z-index: -1;
   }
+  .button {
+    position: absolute;
+    margin-top: 5rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
 </style>
+
+<svelte:window on:scroll={onScroll} />
+<div class="button">
+<Button
+  class="button"
+  on:click={handleButton('click')}
+  on:mouseenter={handleButton('mouseenter')}
+  on:mouseleave={handleButton('mouseleave')}
+  on:touchend={handleButton('touchend')}
+>
+  <input id="surveil" bind:checked={agree} type="checkbox" />
+  I agree
+</Button>
+</div>
 <div class="outer"
   on:touchstart={handleTouch}
   on:touchend={handleTouch}
   on:mouseup={handleClick}
 >
-  <Eyes />
+  <Eyes express={express} close={agree} />
 </div>
 {#each allmystars as { key, x, y } (key)}
   <div
