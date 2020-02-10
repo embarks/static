@@ -180,6 +180,9 @@
     margin: 50px 40px 50px 0;
     transform: translateX(20px) translateY(-25px);
   }
+  .close {
+    margin: 25px 40px 25px 0;
+  }
   .pupil {
     transition: width 0.3s, height 0.3s, border-width 0.3s;
     position: absolute;
