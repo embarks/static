@@ -1,8 +1,8 @@
 <script>
-  import { onMount, afterUpdate } from 'svelte'
-  import { tweened } from 'svelte/motion'
-  import { backOut } from 'svelte/easing'
-  import { version } from '../package.json'
+  import { onMount } from "svelte"
+  import { tweened } from "svelte/motion"
+  import { backOut } from "svelte/easing"
+  // import { version } from "../package.json"
 
   export let express
   export let close = false
@@ -18,8 +18,6 @@
       right: null
     }
   }
-  let wasTouchEvent = false
-  let resetAfterTouch = false
 
   let div, rect, mobile
   let x = tweened(50, {
@@ -74,7 +72,7 @@
       touchX < right && 
       touchY < bottom && 
       touchY > top
-    );
+    )
 
     return isTouching
   }
@@ -92,8 +90,8 @@
   }
 
   function handleTouch (event) {
-    const touchX = event.changedTouches[0].clientX;
-    const touchY = event.changedTouches[0].clientY;
+    const touchX = event.changedTouches[0].clientX
+    const touchY = event.changedTouches[0].clientY
     blinkOnTouch({ touchX, touchY })
 
     handleMousemove({
@@ -111,14 +109,14 @@
   }
 
   function mouseEnterEye (eye) {
-    return (event) => {
-      eye.classList.add('closed')
+    return () => {
+      eye.classList.add("closed")
     }
   }
 
   function mouseLeaveEye (eye) {
-    return (event) => {
-      eye.classList.remove('closed')
+    return () => {
+      eye.classList.remove("closed")
     }
   }
 

@@ -1,5 +1,4 @@
-<script>
-</script>
+<script></script>
 <style>
   button {
     font-size: 14px;
@@ -24,7 +23,7 @@
     /* button: surface color */ background-color: purple;
   }
   button:hover {
-    /* button: side color */ border-color: pink;
+    /* button: side color */ border-color: palevioletred;
   }
   button:hover > span {
     /* button: surface color */ background-color: pink;

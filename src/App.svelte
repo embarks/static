@@ -1,10 +1,8 @@
 <script>
-  import Eyes from './Eyes.svelte'
-  import Button from './Button.svelte'
-  import { elasticOut, elasticInOut } from 'svelte/easing'
-  import { onMount, afterUpdate } from 'svelte'
+  import Eyes from "./Eyes.svelte"
+  import Button from "./Button.svelte"
+  import { elasticOut, elasticInOut } from "svelte/easing"
 
-  let m = { x: 0, y: 0 }
   let scrolly = 0
   let allmystars = []
   let agree = false
@@ -41,19 +39,19 @@
   }
   
   function handleButton (eventType) {
-    if (eventType === 'mouseenter')
-      return (event) => {
+    if (eventType === "mouseenter")
+      return () => {
         express = true
       }
-    if (eventType === 'mouseleave') 
-      return (event) => {
-          express = false
-        }
+    if (eventType === "mouseleave") 
+      return () => {
+        express = false
+      }
     return () => { agree = !agree }
   }
   
   function handleClick(event) {
-    const y = event.clientY + scrolly;
+    const y = event.clientY + scrolly
     const key = `${event.clientX} ${y}`
     allmystars = [...allmystars, { x: event.clientX, y, key }]
     setTimeout(function () {
@@ -62,7 +60,7 @@
   }
 
   function handleTouch(e) {
-    express = false;
+    express = false
     handleClick({
       clientY: e.changedTouches[0].clientY,
       clientX: e.changedTouches[0].clientX,
@@ -106,10 +104,10 @@
 <div class="button">
 <Button
   class="button"
-  on:click={handleButton('click')}
-  on:mouseenter={handleButton('mouseenter')}
-  on:mouseleave={handleButton('mouseleave')}
-  on:touchend={handleButton('touchend')}
+  on:click={handleButton("click")}
+  on:mouseenter={handleButton("mouseenter")}
+  on:mouseleave={handleButton("mouseleave")}
+  on:touchend={handleButton("touchend")}
 >
   <input id="surveil" bind:checked={agree} type="checkbox" />
   I agree
