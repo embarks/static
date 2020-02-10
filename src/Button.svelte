@@ -9,8 +9,8 @@
     padding: 0;
     border-width: 1px;
     border-radius: 4px;
-    /* button: side color */ background-color: purple;
-    /* button: outer border */ border-color: black;
+    /* side color */ background-color: purple;
+    /* outer border */ border-color: black;
     padding-bottom: 2px;
   }
   button > span {
@@ -19,25 +19,25 @@
     margin: 0;
     padding: 0.3rem;
     color: white;
-    /* button: surface border */ border: 1px solid red;
-    /* button: surface color */ background-color: purple;
+    /* surface border */ border: 1px solid pink;
+    /* surface color */ background-color: purple;
   }
   button:hover {
-    /* button: side color */ border-color: palevioletred;
+    /* hover outer border color */ border-color: palevioletred;
   }
   button:hover > span {
-    /* button: surface color */ background-color: pink;
+    /* hover surface color */ background-color: darkmagenta;
   }
   button:not(:disabled):not(.disabled):active {
-    border-color: red;
+    /* active outer border */ border-color: palevioletred;
     padding-bottom: 0px;
     margin-top: 2px !important;
     outline: none;
     box-shadow: none;
-    background-color: red;
+    /* active side color */ background-color: purple;
   }
   button:not(:disabled):not(.disabled):active > span {
-    background-color: red;
+    /* active surface color */ background-color: darkmagenta;
   }
 </style>
 
