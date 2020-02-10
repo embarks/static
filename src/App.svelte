@@ -49,11 +49,6 @@
       return (event) => {
           express = false
         }
-    if (eventType === 'touchend') {
-      return (event) => {
-        express = false
-      }
-    }
     return () => { agree = !agree }
   }
   
@@ -67,6 +62,7 @@
   }
 
   function handleTouch(e) {
+    express = false;
     handleClick({
       clientY: e.changedTouches[0].clientY,
       clientX: e.changedTouches[0].clientX,
