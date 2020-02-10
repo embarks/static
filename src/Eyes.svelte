@@ -10,7 +10,14 @@
     left: null,
     right: null
   }
-  let eyePos = {}
+  let eyePos = {
+    left: null,
+    right: null,
+    elem: {
+      left: null,
+      right: null
+    }
+  }
   let wasTouchEvent = false
   let resetAfterTouch = false
 
@@ -26,7 +33,7 @@
   let sx = `${$x}%`
   let sy = `${$y}%`
 
-  function resetEyePos () {
+  function resetRects () {
     if (div) rect = div.getBoundingClientRect()
     mobile = rect && rect.width && rect.width < 800
     for (const side in eyes) {
@@ -34,20 +41,11 @@
       if (eye) {
         const eyeRect = eye.getBoundingClientRect()
         eyePos[side] = eyeRect
-        if (wasTouchEvent) {
-          resetAfterTouch = true
-        }
       }
     }
   }
 
-  onMount(resetEyePos)
-
-  afterUpdate(() => {
-    if (wasTouchEvent && !resetAfterTouch) {
-      resetEyePos()
-    }
-  })
+  onMount(resetRects)
 
   $: {
     if (!close) {
@@ -57,6 +55,13 @@
   }
 
   function isTouchingEye(side, { touchX, touchY }) {
+    for (const side in eyes) {
+      const eye = eyePos.elem[side]
+      if (eye) {
+        const eyeRect = eye.getBoundingClientRect()
+        eyePos[side] = eyeRect
+      }
+    }
     const {
       top,
       right,
@@ -96,9 +101,6 @@
       clientX: touchX,
       clientY: touchY
     })
-    if (eyes.left && !wasTouchEvent) {
-      wasTouchEvent = true
-    }
   }
 
   function handleMousemove (event) {
@@ -214,7 +216,7 @@
   }
 </style>
 
-<svelte:window on:resize={resetEyePos} />
+<svelte:window on:resize={resetRects} />
 <div class="container"
   on:mousemove={handleMousemove}
   on:touchmove={handleTouch}
@@ -224,12 +226,14 @@
     <div class="detec">
       <div class="eye"
         class:mobile
+        bind:this={eyePos.elem.left}
         on:mouseenter={mouseEnterEye(eyes.left)}
         on:mouseleave={mouseLeaveEye(eyes.left)}
         on:touchmove={touchEye(eyes.left)}
       ></div>
       {#if !mobile}
         <div class="eye"
+          bind:this={eyePos.elem.right}
           on:mouseenter={mouseEnterEye(eyes.right)}
           on:mouseleave={mouseLeaveEye(eyes.right)}
           on:touchmove={touchEye(eyes.right)}
