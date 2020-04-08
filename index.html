@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <!--
+ _________________________________________ 
+/  Hi hello bonjour I wrote the homepage  \
+| without any frameworks or scripts so I  |
+| could be annoying and say I wrote it by |
+| hand. (But actually I used a lot        |
+| of computers)                           |
+|                                         |
+| The views expressed here are not        |
+| necessarily attributable to me, the     |
+| author, as it should always be          |
+| considered extremely sophisticated      |
+| satire. It also has not been determined |
+| whether I have have any free will at    |
+| all.                                    |
+|                                         |
+| Thanks For Reading The Source.          |
+|                                         |
+| Live long and prosper.                  |
+|                                         |
+\ - Emily                                 /
+ ----------------------------------------- 
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+    -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>em ~/index $</title>
+    <style>
+
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-size: 18px;
+      }
+
+      body {
+        background-color: whitesmoke;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      section, footer {
+        padding: 1rem;
+      }
+
+      article.directory a {
+        display: block;
+      }
+
+      article.directory a {
+        text-decoration: none;
+      }
+
+      article.directory a > strong,
+      details.folder-area strong {
+        cursor: pointer;
+      }
+
+      article.directory strong u:hover,
+      details.folder-area:hover summary strong u {
+        text-decoration: none;
+      }
+
+      details.folder-area summary strong::before {
+        content: '📁 ';
+      }
+
+      details.folder-area[open] summary strong::before {
+        content: '📂 '
+      }
+
+      details.folder-area {
+        position: relative;
+      }
+
+      details.folder-area summary {
+        list-style: none;
+      }
+
+      details.folder-area summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details.folder-area .folder {
+        margin-left: 2rem;
+      }
+
+      details {
+        overflow: hidden;
+      }
+
+      details, details > * {
+        transition: all 1s;
+      }
+
+      details:not([open]) summary ~ * {
+        max-height: 0;
+      }
+
+      details[open] summary ~ * {
+        max-height: 4rem;
+      }
+
+      div.divider {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border-top: 1px solid lightgrey;
+      }
+
+      @media screen and (max-width: 600px) {
+        body {
+          font-size: 22px;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>Index</h1>
+      <blockquote>
+        "We are what we pretend to be, so we must be careful what we pretend to be." -
+        <em>Kurt Vonnegut</em>
+      </blockquote>
+
+      <article class="directory">
+        <h2>Directory</h2>
+        <p>
+        </p>
+        <!-- href="/Users/dev/packages/static/svelte/public/index.html" -->
+        <details class="folder-area">
+
+          <summary>
+            <strong><u>demos</u></strong>
+          </summary>
+          <noscript>Trust me, you need javascript 💛</noscript>
+          <div class="folder">
+            <a href="svelte/public/index.html">
+              <strong><u>svelte</u></strong>
+            </a>
+            <a>
+              <strong><u>react</u></strong>
+            </a>
+          </div>
+        </details>
+        <details class="folder-area">
+          <summary>
+            <strong><u>posts </u></strong>
+          </summary>
+        </details>
+        <a>
+          📄 <strong><u>github</u></strong>
+        </a>
+        <a>
+          📄 <strong><u>linkedin</u></strong>
+        </a>
+      </article>
+    </section>
+    <div class="divider"></div>
+    <footer>
+      <em>Hosted with</em> 💛 <em>from a bucket located in the region known as [us-west-1]</em> 🏜
+    </footer>
+  </body>
+</html>

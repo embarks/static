@@ -190,7 +190,7 @@
     width: 50px;
     height: 50px;
     background: #000;
-    border: 10px solid #996600;
+    border: 9px solid #996600;
     border-radius: 50%;
     content: " ";
   }
@@ -211,9 +211,9 @@
     margin-bottom: 30px;
   }
   .express > .eye > .pupil {
-    border-width: 5px;
-    width: 55px;
-    height: 55px;
+    border-width: 6px;
+    width: 53px;
+    height: 53px;
   }
 </style>
 
