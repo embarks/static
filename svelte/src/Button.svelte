@@ -46,6 +46,8 @@
   on:click 
   on:mouseenter 
   on:mouseleave
+  on:focus
+  on:blur
 >
   <span>
     <slot></slot>

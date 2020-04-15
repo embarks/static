@@ -1,12 +1,14 @@
 <script>
   import Eyes from "./Eyes.svelte"
   import Button from "./Button.svelte"
+  import Loading from "./Loading.svelte"
   import { elasticOut, elasticInOut } from "svelte/easing"
 
   let scrolly = 0
   let allmystars = []
   let agree = false
   let express = false
+  let loading = false
 
   function onScroll () { scrolly = window.pageYOffset }
 
@@ -47,7 +49,10 @@
       return () => {
         express = false
       }
-    return () => { agree = !agree }
+    return () => {
+      loading = true
+      agree = true
+    }
   }
   
   function handleClick(event) {
@@ -98,6 +103,10 @@
     transform: translate(-50%, -50%);
     z-index: 5;
   }
+  .loading-container {
+    display: block;
+    width: 100px;
+  }
 </style>
 
 <svelte:window on:scroll={onScroll} />
@@ -108,9 +117,17 @@
   on:mouseenter={handleButton("mouseenter")}
   on:mouseleave={handleButton("mouseleave")}
   on:touchend={handleButton("touchend")}
+  on:focus={handleButton("mouseenter")}
+  on:blur={handleButton("mouseleave")}
 >
-  <input id="surveil" bind:checked={agree} type="checkbox" />
-  I agree
+  {#if loading}
+    <Loading />
+  {:else}
+    <input id="surveil" bind:checked={agree} type="checkbox" />
+    I agree
+  {/if}
+
+  
 </Button>
 </div>
 <div class="outer"
