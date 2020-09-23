@@ -1,175 +1,547 @@
 <!DOCTYPE html>
-
-
 <html>
   <head>
-    <!--
- _________________________________________ 
-/  Hi hello bonjour I wrote the homepage  \
-| without any frameworks or scripts so I  |
-| could be annoying and say I wrote it by |
-| hand. (But actually I used a lot        |
-| of computers)                           |
-|                                         |
-| The views expressed here are not        |
-| necessarily attributable to me, the     |
-| author, as it should always be          |
-| considered extremely sophisticated      |
-| satire. It also has not been determined |
-| whether I have have any free will at    |
-| all.                                    |
-|                                         |
-| Thanks For Reading The Source.          |
-|                                         |
-| Live long and prosper.                  |
-|                                         |
-\ - Emily                                 /
- ----------------------------------------- 
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-    -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>em ~/index $</title>
     <style>
-
+      @font-face {
+        font-family: anon;
+        src: url(AnonymousPro-Regular.ttf);
+      }
       body, html {
         margin: 0;
         padding: 0;
+        font-size: 18px;
         height: 100%;
         width: 100%;
-        font-size: 18px;
       }
 
       body {
-        background-color: whitesmoke;
+        font-family: anon;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        min-width: 360px;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      * {
+        cursor: url('./bird-2-16.png') 2 2, auto;
       }
 
-      section, footer {
-        padding: 1rem;
+      footer {
+        padding: 1rem 2rem;
       }
 
-      article.directory a {
-        display: block;
+      main {
+        padding-top: 1rem;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
-      article.directory a {
+      .outer {
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .tabs {
+        margin: 1rem 0;
+      }
+
+      .tabs a {
+        border: 3px solid transparent;
+        border-radius: 5px;
+        padding: 0 2px;
+        text-transform: lowercase;
+        color: white;
         text-decoration: none;
+        font-size: 14px;
       }
 
-      article.directory a > strong,
-      details.folder-area strong {
-        cursor: pointer;
+      .tabs a:hover {
+        color: red;
+        border: 3px double red;
       }
 
-      article.directory strong u:hover,
-      details.folder-area:hover summary strong u {
-        text-decoration: none;
+      .inner {
+        display: flex;
+        flex-direction: column;
+        width: 13rem;
+        height: 13rem;
+        padding: 0.5rem;
+        overflow: hidden;
+        border: 1px solid white;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
       }
 
-      details.folder-area summary strong::before {
-        content: '📁 ';
+      .display {
+        font-size: 14px;
+        background-color: white;
+        color: black;
+        /* scroll behavior */
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
       }
 
-      details.folder-area[open] summary strong::before {
-        content: '📂 '
-      }
-
-      details.folder-area {
+      .display > div {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        width: 13rem;
+        height: 13rem;
+        box-sizing: border-box;
+        border-radius: 10px;
+        transform-origin: center center;
+        transition: transform 0.5s;
         position: relative;
       }
 
-      details.folder-area summary {
-        list-style: none;
+      .author-header { 
+        margin-top: 0;
+        font-size: 14px;
       }
 
-      details.folder-area summary::-webkit-details-marker {
-        display: none;
+      .cred-header {
+        font-size: 14px;
       }
 
-      details.folder-area .folder {
-        margin-left: 2rem;
+      .note {
+        padding: 1rem;
       }
 
-      details {
+      .note input[type="checkbox"] {
+        margin-left: 0;
+      }
+
+      label {
+        white-space: nowrap;
+        line-height: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      input[type="text"] {
+        flex: 1;
+      }
+
+      input[type="checkbox"]:checked + input[type="text"] {
+        text-decoration: line-through;
+      }
+      input[type="text"] {
+        border: none;
+        border-bottom: 1px solid lightblue;
+        font-family: anon;
+        margin: 0.5rem 0;
+      }
+
+      input[type="text"]:placeholder-shown { 
+        border-bottom: 1px dashed lightblue;
+      }
+
+      input[type="text"]:focus {
+        outline: 1px dotted lightblue;
+        border-bottom: 1px solid transparent;
+      }
+
+      input[type="checkbox"]:focus {
+        outline: 1px dotted pink;
+      }
+
+      input[type="checkbox"]:not(:checked) ~ blockquote {
+        display:none;
+      }
+
+      ul.links {
+        display: flex;
+        flex-direction:column;
+        list-style-type: none;
+        justify-content: space-evenly;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      ul.links li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: flex 0.4s;
+        transition-timing-function: cubic-bezier(.58,.36,.45,.91);
+        display: block;
+        flex: 3;
+      }
+
+      ul.links li a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      ul.links li a strong {
+        display: block;
+        font-weight: 600;
+        -webkit-font-smoothing: antialiased;
+        font-size: 16px;
+      }
+
+      ul.links li:hover {
+        flex: 4;
+      }
+
+      ul.links {
+        text-align: center;
+      }
+
+      .static {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      .static img { 
+        margin: 0.2rem 0;
+        padding: 2px;
+        border: 1px solid black;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .badges {
+        padding: 1rem;
+      }
+
+      .badge {
+        position: relative;
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        border-radius: 3px;
+        padding: 1px;
+        text-shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        margin-bottom: 0.5rem;
+        z-index: 1;
+      }
+
+      .shine {
+        height: 32px;
+        width: 32px;
+        position: absolute;
         overflow: hidden;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
       }
 
-      details, details > * {
-        transition: all 0.2s;
+      .shine:after {
+        content: "";
+        width: 100%;
+        height: 200%;
+        position: absolute;
+        background: rgb(255,255,255);
+        background: linear-gradient(55deg, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%);
+        transform: skewX(35deg);
+        left: -225%;
+        top: 50%;
+        opacity: 0;
+        z-index: 2;
       }
 
-      details:not([open]) summary ~ * {
+      .badge:hover .shine:after {
+        transition-property: left, opacity;
+        transition-duration: 1s;
+        transition-timing-function: ease-in-out;
+        left: 200%;
+        top: 0;
+        opacity: 1;
+      }
+
+      .badge + .tooltip {
+        transition-property: opacity, bottom, max-height;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+        position: absolute;
+        font-size: 10px;
+        overflow: hidden;
+        opacity: 0;
+        right: 1rem;
+        left: 1rem;
+        bottom: 0;
+        text-align: left;
+        padding: 0.5rem;
+        background: rgba(0, 0, 0, 0.8);
+        font-size: 12px;
+        color: white;
+        border-radius: 2px;
         max-height: 0;
+        z-index: 2;
       }
 
-      details[open] summary ~ * {
-        max-height: 4rem;
+      .badge:hover + .tooltip {
+        position: absolute;
+        opacity: 1;
+        bottom: 1rem;
+        display: block;
+        max-height: 300px;
+
       }
 
-      div.divider {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        border-top: 1px solid lightgrey;
+      .sky-container {
+        position: fixed;
+        z-index: -2;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: lightblue;
       }
 
-      @media screen and (max-width: 600px) {
-        body {
-          font-size: 22px;
+      .sky {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: lightblue;
+      }
+
+      .sun {
+        width: 50px;
+        height: 50px;
+        background-color: #fff1cf;
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 10px #fff1cf80,
+          0 0 0 20px #fff1cf40,
+          0 0 0 30px #fff1cf20,
+          0 0 0 40px #fff1cf10,
+          0 0 0 50px #fff1cf00,
+          0 0 20px 50px #fff1cf10;
+        animation:
+          rays 2s 0s infinite linear;
+      }
+
+      @keyframes rays {
+        0% {
+          box-shadow: 
+          0 0 0 0 #fff1cf80,
+          0 0 0 10px #fff1cf80,
+          0 0 0 20px #fff1cf40,
+          0 0 0 30px #fff1cf20,
+          0 0 0 40px #fff1cf10,
+          0 0 20px 50px #fff1cf10;
+        }
+        100% {
+          box-shadow: 
+          0 0 0 10px #fff1cf80,
+          0 0 0 20px #fff1cf40,
+          0 0 0 30px #fff1cf20,
+          0 0 0 40px #fff1cf10,
+          0 0 0 100px #fff1cf00,
         }
       }
+
+      @keyframes shine {
+        0%, 10% {
+          background-position: -1000px;
+        }
+        20% {
+          background-position: top left;
+        }
+        90% {
+          background-position: top right;
+        }
+        100% {
+          background-position: 1000px;
+        }
+      }
+
 
     </style>
   </head>
   <body>
-    <section>
-      <h1>Index</h1>
-      <blockquote>
-        "We are what we pretend to be, so we must be careful what we pretend to be." -
-        <em>Kurt Vonnegut</em>
-      </blockquote>
-
-      <article class="directory">
-        <h2>Directory</h2>
-        <p>
-        </p>
-        <details class="folder-area">
-
-          <summary>
-            <strong><u>demos</u></strong>
-          </summary>
-          <noscript>Trust me, you need javascript 💛</noscript>
-          <div class="folder">
-            <a href="svelte/">
-              <strong><u>svelte</u></strong>
-            </a>
-            <a href="react/">
-              <strong><u>react</u></strong>
-            </a>
-          </div>
-        </details>
-        <details class="folder-area">
-          <summary>
-            <strong><u>posts </u></strong>
-          </summary>
-        </details>
-        <a target="_blank" href="https://github.com/embarks/">
-          📄 <strong><u>github</u></strong>
-        </a>
-        <a target="_blank" href="https://www.linkedin.com/in/thebartman/">
-          📄 <strong><u>linkedin</u></strong>
-        </a>
-      </article>
-    </section>
-    <div class="divider"></div>
+    <main>
+      <div class="outer">
+        <section class="tabs">
+          <a href="#home">Home</a>
+          <a href="#links">Links</a>
+          <a href="#demos">Demos</a>
+          <a href="#note">Notes</a>
+          <a href="#badges">Badges</a>
+        </section>
+        <div class="inner">
+          <section class="display">
+            <div id="home" class="static">
+              <h2 class="author-header">Author: Emily Bartman</h2>
+              <img height="100" width="100" src="./self.jpg" />
+              <p>Programmer based in Phoenix, Arizona. 🏜</p>
+            </div>
+            <div id="links">
+              <ul class="links">
+                <li>
+                  <a style="background-color: rgb(36, 41, 46);color: white;" target="_blank" href="https://github.com/embarks/">
+                    <strong>github</strong>
+                  </a>
+                </li>
+                <li>
+                  <a style="background-color: rgb(0, 119, 181); color: white;" target="_blank" href="https://www.linkedin.com/in/thebartman/  ">
+                    <strong>linkedin</strong>
+                  </a>
+                </li>
+                <li>
+                  <a style="background-color: gold; color: brown;" target="_blank" href="https://codepen.io/embarks">
+                    <strong>codepen</strong>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div id="demos">
+              <ul class="links demos">
+                <li>
+                  <a style="background-color: #FE3919; color: white;" href="svelte">
+                    <strong>svelte</strong>
+                  </a>
+                </li>
+                <li>
+                  <a style="background-color:rgb(40, 44, 52); color: rgb(97, 218, 251);" href="react">
+                    <strong>react</strong>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div id="note" class="note">
+              <label for="one">
+                <input type="checkbox" />
+                  <input type="text" placeholder="will do">
+              </label>
+              <label for="two">
+                <input type="checkbox" />
+                  <input type="text" placeholder="must do">
+              </label>
+              <label for="three">
+                <input type="checkbox" />
+                  <input type="text" placeholder="should do">
+              </label>
+              <label for="four">
+                <input type="checkbox" />
+                  <input type="text" placeholder="could do">
+              </label>
+              <label for="five">
+                <input type="checkbox" />
+                  <input type="text" placeholder="...why not?">
+              </label>
+            </div>
+            <div id="badges" class="badges">
+              <div style="background-color: black" class="badge">
+                <span>💛</span>
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Javascript professional since 2014</span>
+              <div style="background-color: rebeccapurple" class="badge">⚛️
+                <div class="shine"></div>
+              </div>
+              <span style="color: white" class="tooltip">
+                Developing ReactJS applications since 2017
+              </span>
+              <div style="background-color: skyblue" class="badge">☁️
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Deploying to the cloud since 2017</span>
+              <div style="background-color: teal" class="badge">🌐
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Web developer since 2014</span>
+              <div style="background-color: gold" class="badge">🎓
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Bachelor of Science in Engineering & Computer Science recieved 2016 from Northern Arizona University</span>
+              <div style="background-color: royalblue" class="badge">🖌
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Adobe Creative Suite hobbyist since 2010</span>
+              <div style="background-color: darkgreen" class="badge">🐍
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Trained in the Python programming language</span>
+              <div style="background-color: cornsilk" class="badge">🦀
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Self-taught Rust programming</span>
+              <div style="background-color: palevioletred" class="badge">🧙‍♂️
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Technical project leader since 2018</span>
+              <div style="background-color: brown" class="badge">👩🏻‍🏫
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Speaker & lecturer since 2015</span>
+              <div style="background-color: firebrick" class="badge">⌨️
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Computer & technology enthusiast since 1999</span>
+              <div style="background-color: goldenrod" class="badge">🚐
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Certified van driver & Arizona tourism professional</span>
+              <div style="background-color: purple" class="badge">🏍
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Certified two-wheeled creature since 2017</span>
+              <div style="background-color: darkblue" class="badge">👩‍🚀
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Future Martian (?)</span>
+              <div style="background-color: rgb(219, 59, 15)" class="badge">👩🏽‍💻
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Software development consultant at Formidable Labs since 2020</span>
+              <div style="background-color: gray" class="badge">🕵🏻‍♀️
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Secret Security Clearance sponsored by NASA, USGS, & General Dynamics</span>
+              <div style="background-color: lemonchiffon" class="badge">👩‍🎨
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Sketch artist & illustrator</span>
+              <div style="background-color: hotpink" class="badge">🧠
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Developing APIs with GraphQL since 2017</span>
+              <div style="background-color: black" class="badge">👽
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Science fiction fan & aspiring author</span>
+              <div style="background-color: darkolivegreen" class="badge">👁
+                <div class="shine"></div>
+              </div>
+              <span class="tooltip">Thought criminal</span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
     <footer>
-      <em>Hosted with</em> 💛 <em>from a bucket located in the region known as [us-west-1]</em> 🏜
     </footer>
+    <div class="sky-container">
+      <div class="sky">
+        <div class="sun"></div>
+      </div>
+    </div>
+    <noscript>Trust me, you need javascript 💛</noscript>
   </body>
 </html>

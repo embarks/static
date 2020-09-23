@@ -1,5 +1,5 @@
 .DS_Store
-public/bundle.*
+**/public/bundle.*
 .env*
 **/node_modules
 **/dist

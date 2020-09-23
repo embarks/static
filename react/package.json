@@ -5,7 +5,9 @@
   "scripts": {
     "test": "echo \"testing\"",
     "start": "HTTPS=true webpack-dev-server --open --config webpack.dev.js",
-    "build": "NODE_ENV='production' webpack --config webpack.prod.js"
+    "build": "NODE_ENV='production' webpack --config webpack.prod.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,10 @@
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/react": "^6.0.21",
     "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
@@ -42,6 +48,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
+    "react-is": "^16.13.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.26.1",
@@ -54,14 +61,12 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@mindshaft/jits": "^0.2.1",
     "classnames": "^2.2.6",
     "dotenv-webpack": "^1.7.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "query-string": "5",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "react-draggable": "^3.3.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "uuid": "^3.3.2"
