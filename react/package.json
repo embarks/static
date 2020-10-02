@@ -4,10 +4,9 @@
   "description": "em's web presence",
   "scripts": {
     "test": "echo \"testing\"",
-    "start": "HTTPS=true webpack-dev-server --open --config webpack.dev.js",
-    "build": "NODE_ENV='production' webpack --config webpack.prod.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build": "build-storybook -o ./build --docs",
+    "serve": "npx http-server ./build"
   },
   "repository": {
     "type": "git",
@@ -37,6 +36,7 @@
     "@svgr/webpack": "^5.4.0",
     "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.4",
+    "babel-plugin-styled-components": "^1.11.1",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
     "eslint": "^5.14.0",
