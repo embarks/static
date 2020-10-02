@@ -16,10 +16,10 @@ const postCSSLoader = {
     sourceMap: true,
     plugins: () => [
       autoprefixer({
-        browserlist: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9']
-      })
-    ]
-  }
+        browserlist: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
+      }),
+    ],
+  },
 }
 
 const CSSModuleLoader = {
@@ -28,8 +28,8 @@ const CSSModuleLoader = {
     modules: true,
     sourceMap: true,
     localIdentName: devMode ? '[local]__[hash:base64:5]' : '[hash:base64:5]',
-    minimize: true
-  }
+    minimize: true,
+  },
 }
 
 const CSSLoader = {
@@ -37,8 +37,8 @@ const CSSLoader = {
   options: {
     modules: false,
     sourceMap: true,
-    minimize: true
-  }
+    minimize: true,
+  },
 }
 
 module.exports = {
@@ -49,63 +49,58 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: { presets: ['@babel/env'] }
+        options: { presets: ['@babel/env'] },
       },
       {
         test: /\.css$/,
-        use: [
-          StyleLoader,
-          CSSLoader,
-          postCSSLoader
-        ]
+        use: [StyleLoader, CSSLoader, postCSSLoader],
       },
       {
         test: /\.scss$/,
         exclude: /\.module\.scss$/,
-        use: [StyleLoader, CSSLoader, postCSSLoader, 'sass-loader']
+        use: [StyleLoader, CSSLoader, postCSSLoader, 'sass-loader'],
       },
       {
         test: /\.module\.scss$/,
-        use: [
-          StyleLoader,
-          CSSModuleLoader,
-          postCSSLoader,
-          'sass-loader'
-        ]
+        use: [StyleLoader, CSSModuleLoader, postCSSLoader, 'sass-loader'],
       },
       {
         test: /\.(png|jpg|gif|ttf)$/,
         use: [
           {
             loader: 'file-loader',
-            options: {}
-          }
-        ]
-      }
-    ]
+            options: {},
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+    ],
   },
   resolve: {
     alias: {
-      'react': path.resolve(__dirname, 'node_modules', 'react'),
-      'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom')
+      react: path.resolve(__dirname, 'node_modules', 'react'),
+      'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
     },
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
   },
   output: {
     path: path.resolve(__dirname, './dist/'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
   plugins: [
     new Dotenv(),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './public/index.html')
+      template: path.resolve(__dirname, './public/index.html'),
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-    })
-  ]
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
+  ],
 }
