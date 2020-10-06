@@ -1,6 +1,6 @@
 import React from 'react'
-
-import { Button } from './Button'
+import Button from './Button'
+import { createGlobalStyle } from 'styled-components'
 
 export default {
   title: 'Title/Button',
@@ -10,7 +10,20 @@ export default {
   },
 }
 
-const Template = (args) => <Button {...args} />
+const SBBG = createGlobalStyle`
+  body {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+  }
+`
+
+const Template = (args) => (
+  <>
+    <SBBG />
+    <Button {...args} />
+  </>
+)
 
 export const Primary = Template.bind({})
 Primary.args = {
