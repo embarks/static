@@ -6,7 +6,8 @@
     "test": "echo \"testing\"",
     "storybook": "start-storybook -p 6006",
     "build": "build-storybook -o ./build --docs",
-    "serve": "npx http-server ./build"
+    "serve": "npx http-server ./build",
+    "lint:fix": "eslint --fix --ext .js,.jsx ./src"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
     "eslint": "^5.14.0",
+    "eslint-config-prettier": "^6.12.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-node": "^9.1.0",

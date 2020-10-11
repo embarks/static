@@ -4,7 +4,7 @@
     "browser": true,
     "es6": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "standard"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
@@ -25,8 +25,7 @@
   "rules": {
     "comma-dangle": "off",
     "no-console": "off",
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"]
+    "indent": "off",
+    "linebreak-style": ["error", "unix"]
   }
 }
