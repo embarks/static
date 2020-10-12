@@ -7,10 +7,12 @@ import { variantColorKeys } from "../theme"
 const { contrast, background, text /*focus*/ } = variantColorKeys
 
 const __ = (colorKey, mod) => {
-  console.log("color key", colorKey, background, contrast)
-  return ({ variant, theme }) => {
+  let variant, theme
+  return (props) => {
+    ;({ variant, theme } = props)
     if (!theme.variants.includes(variant)) {
-      throw new Error("Unknown variant provided to Button")
+      console.warn("Unknown variant provided to Button")
+      variant = "primary"
     }
     const color = theme.variants(variant)[colorKey]
     if (typeof mod === "function") {
@@ -24,6 +26,7 @@ const Button = styled.button`
   display: inline-block;
   margin-top: 0 !important;
   padding: 0;
+  min-width: 45px;
   border-width: 1px;
   border-radius: 4px;
   padding-bottom: 2px;
@@ -69,7 +72,7 @@ const Button = styled.button`
     overflow: hidden;
     width: 100%;
     margin: 0;
-    padding: 0.3rem;
+    padding: 8px;
     background-color: ${__(background)};
     border: 1px solid ${__(contrast)};
     color: ${__(text)};
@@ -88,7 +91,7 @@ export const CuteButton = (props) => {
   const myChildren = typeof children === "undefined" ? defaultText : children
 
   return (
-    <Button variant={variant} {...rest}>
+    <Button variant={variant} disabled={variant === "disabled"} {...rest}>
       <span>{myChildren}</span>
     </Button>
   )
@@ -100,7 +103,6 @@ CuteButton.defaultProps = {
 
 CuteButton.propTypes = {
   variant: PropTypes.string,
-  className: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 }
 export default CuteButton
