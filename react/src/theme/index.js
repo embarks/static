@@ -1,67 +1,140 @@
+import React, { useEffect, useState } from "react"
+import PropTypes from "prop-types"
 import { darken, lighten } from "polished"
+import { ThemeProvider as StyledComponentsProvider } from "styled-components"
+import DEFAULT_THEME from "./constants/colors/spacedust.json"
 
-import THEME_COLORS from "./spacedust.json"
-const THEME_COLOR_KEYS = Object.keys(THEME_COLORS)
+export const THEME_NAMES = [
+  "colbalt-neon",
+  "dotgov",
+  "fideloper",
+  "manpage",
+  "monalisa",
+  "seashells",
+  "solarized",
+  "spacedust",
+]
 
-const background = "background"
-const contrast = "contrast"
-const focus = "focus"
-const text = "text"
-
-const VARIANT_MAP = {
-  keys: [text, background, contrast, focus],
-  primary: [
-    THEME_COLORS.text,
-    lighten(0.08, THEME_COLORS.black),
-    THEME_COLORS.brightBlack,
-  ],
-  secondary: [THEME_COLORS.dark, THEME_COLORS.text, THEME_COLORS.dark],
-  info: [THEME_COLORS.black, THEME_COLORS.brightGreen, THEME_COLORS.black],
-  success: [THEME_COLORS.bold, THEME_COLORS.green, THEME_COLORS.bold],
-  green: [THEME_COLORS.text, THEME_COLORS.green, THEME_COLORS.text],
-  danger: [THEME_COLORS.bold, THEME_COLORS.brightRed, THEME_COLORS.bold],
-  error: [THEME_COLORS.black, THEME_COLORS.brightRed, THEME_COLORS.black],
-  warn: [THEME_COLORS.dark, THEME_COLORS.brightYellow, THEME_COLORS.dark],
-  highlight: [THEME_COLORS.bold, THEME_COLORS.brightCyan, THEME_COLORS.bold],
-  link: [THEME_COLORS.light, THEME_COLORS.brightBlue, THEME_COLORS.light],
-  dark: [THEME_COLORS.light, THEME_COLORS.dark, THEME_COLORS.brightBlack],
-  light: [THEME_COLORS.dark, THEME_COLORS.light, THEME_COLORS.dark],
-  bright: [THEME_COLORS.black, THEME_COLORS.yellow, THEME_COLORS.black],
-  bold: [THEME_COLORS.main, THEME_COLORS.bold, THEME_COLORS.main],
-  black: [
-    THEME_COLORS.light,
-    THEME_COLORS.brightBlack,
-    lighten(0.08, THEME_COLORS.black),
-  ],
-  subtle: [THEME_COLORS.text, THEME_COLORS.main, THEME_COLORS.main],
-  notice: [THEME_COLORS.black, THEME_COLORS.magenta, THEME_COLORS.black],
-  funky: [THEME_COLORS.white, THEME_COLORS.brightMagenta, THEME_COLORS.white],
-  disabled: [
-    THEME_COLORS.grey,
-    darken(0.2, THEME_COLORS.grey),
-    THEME_COLORS.grey,
-  ],
+async function getThemeColors(key) {
+  return import(`./constants/colors/${key}.json`)
 }
 
-const COLOR_KEYS = Object.fromEntries(
-  new Map(VARIANT_MAP.keys.map((key, index) => [key, index]))
-)
+const createThemeObj = (themeColors = DEFAULT_THEME) => {
+  const VARIANT_COLS = ["text", "bg", "fg", "focus"]
 
-const VARIANT_KEYS = Object.keys(VARIANT_MAP).filter((key) => key !== "keys")
+  const VARIANT_MAP = {
+    primary: [
+      themeColors.text,
+      lighten(0.08, themeColors.main),
+      themeColors.brightBlack,
+    ],
+    secondary: [themeColors.dark, themeColors.text, themeColors.dark],
+    info: [themeColors.black, themeColors.brightGreen, themeColors.black],
+    success: [themeColors.black, themeColors.green, themeColors.black],
+    danger: [themeColors.text, themeColors.red, themeColors.text],
+    error: [themeColors.black, themeColors.brightRed, themeColors.black],
+    warn: [themeColors.darker, themeColors.brightYellow, themeColors.dark],
+    link: [themeColors.blue, themeColors.brightCyan, themeColors.text],
+    dark: [themeColors.light, themeColors.dark, themeColors.brightBlack],
+    light: [themeColors.dark, themeColors.light, themeColors.dark],
+    bright: [themeColors.black, themeColors.yellow, themeColors.black],
+    bold: [themeColors.main, themeColors.bold, themeColors.main],
+    black: [
+      themeColors.light,
+      themeColors.brightBlack,
+      lighten(0.08, themeColors.black),
+    ],
+    subtle: [themeColors.text, themeColors.main, themeColors.main],
+    notice: [themeColors.black, themeColors.magenta, themeColors.black],
+    funky: [themeColors.darker, themeColors.brightMagenta, themeColors.green],
+    disabled: [
+      themeColors.grey,
+      darken(0.2, themeColors.grey),
+      themeColors.grey,
+    ],
+  }
 
-const theme = THEME_COLORS
+  const VARIANT_COLOR_MAP =
+    /* [variant - primary, secondary, etc]: { [key - text, contrast, etc] } */
+    Object.fromEntries(
+      new Map(
+        Object.keys(VARIANT_MAP).map((variantKey) => {
+          const variantColorValues = VARIANT_COLS.reduce(
+            (colorValues, variantColorKey, index) => {
+              const color = VARIANT_MAP[variantKey][index]
+              return {
+                ...colorValues,
+                [variantColorKey]: color,
+              }
+            },
+            {},
+          )
+          return [variantKey, variantColorValues]
+        }),
+      ),
+    )
 
-function variants(variantKey) {
-  return VARIANT_MAP[variantKey]
+  const theme = {
+    colors: themeColors, // theme.green, theme.red
+    ...VARIANT_COLOR_MAP,
+  }
+
+  function variants(variantKey) {
+    return VARIANT_MAP[variantKey]
+  }
+
+  variants.keys = Object.keys(VARIANT_MAP)
+  theme.variants = variants
+
+  const FONT_SIZES_PX = [11, 12, 14, 16, 20]
+
+  const TYPOGRAPHY = {
+    sizes: FONT_SIZES_PX.map((v) => `${v}px`),
+  }
+  theme.fonts = TYPOGRAPHY
+
+  return theme
 }
 
-variants.colorKeys = COLOR_KEYS
-variants.keys = VARIANT_KEYS
-variants.includes = (key) => variants.keys.includes(key)
-theme.variants = variants
+const CustomThemeContext = React.createContext({
+  theme: {},
+  setTheme: {},
+})
 
-export { variants }
-export { COLOR_KEYS as variantColorKeys }
-export { THEME_COLOR_KEYS as themeColorKeys }
-export { VARIANT_KEYS as variantKeys }
-export default theme
+export const ThemeProvider = ({ themeName, children }) => {
+  const [themeId, setThemeId] = useState(themeName)
+  const [theme, setTheme] = useState(createThemeObj(DEFAULT_THEME))
+
+  useEffect(() => {
+    const fetchTheme = async () => {
+      const themeColors = await getThemeColors(themeId)
+      return createThemeObj(themeColors)
+    }
+    fetchTheme().then((newTheme) => setTheme(newTheme))
+  }, [setThemeId, themeId, setTheme])
+
+  return (
+    <CustomThemeContext.Provider value={{ theme, setTheme: setThemeId }}>
+      <StyledComponentsProvider theme={theme}>
+        {children}
+      </StyledComponentsProvider>
+    </CustomThemeContext.Provider>
+  )
+}
+
+ThemeProvider.displayName = "CustomThemeProvider"
+
+export const useTheme = (themeName) => {
+  const { theme, setTheme } = React.useContext(CustomThemeContext)
+  React.useEffect(() => {
+    setTheme(themeName)
+  }, [themeName, setTheme])
+  return { theme, setTheme }
+}
+
+ThemeProvider.propTypes = {
+  themeName: PropTypes.string,
+  children: PropTypes.node,
+}
+
+export default createThemeObj(DEFAULT_THEME)

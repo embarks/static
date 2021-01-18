@@ -2,7 +2,6 @@
   import { onMount } from "svelte"
   import { tweened } from "svelte/motion"
   import { backOut } from "svelte/easing"
-  // import { version } from "../package.json"
 
   export let express
   export let close = false
@@ -19,7 +18,7 @@
     }
   }
 
-  let div, rect, mobile
+  let div, rect, narrow
   let x = tweened(50, {
     duration: 400,
     easing: backOut
@@ -33,7 +32,7 @@
 
   function resetRects () {
     if (div) rect = div.getBoundingClientRect()
-    mobile = rect && rect.width && rect.width < 800
+    narrow = rect && rect.width && rect.width < 500
     for (const side in eyes) {
       const eye = eyes[side]
       if (eye) {
@@ -130,6 +129,16 @@
 </script>
 
 <style>
+  .outer {
+    position: relative;
+    background: blue;
+    height: 300px;
+    width: 500px;
+    background-clip: content-box;
+    padding: 15px;
+    border: dotted black 1px;
+    border-radius: 4px;
+  }
   .detec {
     /* 
   * instead of attempting to complicate matters with more divs around the eye 
@@ -197,8 +206,10 @@
   div.container {
     position: absolute;
     overflow: hidden;
-    width: 100%; 
-    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -218,58 +229,60 @@
 </style>
 
 <svelte:window on:resize={resetRects} />
-<div class="container"
-  on:mousemove={handleMousemove}
-  on:touchmove={handleTouch}
-  on:touchend={handleTouch}
->
-  <div class="eyes" bind:this={div} class:express>
-    <div class="detec">
-      <div class="eye"
-        class:mobile
-        bind:this={eyePos.elem.left}
-        on:mouseenter={mouseEnterEye(eyes.left)}
-        on:mouseleave={mouseLeaveEye(eyes.left)}
-        on:touchmove={touchEye(eyes.left)}
-      ></div>
-      {#if !mobile}
+<div class="outer">
+  <div class="container"
+    on:mousemove={handleMousemove}
+    on:touchmove={handleTouch}
+    on:touchend={handleTouch}
+  >
+    <div class="eyes" bind:this={div} class:express>
+      <div class="detec">
         <div class="eye"
-          bind:this={eyePos.elem.right}
-          on:mouseenter={mouseEnterEye(eyes.right)}
-          on:mouseleave={mouseLeaveEye(eyes.right)}
-          on:touchmove={touchEye(eyes.right)}
+          class:narrow
+          bind:this={eyePos.elem.left}
+          on:mouseenter={mouseEnterEye(eyes.left)}
+          on:mouseleave={mouseLeaveEye(eyes.left)}
+          on:touchmove={touchEye(eyes.left)}
         ></div>
-      {/if}
-    </div>
-    <div class="eye"
-      class:mobile
-      class:close
-      bind:this={eyes.left}
-      >
-      <div
-        class="pupil"
-        style="
-          top:{sy};
-          left:{sx};
-          transform: translate(-{sx}, -{sy})
-        "
-      >
+        {#if !narrow}
+          <div class="eye"
+            bind:this={eyePos.elem.right}
+            on:mouseenter={mouseEnterEye(eyes.right)}
+            on:mouseleave={mouseLeaveEye(eyes.right)}
+            on:touchmove={touchEye(eyes.right)}
+          ></div>
+        {/if}
+      </div>
+      <div class="eye"
+        class:narrow
+        class:close
+        bind:this={eyes.left}
+        >
+        <div
+          class="pupil"
+          style="
+            top:{sy};
+            left:{sx};
+            transform: translate(-{sx}, -{sy})
+          "
+        >
+        </div>
+      </div>
+      {#if !narrow}
+      <div class="eye" class:close bind:this={eyes.right}>
+        <div
+          class="pupil"
+          style="
+            top: {sy};
+            left: {sx};
+            transform: translate(-{sx}, -{sy})
+          "
+        >
       </div>
     </div>
-    {#if !mobile}
-    <div class="eye" class:close bind:this={eyes.right}>
-      <div
-        class="pupil"
-        style="
-          top: {sy};
-          left: {sx};
-          transform: translate(-{sx}, -{sy})
-        "
-      >
+    {/if}
     </div>
+    <slot>
+    </slot>
   </div>
-  {/if}
-  </div>
-  <slot>
-  </slot>
 </div>

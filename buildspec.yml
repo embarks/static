@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 10
+      nodejs: 12
     commands:
       - echo Entered the install phase...
       - apt-get update -y && apt-get install -y make apt-transport-https
@@ -25,7 +25,7 @@ phases:
     commands:
       - aws s3 rm $STORAGE_BUCKET --recursive
       - aws s3 cp ./index.html $STORAGE_BUCKET
-      - aws s3 cp ./react/dist/ $STORAGE_BUCKET/react/ --recursive
+      - aws s3 cp ./react/build/ $STORAGE_BUCKET/react/ --recursive
       - aws s3 cp ./svelte/public/ $STORAGE_BUCKET/svelte/ --recursive
       - echo Successfully uploaded build to S3
   

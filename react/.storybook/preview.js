@@ -1,30 +1,41 @@
 import React from "react"
-import { themes } from "@storybook/theming"
-import { addParameters } from "@storybook/react"
-import { DocsPage, DocsContainer } from "@storybook/addon-docs/blocks"
-import { ThemeProvider } from "styled-components"
+import { DocsContainer } from "@storybook/addon-docs/blocks"
+import { ThemeProvider } from "../src/theme"
 
-import theme from "../src/theme"
+import { theme as sbTheme } from "./manager"
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  backgrounds: {
+    disable: true,
+  },
   layout: "centered",
   docs: {
-    theme: themes.dark,
+    theme: sbTheme,
+    container: ({ children, context }) => {
+      return (
+        <ThemeProvider themeName="spacedust">
+          <DocsContainer context={context}>{children}</DocsContainer>
+        </ThemeProvider>
+      )
+    },
   },
+  // themes: [
+  //   {
+  //     name: "spacedust",
+  //     class: "theme-spacedust",
+  //     color: "#00aced",
+  //     default: true,
+  //   },
+  //   { name: "manpage", class: "theme-manpage", color: "#3b5998" },
+  // ],
 }
 
-addParameters({
-  docs: {
-    container: DocsContainer,
-    page: DocsPage,
-  },
-})
-
 export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={theme}>
-      <Story />
-    </ThemeProvider>
-  ),
+  (Story) => {
+    return (
+      <ThemeProvider themeName="spacedust">
+        <Story />
+      </ThemeProvider>
+    )
+  },
 ]

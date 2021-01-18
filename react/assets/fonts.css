@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "AnonymousPro";
+  src: url("./AnonymousPro-Regular.ttf");
+  font-weight: normal;
+  font-size: normal;
+}
+
+@font-face {
+  font-family: "AnonymousProBold";
+  src: url("./AnonymousPro-Bold.ttf");
+  font-weight: bold;
+  font-size: normal;
+}
+
+@font-face {
+  font-family: "AnonymousProItalic";
+  src: url("./AnonymousPro-Italic.ttf");
+  font-weight: normal;
+  font-size: normal;
+}
+
+@font-face {
+  font-family: "AnonymousProBoldItalic";
+  src: url("./AnonymousPro-BoldItalic.ttf");
+  font-weight: normal;
+  font-size: normal;
+}
+
+i,
+em {
+  font-family: "AnonymousProItalic";
+  font-style: normal;
+}
+
+strong,
+b,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "AnonymousProBold";
+}
+
+strong i,
+strong em,
+b em,
+b i,
+em strong,
+i strong {
+  font-family: "AnonymousProBoldItalic";
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
