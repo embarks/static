@@ -31,11 +31,12 @@ const Button = styled.button`
   border-color: ${({ theme, variant }) => theme[variant].bg};
   &:hover {
     border-color: ${({ theme, variant }) => lighten(0.05, theme[variant].bg)};
-  &:not(:disabled):not(.disabled):active {
-    margin-top: ${({ small }) => (small ? "1px" : "2px")} !important;
-    padding-bottom: 0px;
-    background-color: ${({ theme, variant }) => theme[variant].fg};
-    border-color: ${({ theme, variant }) => theme[variant].bg})};
+    &:not(:disabled):not(.disabled):active {
+      margin-top: ${({ small }) => (small ? "1px" : "2px")} !important;
+      padding-bottom: 0px;
+      background-color: ${({ theme, variant }) => theme[variant].fg};
+      border-color: ${({ theme, variant }) => theme[variant].bg};
+    }
   }
   &:active,
   &.active {
@@ -43,12 +44,12 @@ const Button = styled.button`
   }
   ${({ isActive }) => isActive && `${activeStyles}`}
   &:focus {
-    box-shadow: inset 0 1px 0 ${({ theme, variant }) =>
-      transparentize(0.85, theme[variant].bg)},
-      0 1px 1px ${({ theme, variant }) =>
-        transparentize(0.75, theme[variant].bg)},
-      0 0 0 0.2rem ${({ theme, variant }) =>
-        transparentize(0.65, theme[variant].bg)};
+    box-shadow: inset 0 1px 0
+        ${({ theme, variant }) => transparentize(0.85, theme[variant].bg)},
+      0 1px 1px
+        ${({ theme, variant }) => transparentize(0.75, theme[variant].bg)},
+      0 0 0 0.2rem
+        ${({ theme, variant }) => transparentize(0.65, theme[variant].bg)};
     outline: 0;
   }
   & > span {
@@ -63,7 +64,7 @@ const Button = styled.button`
     border: 1px solid ${({ theme, variant }) => theme[variant].fg};
     color: ${({ theme, variant }) => theme[variant].text};
   }
-  &:hover > span {
+  &:hover:not(:disabled):not(.disabled) > span {
     background-color: ${({ theme, variant }) =>
       lighten(0.05, theme[variant].bg)};
   }

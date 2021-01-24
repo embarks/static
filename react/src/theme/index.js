@@ -5,14 +5,19 @@ import { ThemeProvider as StyledComponentsProvider } from "styled-components"
 import DEFAULT_THEME from "./constants/colors/spacedust.json"
 
 export const THEME_NAMES = [
-  "colbalt-neon",
   "dotgov",
   "fideloper",
   "manpage",
   "monalisa",
   "seashells",
-  "solarized",
   "spacedust",
+  "desert",
+  "belefonte",
+  "chalkboard",
+  "earthsong",
+  "ollie",
+  "spacegray",
+  "zenburn",
 ]
 
 async function getThemeColors(key) {
@@ -28,25 +33,43 @@ const createThemeObj = (themeColors = DEFAULT_THEME) => {
       lighten(0.08, themeColors.main),
       themeColors.brightBlack,
     ],
-    secondary: [themeColors.dark, themeColors.text, themeColors.dark],
-    info: [themeColors.black, themeColors.brightGreen, themeColors.black],
-    success: [themeColors.black, themeColors.green, themeColors.black],
-    danger: [themeColors.text, themeColors.red, themeColors.text],
-    error: [themeColors.black, themeColors.brightRed, themeColors.black],
-    warn: [themeColors.darker, themeColors.brightYellow, themeColors.dark],
-    link: [themeColors.blue, themeColors.brightCyan, themeColors.text],
-    dark: [themeColors.light, themeColors.dark, themeColors.brightBlack],
+    secondary: [themeColors.darker, themeColors.lighter, themeColors.darker],
+    success: [themeColors.black, themeColors.brightGreen, themeColors.black],
+    info: [themeColors.brightGreen, themeColors.black, themeColors.green],
+    danger: [themeColors.white, themeColors.red, themeColors.white],
+    error: [
+      themeColors.brightBlack,
+      themeColors.brightRed,
+      themeColors.brightBlack,
+    ],
+    warn: [themeColors.darker, themeColors.brightYellow, themeColors.darker],
+    link: [themeColors.black, themeColors.cyan, themeColors.black],
+    dark: [themeColors.light, themeColors.black, themeColors.brightBlack],
     light: [themeColors.dark, themeColors.light, themeColors.dark],
-    bright: [themeColors.black, themeColors.yellow, themeColors.black],
+    bright: [
+      themeColors.brightBlack,
+      themeColors.brightYellow,
+      themeColors.brightBlack,
+    ],
     bold: [themeColors.main, themeColors.bold, themeColors.main],
     black: [
       themeColors.light,
       themeColors.brightBlack,
-      lighten(0.08, themeColors.black),
+      lighten(0.1, themeColors.black),
     ],
     subtle: [themeColors.text, themeColors.main, themeColors.main],
-    notice: [themeColors.black, themeColors.magenta, themeColors.black],
-    funky: [themeColors.darker, themeColors.brightMagenta, themeColors.green],
+    notice: [themeColors.brightBlack, themeColors.magenta, themeColors.black],
+    fresh: [themeColors.red, themeColors.white, themeColors.blue],
+    funky: [themeColors.white, themeColors.darker, themeColors.brightMagenta],
+    clean: [themeColors.blue, themeColors.white, themeColors.brightBlue],
+    dirty: [themeColors.brightWhite, themeColors.dark, themeColors.darker],
+    evil: [themeColors.brightRed, themeColors.brightBlack, themeColors.red],
+    good: [
+      themeColors.darker,
+      themeColors.brightYellow,
+      themeColors.brightMagenta,
+    ],
+
     disabled: [
       themeColors.grey,
       darken(0.2, themeColors.grey),
@@ -108,11 +131,14 @@ export const ThemeProvider = ({ themeName, children }) => {
   useEffect(() => {
     const fetchTheme = async () => {
       const themeColors = await getThemeColors(themeId)
-      return createThemeObj(themeColors)
+      const newTheme = createThemeObj(themeColors.default)
+      console.log("new theme", newTheme.colors)
+      return newTheme
     }
     fetchTheme().then((newTheme) => setTheme(newTheme))
   }, [setThemeId, themeId, setTheme])
 
+  console.log("refresh", theme.colors.main)
   return (
     <CustomThemeContext.Provider value={{ theme, setTheme: setThemeId }}>
       <StyledComponentsProvider theme={theme}>

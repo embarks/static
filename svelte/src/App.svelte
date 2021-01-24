@@ -103,15 +103,15 @@
   on:mouseup={handleClick}
 > -->
   <Eyes express={express} close={agree} />
-<!-- </div> -->
-{#each allmystars as { key, x, y } (key)}
-  <div
+  {#each allmystars as { key, x, y } (key)}
+    <div
     in:starIn="{{ duration: 400 }}"
     out:starOut="{{ duration: 5000 }}"
     class="star" 
     style="
-      top:{y-14*2}px;
-      left:{x-10*2}px;
-    "
-  ></div>
-{/each}
+        top:{y-14*2}px;
+        left:{x-10*2}px;
+      "
+    ></div>
+  {/each}
+</div>

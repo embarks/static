@@ -1,7 +1,7 @@
 import { addons } from "@storybook/addons"
 import { create } from "@storybook/theming/create"
 import { darken, lighten } from "polished"
-import logo from "../public/logo.png"
+import logo from "../public/skully.png"
 import custom from "../src/theme/constants/colors/spacedust.json"
 import "../assets/fonts.css"
 
@@ -35,7 +35,7 @@ export const theme = create({
   inputBorder: custom.main,
   inputTextColor: custom.bold,
   inputBorderRadius: 3,
-  brandTitle: "React, Naturally",
+  brandTitle: "you look inside... ... ... ... ... it's full of worms.",
   brandUrl: "https://emwaves.org",
   brandImage: logo,
 })
@@ -45,7 +45,8 @@ addons.setConfig({
   showNav: true,
   showPanel: true,
   panelPosition: "bottom",
-  isToolshown: true,
+  isToolshown: false,
+  enableShortcuts: false,
   theme: theme,
   showRoots: false,
   enableShortcuts: true,

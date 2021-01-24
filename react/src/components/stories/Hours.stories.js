@@ -2,7 +2,7 @@ import React from "react"
 import HowMany from "../HowMany"
 
 export default {
-  title: "Components/HowMany/Hours",
+  title: "Time/Hours",
   component: HowMany,
   argTypes: {
     hours: {
@@ -20,9 +20,14 @@ const Template = ({ hours, ...args }) => (
   <HowMany hours={new Date(hours).toString()} {...args} />
 )
 
+function getHoursSince9AM(d) {
+  var e = new Date(d)
+  return e.setHours(9, 0, 0, 0)
+}
+
 export const HoursSince = Template.bind({})
 HoursSince.args = {
-  hours: new Date() - 1000 * 60 * 60 * 3.5,
-  prefix: "it's been",
-  postfix: "since I clocked out",
+  prefix: "I've been working for",
+  hours: getHoursSince9AM(new Date()),
+  postfix: "today",
 }

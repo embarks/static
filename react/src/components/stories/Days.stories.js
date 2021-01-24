@@ -2,7 +2,7 @@ import React from "react"
 import HowMany from "../HowMany"
 
 export default {
-  title: "Components/HowMany/Days",
+  title: "Time/Days",
   component: HowMany,
   argTypes: {
     days: {
@@ -22,7 +22,7 @@ const Template = (args) => (
 
 export const DaysSince = Template.bind({})
 DaysSince.args = {
-  days: new Date() - 1000 * 60 * 60 * 24 * 6,
+  days: new Date("2016-05-01"),
   prefix: "Only",
-  postfix: "since my last drink",
+  postfix: "since I graduated",
 }

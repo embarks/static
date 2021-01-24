@@ -17,13 +17,9 @@ import { theme as managerTheme } from "../../.storybook/manager"
 
 <Meta title="README" />
 
-# Introduction
-
-This is a React journal and demo container for <b><em>emwaves.org</em></b>.
-
 ## How to use
 
-On the left of your screen there is a sidebar. You can click on it randomly, or in an orderly fashion. You are also welcome to click nothing.
+On the left of your screen there is a list of links. You can click on it... But be careful! Every time you click a link, you increase the chances you will be forced to read something that will change the shape of your brain forever.
 
 ## Tools I used
 
@@ -35,26 +31,28 @@ Version <CurrentVersion /> is supported by the following libraries from NPM.
 
 ### Dependency list
 
+export const UL = styled.ul`
+  & > li {
+    list-style: none;
+  }
+`
+
+export const Details = styled.details`
+  &:hover > summary,
+  &:hover > summary::marker {
+    color: black;
+    cursor: pointer;
+  }
+  & > summary,
+  & > summary::marker {
+    color: lightgrey;
+    font-family: monospace;
+    line-height: 15px;
+  }
+`
+
 export const DependencyList = () => {
   const [showList, setShowList] = useState(false)
-  const UL = styled.ul`
-    & > li {
-      list-style: none;
-    }
-  `
-  const Details = styled.details`
-    &:hover > summary,
-    &:hover > summary::marker {
-      color: black;
-      cursor: pointer;
-    }
-    & > summary,
-    & > summary::marker {
-      color: lightgrey;
-      font-family: monospace;
-      line-height: 15px;
-    }
-  `
   const formatDependency = (dependency, version) => {
     return (
       <>
@@ -87,62 +85,3 @@ export const DependencyList = () => {
 }
 
 <DependencyList />
-
-### Storybook
-
-It's been <HowMany days="11/12/2017" /> since I started using Storybook professionally to write and document React components. Storybook's framework is useful because I can include source code and components directly in my markdown with minimal setup and coding.
-
-<Source
-  dark
-  language="jsx"
-  code={dedent`
-    <Button onClick={() => setPartyMode(true)}>
-      Party
-    </Button>
-  `}
-/>
-
-export const ButtonPoster = () => {
-  const { setTheme } = useTheme()
-  const Container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-    max-width: 500px;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    & > div {
-      margin-right: 1rem;
-      margin-top: 1rem;
-    }
-  `
-  const setPartyMode = () => console.log("🎉🎉🎉🎉🎉🎉")
-  return (
-    <Container>
-      {theme.variants.keys.map((variant) => {
-        return (
-          <div key={variant}>
-            <Button onClick={() => setTheme("colbalt-neon")} variant={variant}>
-              party
-            </Button>
-          </div>
-        )
-      })}
-    </Container>
-  )
-}
-
-<ButtonPoster />
-
-### Styled Components
-
-export const NpmLink = styled.code`
-  text-decoration: none;
-  & > a {
-    font-family: monospace;
-  }
-`
-
-I've used <NpmLink>[styled-components](https://github.com/styled-components)</NpmLink> for <HowMany days="10/02/2020" />! I recommend it. 💅

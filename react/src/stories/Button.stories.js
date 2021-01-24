@@ -1,9 +1,7 @@
 import React, { useState } from "react"
 import Button from "../components/Button"
 import defaultTheme, { useTheme, THEME_NAMES } from "../theme"
-// import { useMutationObserver } from "../components/useMutationObserver"
-
-// const ADDON_THEME_CLASSLIST_PREFIX = "theme-"
+import styled from "styled-components"
 
 export default {
   id: "button",
@@ -30,26 +28,6 @@ export default {
 
 /* eslint-disable-next-line react/prop-types */
 const Template = ({ children, ...args }) => {
-  // const bodyRef = React.useRef(document.body)
-  // const [theme, setTheme] = useState("spacedust")
-
-  // const setAddonTheme = () => {
-  //   let found
-  //   const mutatedTheme = document.body.classList.value
-  //     .split(" ")
-  //     .find((key) => {
-  //       found = key.startsWith(ADDON_THEME_CLASSLIST_PREFIX)
-  //       if (found) return true
-  //     })
-  //     .slice(ADDON_THEME_CLASSLIST_PREFIX.length, found.length)
-
-  //   if (mutatedTheme !== theme) {
-  //     setTheme(mutatedTheme)
-  //   }
-  // }
-
-  // useMutationObserver(bodyRef, setAddonTheme)
-
   return (
     <Button onClick={function () {}} {...args}>
       {children}
@@ -63,37 +41,74 @@ Primary.args = {
   children: "Make it so",
 }
 
-const ThemeTester = () => {
+const Container = styled.div`
+  border-radius: 2px;
+  color: ${({ theme }) => theme.colors.text};
+  padding: 1rem;
+  background: ${({ theme }) => theme.colors.main};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Row = styled.div`
+  max-width: 24rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const WrapButton = styled.div`
+  margin: 0.5rem;
+`
+const Gallery = () => {
+  // use array index to loop through different themes
   const [themeId, setThemeId] = useState(7)
+
+  // My buttons use ThemeContext
+  // This hook can change the theme
   useTheme(THEME_NAMES[themeId])
 
+  // Curry the function with the direction
+  // so to reuse the setThemeId functionality
   const onClick = (direction) => () => {
-    let nextState = direction === "right" ? themeId + 1 : themeId - 1
-    if (nextState > THEME_NAMES.length - 1) {
-      nextState = 0
-    } else if (nextState <= 0) {
-      nextState = THEME_NAMES.length
-    }
-    setThemeId(nextState)
+    setThemeId((themeId) => {
+      let nextState =
+        direction === "right" ? (themeId + 1) % THEME_NAMES.length : themeId - 1
+      if (nextState < 0) {
+        nextState = THEME_NAMES.length - 1
+      }
+      return nextState
+    })
   }
 
   return (
-    <>
-      <Button onClick={onClick("left")}>👈</Button>
-      <div>
+    <Container>
+      <h3>{THEME_NAMES[themeId] || "default theme"}</h3>
+      <Row>
         {defaultTheme.variants.keys.map((variant) => {
           return (
-            <span key={variant}>
-              <Button variant={variant}>
-                {THEME_NAMES[themeId]} - {variant}
-              </Button>
-            </span>
+            <WrapButton key={variant}>
+              <Button variant={variant}>{variant}</Button>
+            </WrapButton>
           )
         })}
-      </div>
-      <Button onClick={onClick("right")}>👉</Button>
-    </>
+      </Row>
+      <Row
+        css={`
+          margin: 0.5rem;
+          & > button {
+            margin: 0.5rem;
+          }
+        `}
+      >
+        <Button onClick={onClick("left")}>👈</Button>
+        <Button onClick={onClick("right")}>👉</Button>
+      </Row>
+    </Container>
   )
 }
 
-export const Test = ThemeTester.bind({})
+export const ThemedGallery = Gallery.bind({})
