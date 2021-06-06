@@ -98,9 +98,11 @@
         color: black;
         /* scroll behavior */
         overflow-y: auto;
+        overflow-x: hidden;
         scroll-snap-type: y mandatory;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
 
       .display > div {
@@ -260,20 +262,37 @@
         justify-content: center;
         text-align: center;
         font-size: 16px;
+        font-size: 1.2vw;
         border-radius: 3px;
         padding: 1px;
         text-shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
         box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         z-index: 1;
-        transition: transform 0.15s, font-size 0.25s ease-in-out;
-        overflow: hidden;
+        transition: transform 0.15s, font-size 0.15s ease-in;
+      }
+      .badge:after {  
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 0.15s ease-in;
+
       }
 
       .badge:hover {
-        transform: scale(1.5);
-        font-size: 24px;
+        transform: scale(1.25);
+        /* font-size: 22px; */
+        font-size: 22px;
+        font-size: 1.5vw;
         z-index: 2;
         cursor: pointer !important;
+      }
+
+      .badge:hover:after {
+        opacity: 1;
       }
 
       .shine {
@@ -287,6 +306,7 @@
         bottom: 0;
         flex: 0;
         pointer-events: none;
+        border-radius: 4px;
       }
 
       .shine:after {
@@ -490,57 +510,57 @@
               <div tabindex="0" style="background-color: black" class="badge">💛
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Javascript programmer [2014]</span>
+              <span class="tooltip">javascript [2014]</span>
 
               <div tabindex="0" style="background-color: darkgreen" class="badge">🐍
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Python programmer [2012]</span>
+              <span class="tooltip">python [2012]</span>
 
               <div tabindex="0" style="background-color: cornsilk" class="badge">🦀
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Rust programmer [2020]</span>
+              <span class="tooltip">rust [2020]</span>
 
               <div tabindex="0" style="background-color: skyblue" class="badge">☁️
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Cloud native developer [2017]</span>
+              <span class="tooltip">cloud native [2017]</span>
 
               <div tabindex="0" style="background-color: teal" class="badge">🌐
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Web developer [2016]</span>
+              <span class="tooltip">web developer [2016]</span>
 
               <div tabindex="0" style="background-color: goldenrod" class="badge">🚐
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Certified to drive the van [2011]</span>
+              <span class="tooltip">certified to drive the van [2011]</span>
 
               <div tabindex="0" style="background-color: purple" class="badge">🏍️
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Two-wheeled creature [2017]</span>
+              <span class="tooltip">two-wheeled creature [2017]</span>
 
               <div tabindex="0" style="background-color: gold" class="badge">🎓
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Computer science degree [2016]</span>
+              <span class="tooltip">computer science [2016]</span>
 
               <div tabindex="0" style="background-color: darkblue" class="badge">👩‍🚀
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Professional Martian [20??]</span>
+              <span class="tooltip">martian [20??]</span>
 
               <div tabindex="0" style="background-color: rgb(219, 59, 15)" class="badge">👷🏽‍♀️
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Professional programmer @ Formidable Labs [2020]</span>
+              <span class="tooltip">formidable [2020]</span>
 
               <div tabindex="0" style="background-color: black" class="badge">👁️
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Thought criminal [REDACTED]</span>
+              <span class="tooltip">thought criminal [REDACTED]</span>
             </div>
           </section>
         </div>
