@@ -22,6 +22,9 @@ phases:
     commands:
       - aws s3 rm $STORAGE_BUCKET --recursive
       - aws s3 cp ./index.html $STORAGE_BUCKET
+      - aws s3 cp ./AnonymousPro-Regular.ttf $STORAGE_BUCKET
+      - aws s3 cp ./bird-2-16.png $STORAGE_BUCKET
+      - aws s3 cp ./self.jpg $STORAGE_BUCKET
       - aws s3 cp ./react/build/ $STORAGE_BUCKET/react/ --recursive
       - echo Successfully uploaded build to S3
   
