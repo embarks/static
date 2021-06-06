@@ -1,58 +1,31 @@
-import { useState } from "react"
-import {
-  Meta,
-  Story,
-  Canvas,
-  Source,
-  DocsContainer,
-} from "@storybook/addon-docs/blocks"
-import { addons } from "@storybook/addons"
 import { styled } from "@storybook/theming"
-import dedent from "dedent"
 import Button from "../components/Button"
-import HowMany from "../components/HowMany"
-import theme, { useTheme } from "../theme"
+import Link from "../components/Link"
 import pckg from "../../package.json"
-import { theme as managerTheme } from "../../.storybook/manager"
 
 <Meta title="README" />
 
-## How to use
-
-On the left of your screen there is a list of links. You can click on it... But be careful! Every time you click a link, you increase the chances you will be forced to read something that will change the shape of your brain forever.
-
-## Tools I used
+On the side of your screen there is a list of links. You can click on it... ... ... or not. Contained are my javascript widgets and documents I have written.
 
 export const CurrentVersion = () => {
   return <strong>{pckg.version}</strong>
 }
 
-Version <CurrentVersion /> is supported by the following libraries from NPM.
-
-### Dependency list
+version: <CurrentVersion />
 
 export const UL = styled.ul`
+  margin-left: 0;
+  padding-left: 0;
   & > li {
     list-style: none;
   }
 `
 
-export const Details = styled.details`
-  &:hover > summary,
-  &:hover > summary::marker {
-    color: black;
-    cursor: pointer;
-  }
-  & > summary,
-  & > summary::marker {
-    color: lightgrey;
-    font-family: monospace;
-    line-height: 15px;
-  }
+export const Container = styled.div`
+  display: flex;
 `
 
 export const DependencyList = () => {
-  const [showList, setShowList] = useState(false)
   const formatDependency = (dependency, version) => {
     return (
       <>
@@ -66,20 +39,11 @@ export const DependencyList = () => {
       {formatDependency(dependency, pckg.dependencies[dependency])}
     </li>
   ))
-  const devDependencies = Object.keys(
-    pckg.devDependencies,
-  ).map((dependency) => (
-    <li key={dependency}>
-      {formatDependency(dependency, pckg.devDependencies[dependency])}
-    </li>
-  ))
   return (
     <>
-      <UL>{dependencies}</UL>
-      <Button small variant="subtle" onClick={() => setShowList(!showList)}>
-        {`${showList ? "hide" : "show"} dev dependencies`}
-      </Button>
-      {showList && <UL>{devDependencies}</UL>}
+      <Container> 
+        <UL>{dependencies}</UL>
+      </Container>
     </>
   )
 }

@@ -1,20 +1,20 @@
 import { addons } from "@storybook/addons"
 import { create } from "@storybook/theming/create"
-import { darken, lighten } from "polished"
+import { lighten } from "polished"
 import logo from "../public/skully.png"
-import custom from "../src/theme/constants/colors/spacedust.json"
+import custom from "../src/theme/constants/colors/empower.json"
 import "../assets/fonts.css"
 
 export const theme = create({
-  base: "dark",
+  base: "light",
 
   colorPrimary: custom.main,
   colorSecondary: custom.brightBlue,
 
   // UI
-  appBg: darken(0.05, custom.black),
+  appBg: custom.main,
   appContentBg: custom.main,
-  appBorderColor: custom.dark,
+  appBorderColor: custom.white,
   appBorderRadius: 2,
 
   // Typography
@@ -23,10 +23,10 @@ export const theme = create({
 
   // Text colors
   textColor: custom.text,
-  textInverseColor: custom.dark,
+  textInverseColor: custom.selection,
 
   // Toolbar default and active colors
-  barTextColor: custom.dark,
+  barTextColor: custom.black,
   barSelectedColor: custom.red,
   barBg: custom.main,
 
@@ -49,5 +49,4 @@ addons.setConfig({
   enableShortcuts: false,
   theme: theme,
   showRoots: false,
-  enableShortcuts: true,
 })

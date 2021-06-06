@@ -4,7 +4,7 @@
   "description": "em's humble react lab",
   "scripts": {
     "test": "echo \"testing\"",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "start-storybook -p 6006 -s public --docs --no-manager-cache",
     "build": "build-storybook -o ./build --docs",
     "serve": "npx http-server ./build",
     "lint:fix": "eslint --fix --ext .js,.jsx ./src"

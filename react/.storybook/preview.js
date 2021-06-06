@@ -13,29 +13,18 @@ export const parameters = {
     theme: sbTheme,
     container: ({ children, context }) => {
       return (
-        <ThemeProvider themeName="spacedust">
+        <ThemeProvider>
           <DocsContainer context={context}>{children}</DocsContainer>
         </ThemeProvider>
       )
     },
   },
-  // themes: [
-  //   {
-  //     name: "spacedust",
-  //     class: "theme-spacedust",
-  //     color: "#00aced",
-  //     default: true,
-  //   },
-  //   { name: "manpage", class: "theme-manpage", color: "#3b5998" },
-  // ],
 }
 
 export const decorators = [
-  (Story) => {
-    return (
-      <ThemeProvider themeName="spacedust">
-        <Story />
-      </ThemeProvider>
-    )
-  },
+  (Story) => (
+    <ThemeProvider>
+      <Story />
+    </ThemeProvider>
+  ),
 ]

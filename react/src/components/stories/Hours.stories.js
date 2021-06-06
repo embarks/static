@@ -2,9 +2,13 @@ import React from "react"
 import HowMany from "../HowMany"
 
 export default {
-  title: "Time/Hours",
+  title: "time/hours",
   component: HowMany,
   argTypes: {
+    showUnit: {
+      control: "boolean",
+      defaultValue: true,
+    },
     hours: {
       control: "date",
     },
@@ -25,8 +29,8 @@ function getHoursSince9AM(d) {
   return e.setHours(9, 0, 0, 0)
 }
 
-export const HoursSince = Template.bind({})
-HoursSince.args = {
+export const Hours = Template.bind({})
+Hours.args = {
   prefix: "I've been working for",
   hours: getHoursSince9AM(new Date()),
   postfix: "today",

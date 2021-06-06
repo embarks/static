@@ -1,30 +1,42 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { darken, lighten } from "polished"
 import { ThemeProvider as StyledComponentsProvider } from "styled-components"
-import DEFAULT_THEME from "./constants/colors/spacedust.json"
+import belefonte_theme from "./constants/colors/belefonte.json";
+import chalkboard_theme from "./constants/colors/chalkboard.json";
+import desert_theme from "./constants/colors/desert.json";
+import dotgov_theme from "./constants/colors/dotgov.json";
+import earthsong_theme from "./constants/colors/earthsong.json";
+import empower_theme from "./constants/colors/empower.json"
+import fideloper_theme from "./constants/colors/fideloper.json";
+import manpage_theme from "./constants/colors/manpage.json";
+import monalisa_theme from "./constants/colors/monalisa.json";
+import ollie_theme from "./constants/colors/ollie.json";
+import seashells_theme from "./constants/colors/seashells.json";
+import spacedust_theme from "./constants/colors/spacedust.json";
+import spacegray_theme from "./constants/colors/spacegray.json";
+import zenburn_theme from "./constants/colors/zenburn.json";
 
-export const THEME_NAMES = [
-  "dotgov",
-  "fideloper",
-  "manpage",
-  "monalisa",
-  "seashells",
-  "spacedust",
-  "desert",
-  "belefonte",
-  "chalkboard",
-  "earthsong",
-  "ollie",
-  "spacegray",
-  "zenburn",
-]
-
-async function getThemeColors(key) {
-  return import(`./constants/colors/${key}.json`)
+export const THEME_COLORS = {
+  "dotgov": dotgov_theme,
+  "fideloper": fideloper_theme,
+  "manpage": manpage_theme,
+  "monalisa": monalisa_theme,
+  "seashells": seashells_theme,
+  "spacedust": spacedust_theme,
+  "desert": desert_theme,
+  "belefonte": belefonte_theme,
+  "chalkboard": chalkboard_theme,
+  "earthsong": earthsong_theme,
+  "ollie": ollie_theme,
+  "spacegray": spacegray_theme,
+  "zenburn": zenburn_theme,
+  "empower": empower_theme,
 }
 
-const createThemeObj = (themeColors = DEFAULT_THEME) => {
+export const THEME_NAMES = Object.keys(THEME_COLORS)
+
+const createThemeObj = (themeColors = empower_theme) => {
   const VARIANT_COLS = ["text", "bg", "fg", "focus"]
 
   const VARIANT_MAP = {
@@ -48,7 +60,7 @@ const createThemeObj = (themeColors = DEFAULT_THEME) => {
     light: [themeColors.dark, themeColors.light, themeColors.dark],
     bright: [
       themeColors.brightBlack,
-      themeColors.brightYellow,
+      themeColors.yellow,
       themeColors.brightBlack,
     ],
     bold: [themeColors.main, themeColors.bold, themeColors.main],
@@ -119,48 +131,29 @@ const createThemeObj = (themeColors = DEFAULT_THEME) => {
   return theme
 }
 
-const CustomThemeContext = React.createContext({
-  theme: {},
-  setTheme: {},
-})
+// eslint-disable-next-line react/prop-types
+export const ThemeProvider = ({ children, theme: themeId = 'empower' }) => {
+  const [theme, setTheme] = useState(createThemeObj(THEME_COLORS[themeId]))
 
-export const ThemeProvider = ({ themeName, children }) => {
-  const [themeId, setThemeId] = useState(themeName)
-  const [theme, setTheme] = useState(createThemeObj(DEFAULT_THEME))
-
-  useEffect(() => {
-    const fetchTheme = async () => {
-      const themeColors = await getThemeColors(themeId)
-      const newTheme = createThemeObj(themeColors.default)
-      console.log("new theme", newTheme.colors)
-      return newTheme
+  React.useEffect(() => {
+    if (themeId) {
+      setTheme(createThemeObj(THEME_COLORS[themeId]))
     }
-    fetchTheme().then((newTheme) => setTheme(newTheme))
-  }, [setThemeId, themeId, setTheme])
+  }, [themeId])
 
-  console.log("refresh", theme.colors.main)
+
   return (
-    <CustomThemeContext.Provider value={{ theme, setTheme: setThemeId }}>
-      <StyledComponentsProvider theme={theme}>
-        {children}
-      </StyledComponentsProvider>
-    </CustomThemeContext.Provider>
+    <StyledComponentsProvider theme={theme}>
+      {children}
+    </StyledComponentsProvider>
   )
 }
 
 ThemeProvider.displayName = "CustomThemeProvider"
-
-export const useTheme = (themeName) => {
-  const { theme, setTheme } = React.useContext(CustomThemeContext)
-  React.useEffect(() => {
-    setTheme(themeName)
-  }, [themeName, setTheme])
-  return { theme, setTheme }
-}
 
 ThemeProvider.propTypes = {
   themeName: PropTypes.string,
   children: PropTypes.node,
 }
 
-export default createThemeObj(DEFAULT_THEME)
+export default createThemeObj(empower_theme)

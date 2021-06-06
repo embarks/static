@@ -11,21 +11,17 @@ phases:
   pre_build:
     commands:
       - echo Entered pre_build phase...
-      - cd ./react/ && npm install
-      - cd ../svelte/ && npm install && cd ../
+      - cd ./react/ && npm install && cd ../
       - aws s3 cp $ENV_BUCKET/.env ./react/.env
   build:
     commands:
       - echo Entered the build phase...
       - cd ./react/ && npm run build
       - echo React build completed...
-      - cd ../svelte/ && npm run build && cd ../
-      - echo Svelte build completed
   post_build:
     commands:
       - aws s3 rm $STORAGE_BUCKET --recursive
       - aws s3 cp ./index.html $STORAGE_BUCKET
       - aws s3 cp ./react/build/ $STORAGE_BUCKET/react/ --recursive
-      - aws s3 cp ./svelte/public/ $STORAGE_BUCKET/svelte/ --recursive
       - echo Successfully uploaded build to S3
   

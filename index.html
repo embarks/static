@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+  🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛
+  🐛🐛🐛🥤 o gross its full of bugs 🍎🐜🐜🐜🐜🐜🐜🐜
+  🐞🕷🕷🕷🕷🕷🕷🕷🕷🕷🕷🐞🦟🐜🐜🐜🐜🐜🐜🐜🐜🐜🐜🐜🐜
+-->
 <html>
   <head>
     <meta charset="utf-8"/>
@@ -79,7 +84,7 @@
         width: 13rem;
         height: 13rem;
         overflow: hidden;
-        border: 1px solid black;
+        border-radius: 2px;
         background: white;
         box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
       }
@@ -111,9 +116,15 @@
         align-items: center;
       }
 
+      .headline {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       .author-header { 
-        margin-top: 0;
-        font-size: 14px;
+        margin: 0;
+        font-size: 20px;
       }
 
       .cred-header {
@@ -147,18 +158,18 @@
       }
       input[type="text"] {
         border: none;
-        border-bottom: 1px solid lightblue;
+        border-bottom: 1px solid #B7CBE3;
         font-family: anon;
         margin: 0.5rem 0;
         height: 1rem;
       }
 
       input[type="text"]:placeholder-shown { 
-        border-bottom: 1px dashed lightblue;
+        border-bottom: 1px dashed #B7CBE3;
       }
 
       input[type="text"]:focus {
-        outline: 1px dotted lightblue;
+        outline: 1px dotted #B7CBE3;
         border-bottom: 1px solid transparent;
       }
 
@@ -214,14 +225,13 @@
       }
 
       .static {
-        padding: 0.5rem;
+        padding: 0.75rem;
       }
 
       .static img {
-        float: left;
         display: inline-block;
         padding: 2px;
-        margin: 0 0.25rem 0 0;
+        margin: 0 0.5rem 0 0;
         border: 1px dotted black;
         background-color: transparent;
       }
@@ -237,12 +247,13 @@
 
       .badge {
         position: relative;
-        width: 30px;
-        height: 30px;
-        line-height: 32px;
-        justify-content: center;
+        width: 40px;
+        height: 40px;
+        display: flex;
         align-items: center;
-        font-size: 18px;
+        justify-content: center;
+        text-align: center;
+        font-size: 26px;
         border-radius: 3px;
         padding: 1px;
         text-shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
@@ -250,6 +261,7 @@
         margin: 0 0.2rem 0.5rem 0.2rem;
         z-index: 1;
         transition: box-shadow 0.25s ease-in-out;
+        overflow: hidden;
       }
 
       .badge:hover {
@@ -260,14 +272,15 @@
       }
 
       .shine {
-        height: 30px;
-        width: 30px;
+        height: 42px;
+        width: 42px;
         position: absolute;
         overflow: hidden;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
+        flex: 0;
       }
 
       .shine:after {
@@ -338,7 +351,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: lightblue;
+        background-color: #B7CBE3;
       }
 
       .sky {
@@ -347,7 +360,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: lightblue;
+        background-color: #B7CBE3;
       }
 
       .sun {
@@ -416,10 +429,14 @@
         <div class="inner">
           <section class="display">
             <div id="author" class="static">
-              <h2 class="author-header">Emily Bartman's homepage.</h2>
-              <img height="100" width="100" src="./self.jpg" />
-              <p>Web developer person living in Phoenix, Arizona. 🏜 <br/>
-              Trying to keep it professional. Busy during the day. You may <a href="mailto:emily@emwaves.org">reach out to me by email</a>. I am open to conversation, but I may be slow to respond.</p>
+              <div class="headline">
+                <img height="75" width="75" src="./self.jpg" />
+                <h2 class="author-header">Emily Bartman's homepage.</h2>
+              </div>
+              <p>I'm a web developer in sunny Phoenix, Arizona. You may reach out to me by <a href="mailto:emily@emwaves.org">email</a>, if you want to talk or work together. I may be slow to respond.
+              <br/>
+                🐛
+              </p>
             </div>
             <div id="links">
               <ul class="links">
@@ -430,12 +447,7 @@
                 </li>
                 <li>
                   <a tabindex="0" style="background-color: gold; color: brown;" target="_blank" href="react">
-                    <strong>react/blog</strong>
-                  </a>
-                </li>
-                <li>
-                  <a tabindex="0" style="background-color: #FE3919; color: white;" href="svelte">
-                    <strong>svelte/demos</strong>
+                    <strong>library</strong>
                   </a>
                 </li>
                 <li>
@@ -471,55 +483,57 @@
               <div tabindex="0" style="background-color: black" class="badge">💛
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Programmer: Javascript [2014]</span>
+              <span class="tooltip">Javascript programmer [2014]</span>
+
               <div tabindex="0" style="background-color: darkgreen" class="badge">🐍
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Programmer: Python [2012]</span>
+              <span class="tooltip">Python programmer [2012]</span>
+
               <div tabindex="0" style="background-color: cornsilk" class="badge">🦀
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Programmer: Rust [2020]</span>
+              <span class="tooltip">Rust programmer [2020]</span>
+
               <div tabindex="0" style="background-color: skyblue" class="badge">☁️
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Dev: cloud native [2017]</span>
+              <span class="tooltip">Cloud native developer [2017]</span>
+
               <div tabindex="0" style="background-color: teal" class="badge">🌐
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Dev: web & communications [2016]</span>
-              <div tabindex="0" style="background-color: royalblue" class="badge">🧙‍♂️
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">Dev: front-end/UX [2019]</span>
-              <div tabindex="0" style="background-color: rebeccapurple" class="badge">⚛️
-                <div class="shine"></div>
-              </div>
-              <span style="color: white" class="tooltip">Dev: ReactJS [2017]</span>
+              <span class="tooltip">Web developer [2016]</span>
+
               <div tabindex="0" style="background-color: goldenrod" class="badge">🚐
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Automotive: Certified to drive the van [2011]</span>
+              <span class="tooltip">Certified to drive the van [2011]</span>
+
               <div tabindex="0" style="background-color: purple" class="badge">🏍
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Automotive: two-wheeled creature [2017]</span>
+              <span class="tooltip">Motorcycle license [2017]</span>
+
               <div tabindex="0" style="background-color: gold" class="badge">🎓
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Educated: Computer Science [2016]</span>
+              <span class="tooltip">Computer science degree [2016]</span>
+
               <div tabindex="0" style="background-color: darkblue" class="badge">👩‍🚀
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Professional: Martian [20XX]</span>
+              <span class="tooltip">Professional Martian [20??]</span>
+
               <div tabindex="0" style="background-color: rgb(219, 59, 15)" class="badge">👷🏽‍♀️
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Professional: programmer @ Formidable Labs [2020]</span>
+              <span class="tooltip">Professional programmer @ Formidable Labs [2020]</span>
+
               <div tabindex="0" style="background-color: black" class="badge">👁
                 <div class="shine"></div>
               </div>
-              <span class="tooltip">Thought criminal: [REDACTED]</span>
+              <span class="tooltip">Thought criminal [REDACTED]</span>
             </div>
           </section>
         </div>

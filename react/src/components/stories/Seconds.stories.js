@@ -1,10 +1,21 @@
 import React from "react"
+import { THEME_NAMES, ThemeProvider } from "../../theme"
 import HowMany from "../HowMany"
 
 export default {
-  title: "Time/Seconds",
+  title: "time/seconds",
   component: HowMany,
   argTypes: {
+    themeId: {
+      control: {
+        type: "select",
+        options: THEME_NAMES,
+      },
+    },
+    showUnit: {
+      defaultValue: true,
+      control: "boolean",
+    },
     seconds: {
       control: "date",
     },
@@ -30,7 +41,10 @@ const Template = (args) => {
     }, 1000)
     return () => clearInterval(interval)
   }, [])
-  return <HowMany {...args} seconds={seconds.toString()} />
+
+  return <ThemeProvider theme={args.themeId}>
+      <HowMany {...args} seconds={seconds.toString()} />
+    </ThemeProvider>
 }
 
 export const _default = Template.bind({})

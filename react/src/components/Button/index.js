@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { lighten, darken, transparentize } from "polished"
@@ -29,20 +29,21 @@ const Button = styled.button`
   white-space: nowrap;
   background-color: ${({ theme, variant }) => theme[variant].fg};
   border-color: ${({ theme, variant }) => theme[variant].bg};
+  transition: all 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+
   &:hover {
     border-color: ${({ theme, variant }) => lighten(0.05, theme[variant].bg)};
-    &:not(:disabled):not(.disabled):active {
+  }
+  &:not(:disabled):not(.disabled):active {
       margin-top: ${({ small }) => (small ? "1px" : "2px")} !important;
       padding-bottom: 0px;
       background-color: ${({ theme, variant }) => theme[variant].fg};
       border-color: ${({ theme, variant }) => theme[variant].bg};
     }
-  }
   &:active,
   &.active {
     ${activeStyles}
   }
-  ${({ isActive }) => isActive && `${activeStyles}`}
   &:focus {
     box-shadow: inset 0 1px 0
         ${({ theme, variant }) => transparentize(0.85, theme[variant].bg)},
@@ -78,22 +79,11 @@ export const CuteButton = (props) => {
   const { children, variant = "primary", ...rest } = props
   const defaultText = "Make it so"
   const myChildren = typeof children === "undefined" ? defaultText : children
-  const [keyDownActive, setKeyDownActive] = useState(false)
-  const onKeyDown = useCallback(() => {
-    setKeyDownActive(true)
-  }, [setKeyDownActive])
-
-  const onKeyUp = useCallback(() => {
-    setKeyDownActive(false)
-  }, [setKeyDownActive])
 
   return (
     <Button
       variant={variant}
       disabled={variant === "disabled"}
-      onKeyDown={onKeyDown}
-      onKeyUp={onKeyUp}
-      isActive={keyDownActive}
       {...rest}
     >
       <span>{myChildren}</span>
@@ -102,7 +92,6 @@ export const CuteButton = (props) => {
 }
 
 CuteButton.propTypes = {
-  theme: PropTypes.object,
   variant: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
