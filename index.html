@@ -21,7 +21,7 @@
       body, html {
         margin: 0;
         padding: 0;
-        font-size: 18px;
+        font-size: 21px;
         height: 100%;
         width: 100%;
       }
@@ -53,7 +53,7 @@
 
       .outer {
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column-reverse;
         text-align: left;
         justify-content: center;
         align-items: center;
@@ -63,19 +63,18 @@
       }
 
       .tabs {
-        margin: 1rem 0;
+        margin: 0.5em;
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        flex-direction: row;
       }
 
       .tabs a {
         color: black;
         border: 3px solid transparent;
         border-radius: 5px;
-        padding: 1px 4px;
+        padding: 1px 8px;
         text-transform: lowercase;
-        font-size: 14px;
+        font-size: 16px;
       }
 
       .tabs a:hover {
@@ -88,13 +87,13 @@
         /* width: 13rem; */
         height: 13rem;
         overflow: hidden;
-        border-radius: 2px;
+        border-radius: 6px;
         background: white;
         box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
       }
 
       .display {
-        font-size: 14px;
+        font-size: 18px;
         color: black;
         /* scroll behavior */
         overflow-y: auto;
@@ -218,12 +217,18 @@
         display: block;
         font-weight: 600;
         -webkit-font-smoothing: antialiased;
-        font-size: 16px;
+        font-size: 21px;
+        
       }
 
       ul.links li:hover,
       ul.links li:focus-within {
         flex-grow: 4;
+      }
+
+      ul.links li:hover a,
+      ul.links li:focus-within a {
+        text-decoration: goldenrod wavy underline;
       }
 
       ul.links {
@@ -240,136 +245,6 @@
         margin: 0 0.5rem 0 0;
         border: 1px dotted black;
         background-color: transparent;
-      }
-
-      .badges {
-        padding: 1rem;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        text-align: center;
-        row-gap: 6px;
-        column-gap: 6px;
-      }
-
-      .badge {
-        position: relative;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-size: 16px;
-        font-size: 1.2vw;
-        border-radius: 3px;
-        padding: 1px;
-        text-shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        transition: transform 0.15s, font-size 0.15s ease-in;
-      }
-      .badge:after {  
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
-        border-radius: 4px;
-        opacity: 0;
-        transition: opacity 0.15s ease-in;
-
-      }
-
-      .badge:hover {
-        transform: scale(1.25);
-        /* font-size: 22px; */
-        font-size: 22px;
-        font-size: 1.5vw;
-        z-index: 2;
-        cursor: pointer !important;
-      }
-
-      .badge:hover:after {
-        opacity: 1;
-      }
-
-      .shine {
-        height: 32px;
-        width: 32px;
-        position: absolute;
-        overflow: hidden;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        flex: 0;
-        pointer-events: none;
-        border-radius: 4px;
-      }
-
-      .shine:after {
-        content: "";
-        width: 100%;
-        height: 200%;
-        position: absolute;
-        background: rgb(255,255,255);
-        background: linear-gradient(55deg, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%);
-        transform: skewX(35deg);
-        left: -225%;
-        top: 50%;
-        opacity: 0;
-        z-index: 2;
-        pointer-events: none;
-      }
-
-      .badge:hover .shine:after,
-      .badge:focus .shine:after {
-        transition-property: left, opacity;
-        transition-duration: 1s;
-        transition-timing-function: ease-in-out;
-        left: 200%;
-        top: 0;
-        opacity: 1;
-      }
-
-      /* .badge:hover {
-        transform: translateY(-2px);
-      } */
-
-      .badge + .tooltip {
-        transition-property: opacity, bottom, max-height;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in-out;
-        position: absolute;
-        font-size: 10px;
-        overflow: hidden;
-        opacity: 0;
-        right: 0;
-        left: 0;
-        bottom: -1rem;
-        text-align: left;
-        padding: 0.5rem;
-        background: rgba(0, 0, 0, 0.8);
-        font-size: 12px;
-        color: white;
-        border-radius: 2px;
-        max-height: 0;
-        z-index: 2;
-        pointer-events: none;
-        line-height: 1.4;
-        cursor: default;
-      }
-
-      /* .badge:hover + .tooltip, */
-      .badge:focus + .tooltip {
-        position: absolute;
-        opacity: 1;
-        /* bottom: 1rem; */
-        display: block;
-        max-height: 300px;
-        bottom: 0;
       }
 
       .sky-container {
@@ -451,7 +326,6 @@
           <a tabindex="0" href="#author">About</a>
           <a tabindex="0" href="#links">Links</a>
           <a tabindex="0" href="#note">Notes</a>
-          <a tabindex="0" href="#badges">Badges</a>
         </section>
         <div class="inner">
           <section class="display">
@@ -482,6 +356,11 @@
                     <strong>linkedin</strong>
                   </a>
                 </li>
+                <li>
+                  <a tabindex="0" style="background-color: rgb(190, 122, 67); color: black;" target="_blank" href="https://codepen.io/embarks">
+                    <strong>codepen</strong>
+                  </a>
+                </li>
               </ul>
             </div>
             <div id="note" class="note">
@@ -506,67 +385,12 @@
                   <input tabindex="0" type="text" placeholder="???" />
               </label>
             </div>
-            <div id="badges" class="badges">
-              <div tabindex="0" style="background-color: black" class="badge">💛
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">javascript [2014]</span>
-
-              <div tabindex="0" style="background-color: darkgreen" class="badge">🐍
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">python [2012]</span>
-
-              <div tabindex="0" style="background-color: cornsilk" class="badge">🦀
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">rust [2020]</span>
-
-              <div tabindex="0" style="background-color: skyblue" class="badge">☁️
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">cloud native [2017]</span>
-
-              <div tabindex="0" style="background-color: teal" class="badge">🌐
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">web developer [2016]</span>
-
-              <div tabindex="0" style="background-color: goldenrod" class="badge">🚐
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">certified to drive the van [2011]</span>
-
-              <div tabindex="0" style="background-color: purple" class="badge">🏍️
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">two-wheeled creature [2017]</span>
-
-              <div tabindex="0" style="background-color: gold" class="badge">🎓
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">computer science [2016]</span>
-
-              <div tabindex="0" style="background-color: darkblue" class="badge">👩‍🚀
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">martian [20??]</span>
-
-              <div tabindex="0" style="background-color: rgb(219, 59, 15)" class="badge">👷🏽‍♀️
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">formidable [2020]</span>
-
-              <div tabindex="0" style="background-color: black" class="badge">👁️
-                <div class="shine"></div>
-              </div>
-              <span class="tooltip">thought criminal [REDACTED]</span>
-            </div>
           </section>
         </div>
       </div>
     </main>
     <footer>
+      <!--🦶-->
     </footer>
     <div class="sky-container">
       <div class="sky">
