@@ -1,9 +1,9 @@
 import React from "react"
-import HowMany from "../HowMany"
+import TimeSpan from "../TimeSpan"
 
 export default {
-  title: "time/hours",
-  component: HowMany,
+  title: "components/time span/hours",
+  component: TimeSpan,
   argTypes: {
     showUnit: {
       control: "boolean",
@@ -21,7 +21,7 @@ export default {
 
 /* eslint-disable-next-line react/prop-types */
 const Template = ({ hours, ...args }) => (
-  <HowMany hours={new Date(hours).toString()} {...args} />
+  <TimeSpan hours={new Date(hours).toString()} {...args} />
 )
 
 function getHoursSince9AM(d) {

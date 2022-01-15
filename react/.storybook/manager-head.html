@@ -4,11 +4,26 @@
   }
   .sidebar-header a {
     flex: 1;
-    max-width: 8em;
+    max-width: 75px;
   }
 
   .sidebar-header div:first-child {
     display: flex;
     justify-content: flex-end;
   }
+  
+  a.sidebar-item, button.sidebar-item,
+  .search-result-item a, 
+  .search-result-item--label {
+    font-size: 18px;
+  }
+
+  .search-result-item svg,
+  .sidebar-item svg {
+    width: 1em;
+    height: 1em;
+  }
 </style>
+
+<link rel="shortcut icon" href="/storybook.ico">
+<link rel="icon" type="image/png" href="/storybook.png" sizes="192x192">

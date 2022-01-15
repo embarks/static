@@ -1,10 +1,11 @@
 import React from "react"
 import Button from "../components/Button"
+
 import defaultTheme, { THEME_NAMES, ThemeProvider } from "../theme"
 
 export default {
   id: "button",
-  title: "cutie button",
+  title: "components/cutie button",
   component: Button,
   argTypes: {
     onClick: {
@@ -16,13 +17,13 @@ export default {
     themeId: {
       control: {
         type: "select",
-        options: THEME_NAMES
-      }
+        options: THEME_NAMES,
+      },
     },
     variant: {
       control: {
         type: "select",
-        options: defaultTheme.variants.keys,
+        options: defaultTheme.variantKeys,
       },
     },
   },
@@ -32,7 +33,7 @@ export default {
 const Template = ({ children, themeId, ...args }) => {
   return (
     <ThemeProvider theme={themeId}>
-      <Button onClick={function () {}} {...args}>
+      <Button onClick={() => {}} {...args}>
         {children}
       </Button>
     </ThemeProvider>

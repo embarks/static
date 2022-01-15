@@ -1,10 +1,11 @@
 import React from "react"
+import useInterval from "../../hooks/useInterval"
 import { THEME_NAMES, ThemeProvider } from "../../theme"
-import HowMany from "../HowMany"
+import TimeSpan from "../TimeSpan"
 
 export default {
-  title: "time/seconds",
-  component: HowMany,
+  title: "components/time span/seconds",
+  component: TimeSpan,
   argTypes: {
     themeId: {
       control: {
@@ -33,18 +34,17 @@ function getMsSinceMidnight(d) {
 
 /* eslint-disable-next-line react/prop-types */
 const Template = (args) => {
-  const date = new Date(args.seconds)
-  const [seconds, setSeconds] = React.useState(date)
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(new Date(seconds))
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [])
+  let [seconds, setSeconds] = React.useState(new Date(args.seconds))
 
-  return <ThemeProvider theme={args.themeId}>
-      <HowMany {...args} seconds={seconds.toString()} />
+  useInterval(() => {
+    setSeconds(new Date(seconds))
+  }, 1000)
+
+  return (
+    <ThemeProvider theme={args.themeId}>
+      <TimeSpan {...args} seconds={seconds.toString()} />
     </ThemeProvider>
+  )
 }
 
 export const _default = Template.bind({})

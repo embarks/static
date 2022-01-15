@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
-const Code = styled.code`
+const Span = styled.span`
   display: inline-block;
   padding: 0 0.5rem;
   margin: 0;
@@ -12,24 +12,18 @@ const Code = styled.code`
   color: ${({ theme }) => theme.secondary.text};
 `
 
-export const HowMany = (props) => {
+export const TimeSpan = (props) => {
   const { days, years, weeks, seconds, hours, showUnit = true } = props
+  const unitEntries = Object.entries({
+    years,
+    days,
+    weeks,
+    hours,
+    seconds,
+  }).filter(([, datetimeValue]) => Boolean(datetimeValue))
 
-  const keyMap = { days, years, weeks, seconds, hours }
-
-  const unit = [days, years, weeks, seconds, hours].filter(Boolean)
-
-  if (unit.length > 1) {
-    throw new Error(
-      "Only one of [days, years, weeks, seconds, hours] in <HowMany />!",
-    )
-  }
-
-  const [unitKey] = Object.keys(keyMap)
-    .filter((key) => Boolean(keyMap[key]))
-    .map((key) => `${key}`)
-
-  const [dateStr] = unit
+  const [unitEntry] = unitEntries
+  const [unitKey, dateStr] = unitEntry
 
   const inputDate = new Date(dateStr)
   const today = new Date()
@@ -42,34 +36,31 @@ export const HowMany = (props) => {
   const diffTime = Math.abs(endDate.getTime() - startDate.getTime())
 
   let diff = Math.floor(diffTime)
+  const denominator = {
+    seconds: 1000,
+    hours: 1000 * 60 * 60,
+    days: 1000 * 60 * 60 * 24,
+    years: 1000 * 3600 * 24 * 365.25,
+  }[unitKey]
+  diff = Math.floor(diff / denominator)
 
-  if (seconds) {
-    diff = Math.floor(diff / 1000)
-  } else if (hours) {
-    diff = Math.floor(diff / (1000 * 60 * 60))
-  } else if (days) {
-    diff = Math.floor(diff / (1000 * 60 * 60 * 24))
-  } else if (years) {
-    diff = Math.floor(diff / (1000 * 3600 * 24 * 365.25))
-  }
-
-  const prefix = props.prefix === undefined ? null : `${props.prefix} `
-  const postfix = props.postfix === undefined ? null : ` ${props.postfix}`
+  const prefix = props.prefix !== undefined && `${props.prefix} `
+  const postfix = props.postfix !== undefined && ` ${props.postfix}`
   const infix =
     showUnit &&
     ` ${diff === 1 ? unitKey.slice(0, unitKey.length - 1) : unitKey}`
 
   return (
-    <Code>
+    <Span>
       {prefix}
       {diff}
       {infix}
       {postfix}
-    </Code>
+    </Span>
   )
 }
 
-HowMany.propTypes = {
+TimeSpan.propTypes = {
   days: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   years: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   weeks: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
@@ -79,4 +70,4 @@ HowMany.propTypes = {
   postfix: PropTypes.string,
   showUnit: PropTypes.bool,
 }
-export default HowMany
+export default TimeSpan

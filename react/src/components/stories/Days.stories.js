@@ -1,9 +1,9 @@
 import React from "react"
-import HowMany from "../HowMany"
+import TimeSpan from "../TimeSpan"
 
 export default {
-  title: "time/days",
-  component: HowMany,
+  title: "components/time span/days",
+  component: TimeSpan,
   argTypes: {
     showUnit: {
       defaultValue: true,
@@ -21,7 +21,7 @@ export default {
 
 /* eslint-disable-next-line react/prop-types */
 const Template = (args) => (
-  <HowMany {...args} days={new Date(args.days).toString()} />
+  <TimeSpan {...args} days={new Date(args.days).toString()} />
 )
 
 export const Days = Template.bind({})

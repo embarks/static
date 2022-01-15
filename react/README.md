@@ -1,4 +1,11 @@
-# static (v2)
+# React Prototyping Interface
 
-- a small ▪ [svelte](https://svelte.dev/) app ✨
-- built [to last](https://jeffhuang.com/designed_to_last/) ⏳
+## Purpose
+
+Experimenting with web-based interfaces.
+
+## React Storybook
+
+Storybook provides an interface similar to my day-to-day programming job. It lets me make more interesting stuff without a bunch of boring things getting in my way.
+
+**main docs**: storybook.js.org

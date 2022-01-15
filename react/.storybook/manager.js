@@ -2,7 +2,7 @@ import { addons } from "@storybook/addons"
 import { create } from "@storybook/theming/create"
 import { lighten } from "polished"
 import logo from "../public/skully.png"
-import custom from "../src/theme/constants/colors/empower.json"
+import custom from "../src/theme/bases/empower.json"
 import "../assets/fonts.css"
 
 export const theme = create({
@@ -14,12 +14,12 @@ export const theme = create({
   // UI
   appBg: custom.main,
   appContentBg: custom.main,
-  appBorderColor: custom.white,
+  appBorderColor: custom.black,
   appBorderRadius: 2,
 
   // Typography
-  fontBase: "AnonymousPro, Operator Mono, monospace, sans-serif",
-  fontCode: "Courier, AnonymousPro, Operator Mono, monospace",
+  fontBase: "'Antic', 'AnonymousPro', sans-serif",
+  fontCode: "'AnonymousPro', 'Operator Mono', monospace",
 
   // Text colors
   textColor: custom.text,
@@ -43,7 +43,7 @@ export const theme = create({
 addons.setConfig({
   isFullscreen: false,
   showNav: true,
-  showPanel: true,
+  showPanel: false,
   panelPosition: "bottom",
   isToolshown: false,
   enableShortcuts: false,
